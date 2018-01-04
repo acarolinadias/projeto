@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
 
 class Game {
-    constructor(ID, player1Name, name, maxPlayers,) {
+    constructor(ID, player1Name, name, maxPlayers) {
         this.gameID = ID;
         this.gameEnded = false;
         this.gameStarted = false;
@@ -12,32 +12,37 @@ class Game {
         this.playerTurn = 1;
         this.winner = 0;
         this.board = [0,0,0,0,0,0,0,0,0];
-        this.jogo = [0,0,0][0,0,0];
-        this.populate();
+        this.jogo2 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+        //this.populate(5);
        
     }
 
-    populate(){
-        this.i = 0;
-        for(this.i =0 ; this.i <=9; this.i++)
-        {
-            this.jogo[this.i]= new cell(this.i, "asd");
+    populate(value){
+        var x, y;
+        for(x = 0 ;x < 10; x++){
+            for(y = 0; y<10; y++){
+                this.jogo[x][y] == value;
+            }
         }
     }
+
     join(player2Name){
         this.player2= player2Name;
         this.gameStarted = true;
     }
 
     hasRow(value){
-        return  ((this.board[0]==value) && (this.board[1]==value) && (this.board[2]==value)) || 
-                ((this.board[3]==value) && (this.board[4]==value) && (this.board[5]==value)) || 
-                ((this.board[6]==value) && (this.board[7]==value) && (this.board[8]==value)) || 
-                ((this.board[0]==value) && (this.board[3]==value) && (this.board[6]==value)) || 
-                ((this.board[1]==value) && (this.board[4]==value) && (this.board[7]==value)) || 
-                ((this.board[2]==value) && (this.board[5]==value) && (this.board[8]==value)) || 
-                ((this.board[0]==value) && (this.board[4]==value) && (this.board[8]==value)) || 
-                ((this.board[2]==value) && (this.board[4]==value) && (this.board[6]==value));
+
+        if(this.maxPlayers == 2){
+            return
+                ((this.board[0]==value) && (this.board[1]==value) && (this.board[2]==value) && (this.board[3]==value)) ||
+                ((this.board[4]==value) && (this.board[5]==value) && (this.board[6]==value) && (this.board[7]==value)) ||
+                ((this.board[8]==value) && (this.board[10]==value) && (this.board[11]==value) && (this.board[12]==value)) ||
+                ((this.board[13]==value) && (this.board[14]==value) && (this.board[15]==value) || (this.board[16]==value));
+        }
+
+
+
     }  
 
     checkGameEnded(){
