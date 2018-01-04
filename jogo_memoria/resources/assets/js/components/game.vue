@@ -18,7 +18,8 @@
 
             <table>
                 <tr v-for="row of game.jogo">
-                    <td v-for="cell of row">olá</td>
+                    <td v-for="cell of row"></td>
+                    <td v-for="cell of row"></td>
                 </tr>
             </table>
             <hr>

@@ -11,9 +11,8 @@ class Game {
         this.player2= '';
         this.playerTurn = 1;
         this.winner = 0;
-        this.board = [0,0,0,0,0,0,0,0,0];
+        //this.board = [0,0,0,0,0,0,0,0,0];
         this.jogo2 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-        //this.populate(5);
        
     }
 
@@ -36,10 +35,10 @@ class Game {
 
         if(this.maxPlayers == 2){
             return
-                ((this.board[0]==value) && (this.board[1]==value) && (this.board[2]==value) && (this.board[3]==value)) ||
-                ((this.board[4]==value) && (this.board[5]==value) && (this.board[6]==value) && (this.board[7]==value)) ||
-                ((this.board[8]==value) && (this.board[10]==value) && (this.board[11]==value) && (this.board[12]==value)) ||
-                ((this.board[13]==value) && (this.board[14]==value) && (this.board[15]==value) || (this.board[16]==value));
+                ((this.jogo2[0]==value) && (this.jogo2[1]==value) && (this.jogo2[2]==value) && (this.jogo2[3]==value)) ||
+                ((this.jogo2[4]==value) && (this.jogo2[5]==value) && (this.jogo2[6]==value) && (this.jogo2[7]==value)) ||
+                ((this.jogo2[8]==value) && (this.jogo2[10]==value) && (this.jogo2[11]==value) && (this.jogo2[12]==value)) ||
+                ((this.jogo2[13]==value) && (this.jogo2[14]==value) && (this.jogo2[15]==value) || (this.jogo2[16]==value));
         }
 
 
@@ -93,10 +92,18 @@ class Game {
     }
 
 
-}class cell{
+}
+class cell{
     constructor(index, img){
         this.index=index;
         this.img=img;
+    }
+}
+
+class peca{
+    constructor(urlImage, status){
+        this.urlImage = urlImage;
+        this.status = status;
     }
 }
 
