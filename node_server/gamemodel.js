@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
 
 class Game {
-    constructor(ID, player1Name, name, maxPlayers,) {
+    constructor(ID, player1Name, name, maxPlayers) {
         this.gameID = ID;
         this.gameEnded = false;
         this.gameStarted = false;

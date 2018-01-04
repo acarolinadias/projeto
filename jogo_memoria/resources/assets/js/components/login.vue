@@ -9,7 +9,7 @@
         <user-login :user="currentUser" @block-click="loginUser"></user-login>
         <users-password :user="currentUser" @block-click="passwordUser"></users-password>
         <user-create :user="currentUser" @block-click="createUser"></user-create>
-        <users-estatisticas :user="currentUser" @block-click="loginUser"></users-estatisticas>
+        <users-estatisticas :user="currentUser" ></users-estatisticas>
 
 
     </div>
