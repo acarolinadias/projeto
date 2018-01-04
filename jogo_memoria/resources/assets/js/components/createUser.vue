@@ -43,23 +43,23 @@
         props: ['user'],
         methods: {
             addUser: function(){
-                axios.put('api/users/'+this.user, this.user)
+                axios.post('api/users/'+this.user, this.user)
                     .then(response=>{
                     // Copy object properties from response.data.data to this.user
                     // without creating a new reference
                     Object.assign(this.user, response.data.data);
-                this.$emit('user-create', this.user);
-            });
+                    this.$emit('user-create', this.user);
+                });
             },
             cancelUser: function() {
                 axios.put('api/users/' + this.user, this.user)
                 .then(response => {
-                // Copy object properties from response.data.data to this.user
-                // without creating a new reference
-                Object.assign(this.user, response.data.data);
-                this.$emit('user-create', this.user);
-            });
-    }
+                    // Copy object properties from response.data.data to this.user
+                    // without creating a new reference
+                    Object.assign(this.user, response.data.data);
+                    this.$emit('user-create', this.user);
+                });
+            }
         }
     }
 </script>
