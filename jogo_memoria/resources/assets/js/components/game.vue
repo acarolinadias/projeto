@@ -103,6 +103,7 @@
             closeGame() {
                 this.$parent.close(this.game);
             },
+
             clickPiece(index) {
                 if (!this.game.gameEnded) {
                     if (this.game.playerTurn != this.ownPlayerNumber) {

@@ -32,7 +32,7 @@
     export default {
         data: function () {
             return {
-                title: 'Multiplayer',
+                title: 'Jogo da Memória Multiplayer',
                 currentPlayer: 'Player X',
                 lobbyGames: [],
                 activeGames: [],

@@ -1471,9 +1471,9 @@ module.exports = Component.exports
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(103)
+var __vue_script__ = __webpack_require__(108)
 /* template */
-var __vue_template__ = __webpack_require__(104)
+var __vue_template__ = __webpack_require__(109)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -1516,7 +1516,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(16);
-module.exports = __webpack_require__(111);
+module.exports = __webpack_require__(116);
 
 
 /***/ }),
@@ -1543,17 +1543,24 @@ var img = Vue.component('img', __webpack_require__(60));
 var estatisticas = Vue.component('image', __webpack_require__(13));
 var userGameEdit = Vue.component('userGameEdit', __webpack_require__(71));
 var multiplayerGame = Vue.component('multiplayergame', __webpack_require__(74));
-var login = Vue.component('login', __webpack_require__(94));
+var singleplayerGame = Vue.component('singleplayerGame', __webpack_require__(94));
+var login = Vue.component('login', __webpack_require__(99));
 var passoword = Vue.component('passoword', __webpack_require__(14));
-var email = Vue.component('email', __webpack_require__(105));
+var email = Vue.component('email', __webpack_require__(110));
 
-var routes = [{ path: '/', redirect: '/login' }, { path: '/images', component: img }, { path: '/users', component: user }, { path: '/estatisticas', component: estatisticas }, { path: '/userlogin', component: userGameEdit }, { path: '/jogo', component: multiplayerGame }, { path: '/login', component: login }, { path: '/password', component: passoword }, { path: '/email', component: email }];
+var routes = [{ path: '/', redirect: '/login' }, { path: '/images', component: img }, { path: '/users', component: user }, { path: '/estatisticas', component: estatisticas }, { path: '/userlogin', component: userGameEdit }, { path: '/jogo', component: multiplayerGame }, { path: '/gameplayer', component: singleplayerGame }, { path: '/login', component: login }, { path: '/password', component: passoword }, { path: '/email', component: email }];
 var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
     routes: routes
 });
 
 var app = new Vue({
     router: router,
+    data: {
+        player1: undefined,
+        player2: undefined,
+        player3: undefined,
+        player4: undefined
+    },
     el: '#app'
 }).$mount('#app');
 
@@ -48234,7 +48241,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            title: 'Multiplayer',
+            title: 'Jogo da Memória Multiplayer',
             currentPlayer: 'Player X',
             lobbyGames: [],
             activeGames: [],
@@ -48704,6 +48711,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['game'],
@@ -48856,9 +48864,16 @@ var render = function() {
         _vm._l(_vm.game.jogo, function(row) {
           return _c(
             "tr",
-            _vm._l(row, function(cell) {
-              return _c("td", [_vm._v("olá")])
-            })
+            [
+              _vm._l(row, function(cell) {
+                return _c("td")
+              }),
+              _vm._v(" "),
+              _vm._l(row, function(cell) {
+                return _c("td")
+              })
+            ],
+            2
           )
         })
       ),
@@ -48963,7 +48978,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -48972,6 +48987,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 /* 91 */
 /***/ (function(module, exports) {
 
+//
 //
 //
 //
@@ -49089,9 +49105,7 @@ var render = function() {
           }
         },
         [
-          _c("option", { attrs: { disabled: "", value: "" } }, [
-            _vm._v("jogadores")
-          ]),
+          _c("option", { attrs: { disabled: "", value: "" } }, [_vm._v("1")]),
           _vm._v(" "),
           _c("option", [_vm._v("2")]),
           _vm._v(" "),
@@ -49268,11 +49282,464 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(95)
+}
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(95)
+var __vue_script__ = __webpack_require__(97)
 /* template */
-var __vue_template__ = __webpack_require__(102)
+var __vue_template__ = __webpack_require__(98)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/singleplayer.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-34604b80", Component.options)
+  } else {
+    hotAPI.reload("data-v-34604b80", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 95 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(96);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("90efa494", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-34604b80\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./singleplayer.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-34604b80\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./singleplayer.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 96 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\nh2 {\n    text-align: center;\n}\n.points {\n    text-align: center;\n    font-size: 15px;\n}\n\n/*table {\n    width: 100%;\n}\n\ntd {\n    width: 33.333%;\n}\n\ntd:after {\n    content: '';\n    display: block;\n    margin-top: 100%;\n}*/\n.close-btn{\n    border: none;\n    float: right;\n    background-color: transparent;\n}\n.board {\n    max-width: 276px;\n    margin: 0 auto;\n    border-style: solid;\n    border-width: 0px 0 0 0px;\n    border-color: black;\n}\n.cell {\n    display: inline-block;\n    border-style: solid;\n    border-width: 2px 2px 2px 2px;\n    border-color: black;\n    margin-left: -2px;\n    margin-top: -2px;\n}\nimg {\n    width: 50px;\n    height: 50px;\n    margin: 5px;\n    padding: 0;\n    border-style: none;\n}\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 97 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            title: 'Jogo da memória - SinglePlayer',
+            showSuccess: false,
+            showFailure: false,
+            successMessage: '',
+            failMessage: '',
+            currentValue: 1,
+            gameEnded: false,
+            player1User: '',
+            player2User: '',
+            userTurn: 1,
+            counterPlayer1: 0,
+            counterPlayer2: 0,
+            board: this.createTableHidden(16),
+            boardGame: this.createTable(16),
+            click: 0,
+            cellCompare: []
+        };
+    },
+
+    methods: {
+        pieceImageURL: function pieceImageURL(piece) {
+            var imgSrc = String(piece);
+            //a imagem hidden ele atribui o numero 0
+            if (imgSrc == '0') {
+                return 'img/hidden.png';
+            }
+            return 'img/' + imgSrc + '.png';
+        },
+
+        //funcao criar matriz hidden
+        createTableHidden: function createTableHidden(index) {
+            var i;
+            var boardHidden = [];
+            //por cada linha cria uma coluna com imagens hidden
+            for (i = 0; i < index; i++) {
+                boardHidden[i] = 'hidden'; // ou 0
+            }
+            return boardHidden;
+        },
+
+        //funcao criar matriz jogo
+        createTable: function createTable(index) {
+            var i, j;
+            var array = [];
+            var board = [];
+            var imgLen = index / 2;
+            //por cada linha preenche uma coluna com as imagens
+            for (j = 1; j < imgLen + 1; j++) {
+                array.push(j);
+            }
+
+            var arrayAuxDup = array.slice(0);
+
+            var arrayF = array.concat(arrayAuxDup);
+
+            //Random
+            var currentIndex = arrayF.length,
+                temporaryValue,
+                randomIndex;
+            while (0 !== currentIndex) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex -= 1;
+                temporaryValue = arrayF[currentIndex];
+                arrayF[currentIndex] = arrayF[randomIndex];
+                arrayF[randomIndex] = temporaryValue;
+            }
+            //atribui aleatoriamente as imagens
+            for (i = 0; i < index; i++) {
+                board[i] = arrayF[i];
+            }
+
+            console.log(arrayF);
+
+            return board;
+        },
+
+        //decrementa pontos em caso de falha
+        decreasePoints: function decreasePoints(userTurn) {
+            if (userTurn == 1) {
+                this.counterPlayer1 -= 20;
+                this.counterPlayer1 = Math.max(0, this.counterPlayer1);
+            } else {
+                this.counterPlayer2 -= 20;
+                this.counterPlayer2 = Math.max(0, this.counterPlayer2);
+            }
+        },
+        //incrementa pontos em caso de sucesso
+        givePoints: function givePoints(userTurn) {
+            if (userTurn == 1) {
+                this.counterPlayer1 += 30;
+            } else {
+                this.counterPlayer2 += 30;
+            }
+        },
+
+        clickPiece: function clickPiece(index) {
+            var aux;
+
+            this.board[index] = this.boardGame[index];
+            this.currentValue = index;
+
+            switch (this.click) {
+                case 0:
+                    this.board[index] = this.boardGame[index];
+                    this.cellCompare[0] = this.board[index];
+                    this.cellCompare[1] = index;
+                    this.currentValue = index;
+                    this.click = 1;
+                    break;
+
+                case 1:
+                    aux = this.cellCompare[1];
+                    this.board[index] = this.boardGame[index];
+                    if (this.cellCompare[1] != index) {
+                        if (this.cellCompare[0] == this.board[index]) {
+                            console.log("Sao iguais");
+                            this.givePoints(this.userTurn);
+                        } else {
+                            this.decreasePoints(this.userTurn);
+                            this.board[index] = 'hidden';
+                            this.board[this.cellCompare[1]] = 'hidden';
+                            //setTimeout(this.flipCell(index, aux), 2000);
+                        }
+                        this.userTurn = this.userTurn == 1 ? 2 : 1;
+                        this.click = 0;
+                        this.cellCompare = [];
+                    }
+                    break;
+                default:
+                    this.click = 0;
+                    this.cellCompare = [];
+                    break;
+
+            }
+            this.checkGameEnded();
+        },
+        //compara as imagens
+        flipCell: function flipCell(index, cellCompare) {
+            this.board[index] = 'hidden';
+            this.board[cellCompare] = 'hidden';
+        },
+
+        restartGame: function restartGame() {
+            console.log('restartGame');
+            this.board = this.createTableHidden(16);
+            this.showSuccess = false;
+            this.showFailure = false;
+            this.successMessage = '';
+            this.failMessage = '';
+            //this.currentValue= 1;
+            this.gameEnded = false;
+            this.cellCompare = [];
+            this.click = 0;
+            this.counterPlayer1 = 0;
+            this.counterPlayer2 = 0;
+        },
+        // ----------------------------------------------------------------------------------------
+        // GAME LOGIC - START
+        // ----------------------------------------------------------------------------------------
+        hasRow: function hasRow(value) {
+            //console.log("Value: " + value);
+            return this.board[0] == value && this.board[1] == value && this.board[2] == value && this.board[3] == value || this.board[4] == value && this.board[5] == value && this.board[6] == value && this.board[7] == value || this.board[8] == value && this.board[9] == value && this.board[10] == value && this.board[11] == value || this.board[12] == value && this.board[13] == value && this.board[14] == value && this.board[15] == value;
+        },
+        checkGameEnded: function checkGameEnded() {
+            //mostrar mensagens
+            if (this.isBoardComplete()) {
+                if (this.counterPlayer1 > this.counterPlayer2) {
+                    this.successMessage = 'O jogo terminou! Jogador 1 Ganhou!!!!!';
+                } else if (this.counterPlayer1 < this.counterPlayer2) {
+                    this.successMessage = 'O jogo terminou! Jogador 2 Ganhou!!!!!';
+                } else {
+                    this.successMessage = 'O jogo terminou! Empate';
+                }
+                this.showSuccess = true;
+                this.gameEnded = true;
+            }
+            return false;
+        },
+        isBoardComplete: function isBoardComplete() {
+            var returnValue = true;
+            this.board.forEach(function (element) {
+                if (element === 0 || element == 'hidden') {
+                    //console.log(element);
+                    returnValue = false;
+                    return;
+                }
+            });
+            return returnValue;
+        },
+        // ----------------------------------------------------------------------------------------
+        // GAME LOGIC - END
+        // ----------------------------------------------------------------------------------------
+        playerName: function playerName(playerNumber) {
+            console.log("Player num: " + playerNumber);
+            console.log("Nome: " + this.player1User);
+            /*if(this.player1User != undefined && playerNumber == 1){
+                return this.player1User.name;
+            }
+            if(this.player2User != undefined && playerNumber == 2){
+                return this.player2User.name;
+            }*/
+            return 'Jogador ' + playerNumber;
+        }
+    },
+
+    computed: {
+        currentPlayer: function currentPlayer() {
+            console.log("Turn: " + this.userTurn);
+            console.log("Player: " + this.playerName(this.userTurn));
+            this.playerName(this.currentValue);
+            return 'Jogador ' + this.userTurn;
+        }
+    },
+    mounted: function mounted() {
+        if (this.$root.$data.player1) {
+            this.player1User = this.$root.$data.player1;
+        }
+        if (this.$root.$data.player2) {
+            this.player2User = this.$root.$data.player2;
+        }
+    }
+});
+
+/***/ }),
+/* 98 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", [
+      _c("h3", { staticClass: "text-center" }, [_vm._v(_vm._s(_vm.title))]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("h2", [_vm._v("Jogador Atual : " + _vm._s(_vm.currentPlayer))]),
+      _vm._v(" "),
+      _c("br")
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "game-zone-content" }, [
+      _vm.showSuccess
+        ? _c("div", { staticClass: "alert alert-success" }, [
+            _c(
+              "button",
+              {
+                staticClass: "close-btn",
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    _vm.showSuccess = false
+                  }
+                }
+              },
+              [_vm._v("×")]
+            ),
+            _vm._v(" "),
+            _c("strong", [
+              _vm._v(_vm._s(_vm.successMessage) + "     "),
+              _c(
+                "a",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.gameEnded,
+                      expression: "gameEnded"
+                    }
+                  ],
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.restartGame($event)
+                    }
+                  }
+                },
+                [_vm._v("Restart")]
+              )
+            ])
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "board" },
+        _vm._l(_vm.board, function(piece, key) {
+          return _c("div", { staticClass: "cell" }, [
+            _c("img", {
+              attrs: { src: _vm.pieceImageURL(piece) },
+              on: {
+                click: function($event) {
+                  _vm.clickPiece(key)
+                }
+              }
+            })
+          ])
+        })
+      ),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c("div", { staticClass: "points" }, [
+        _c("p", [
+          _vm._v("Pontuação Jogador 1 : " + _vm._s(_vm.counterPlayer1))
+        ]),
+        _vm._v(" "),
+        _c("p", [_vm._v("Pontuação Jogador 2 : " + _vm._s(_vm.counterPlayer2))])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-34604b80", module.exports)
+  }
+}
+
+/***/ }),
+/* 99 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(100)
+/* template */
+var __vue_template__ = __webpack_require__(107)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -49311,18 +49778,18 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 95 */
+/* 100 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__userLogin_vue__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__userLogin_vue__ = __webpack_require__(101);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__userLogin_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__userLogin_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__createUser_vue__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__createUser_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__createUser_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__estatisticas_vue__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__estatisticas_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__estatisticas_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__forgetPassword_vue__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__forgetPassword_vue__ = __webpack_require__(104);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__forgetPassword_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__forgetPassword_vue__);
 //
 //
@@ -49392,15 +49859,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 96 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(97)
+var __vue_script__ = __webpack_require__(102)
 /* template */
-var __vue_template__ = __webpack_require__(98)
+var __vue_template__ = __webpack_require__(103)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -49439,7 +49906,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 97 */
+/* 102 */
 /***/ (function(module, exports) {
 
 //
@@ -49508,7 +49975,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 98 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -49638,15 +50105,15 @@ if (false) {
 }
 
 /***/ }),
-/* 99 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(100)
+var __vue_script__ = __webpack_require__(105)
 /* template */
-var __vue_template__ = __webpack_require__(101)
+var __vue_template__ = __webpack_require__(106)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -49685,7 +50152,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 100 */
+/* 105 */
 /***/ (function(module, exports) {
 
 //
@@ -49721,7 +50188,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 101 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -49777,7 +50244,7 @@ if (false) {
 }
 
 /***/ }),
-/* 102 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -49838,7 +50305,7 @@ if (false) {
 }
 
 /***/ }),
-/* 103 */
+/* 108 */
 /***/ (function(module, exports) {
 
 //
@@ -49901,7 +50368,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 104 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -50028,15 +50495,15 @@ if (false) {
 }
 
 /***/ }),
-/* 105 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(106)
+var __vue_script__ = __webpack_require__(111)
 /* template */
-var __vue_template__ = __webpack_require__(110)
+var __vue_template__ = __webpack_require__(115)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -50075,12 +50542,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 106 */
+/* 111 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__changeEmail_vue__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__changeEmail_vue__ = __webpack_require__(112);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__changeEmail_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__changeEmail_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__changePassword_vue__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__changePassword_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__changePassword_vue__);
@@ -50134,15 +50601,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 107 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(108)
+var __vue_script__ = __webpack_require__(113)
 /* template */
-var __vue_template__ = __webpack_require__(109)
+var __vue_template__ = __webpack_require__(114)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -50181,7 +50648,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 108 */
+/* 113 */
 /***/ (function(module, exports) {
 
 //
@@ -50242,7 +50709,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 109 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -50350,7 +50817,7 @@ if (false) {
 }
 
 /***/ }),
-/* 110 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -50420,7 +50887,7 @@ if (false) {
 }
 
 /***/ }),
-/* 111 */
+/* 116 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

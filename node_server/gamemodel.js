@@ -11,15 +11,33 @@ class Game {
         this.player2= '';
         this.playerTurn = 1;
         this.winner = 0;
-        //this.board = [0,0,0,0,0,0,0,0,0];
-        this.jogo2 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+        //this.board = this.createTable(16, 8);
+        this.board = [0,0,0,0,0,0,0,0,0];
+        //this.jogo2 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
        
     }
 
+    createTable(index,imgLen) {
+        var i, j;
+        var array = [];
+        var board = [];
+
+        for(j = 1; j < imgLen+1; j++){
+            //array.push(Game.pieceImageURL(j));
+        }
+
+        var randomImg = array[Math.floor(Math.random() * array.length)];
+
+        for(i = 0 ; i < index; i++){
+            board[i] = randomImg[i];
+        }
+
+        return board;
+    }
 
     populate(value){
         var x, y;
-        for(x = 0 ;x < 10; x++){
+        for(x = 0 ;x < 4; x++){
             for(y = 0; y<10; y++){
                 this.jogo[x][y] == value;
             }
@@ -93,18 +111,18 @@ class Game {
 
 
 }
-class cell{
-    constructor(index, img){
-        this.index=index;
-        this.img=img;
+    class cell{
+        constructor(index, img){
+            this.index=index;
+            this.img=img;
+        }
     }
-}
 
-class peca{
-    constructor(urlImage, status){
-        this.urlImage = urlImage;
-        this.status = status;
+    class piece{
+        constructor(urlImage, status){
+            this.urlImage = urlImage;
+            this.status = status;
+        }
     }
-}
 
 module.exports = Game;
