@@ -11,12 +11,12 @@ class Game {
         this.player2 = '';
         this.playerTurn = 1;
         this.winner = 0;
-        this.board = {};
-        this.board = this.createTableHidden(16);
-        this.boardGame = {};
-        this.boardGame = this.populate(16);
+        this.board = [];
+        this.boardGame = [];
         this.click = 0;
         this.cellCompare = [];
+        this.createTableHidden(16);
+        this.populate(16);
     }
 
     populate(value) {
@@ -104,6 +104,47 @@ class Game {
             this.playerTurn = this.playerTurn == 1 ? 2 : 1;
         }
         return true;
+    }
+
+    fazerJogada(index){
+
+        var aux;
+        this.board[index] = this.boardGame[index];
+        this.currentValue = index;
+        switch (this.click) {
+            case 0:
+                this.board[index] = this.boardGame[index];
+                this.cellCompare[0] = this.board[index];
+                this.cellCompare[1] = index;
+                this.currentValue = index;
+                this.click = 1;
+                break;
+
+            case 1:
+                aux = this.cellCompare[1];
+                this.board[index] = this.boardGame[index];
+                if (this.cellCompare[1] != index) {
+                    if (this.cellCompare[0] == this.board[index]) {
+                        console.log("Sao iguais");
+                        this.givePoints(this.userTurn);
+                    } else {
+                        this.decreasePoints(this.userTurn);
+                        this.board[index] = 'hidden';
+                        this.board[this.cellCompare[1]] = 'hidden';
+                        //setTimeout(this.flipCell(index, aux), 2000);
+
+                    }
+                    this.click = 0;
+                    this.cellCompare = [];
+                }
+                break;
+            default:
+                this.click = 0;
+                this.cellCompare = [];
+                break;
+
+        }
+        this.checkGameEnded();
     }
 }
 

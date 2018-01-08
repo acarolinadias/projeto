@@ -20,7 +20,7 @@
                     <lobby :games="lobbyGames" @join-click="join"></lobby>
 
                     <template v-for="game in activeGames">
-                        <game :game="game"></game>
+                        <game :game="game" @fazer-jogada="fazerJogada"></game>
                     </template>
                     </div>
                     <div v-else>
@@ -101,6 +101,9 @@
             },
         },
         methods: {
+            fazerJogada(index){
+                this.$socket.emit('fazer_jogada', index);
+            },
             createSinglePlayer(){
                 console.log("Create");
                 this.singlePlayer=true;

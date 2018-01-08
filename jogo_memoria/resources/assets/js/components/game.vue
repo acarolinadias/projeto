@@ -19,7 +19,7 @@
             </div>
 
             <div class="board">
-                <div class="cell" v-for="(piece, key) of boardGame">
+                <div class="cell" v-for="(piece, key) of game.board">
                     <img v-bind:src="pieceImageURL(piece)" v-on:click="clickPiece(key)">
                 </div>
             </div>
@@ -45,8 +45,9 @@
     cellCompare: []
 }
 },
+
     computed: {
-    ownPlayerNumber() {
+        ownPlayerNumber() {
     if (this.game.player1SocketID == this.$parent.socketId) {
     return 1;
 } else if (this.game.player2SocketID == this.$parent.socketId) {
@@ -114,12 +115,12 @@
 }
 },
     methods: {
-    getBoardGame(){
+        getBoardGame(){
 
-        console.log(this.game.boardGame);
+            console.log(this.game);
 
 
-            },
+        },
 
     closeGame() {
     this.$parent.close(this.game);
@@ -140,55 +141,14 @@
     //funcao criar matriz jogo
 
 
-
-
     //decrementa pontos em caso de falha
-
-},
-
     clickPiece: function(index) {
-    console.log(this.boardGame[index])
-    var aux;
-    this.board[index] = this.boardGame[index];
-
-    this.currentValue = index;
-
-    switch (this.click) {
-    case 0:
-    this.board[index] = this.boardGame[index];
-    this.cellCompare[0] = this.board[index];
-    this.cellCompare[1] = index;
-    this.currentValue = index;
-    this.click = 1;
-    break;
-
-    case 1:
-    aux = this.cellCompare[1];
-    this.board[index] = this.boardGame[index];
-    if (this.cellCompare[1] != index) {
-    if (this.cellCompare[0] == this.board[index]) {
-    console.log("Sao iguais");
-    this.givePoints(this.userTurn);
-} else {
-    this.decreasePoints(this.userTurn);
-    this.board[index] = 'hidden';
-    this.board[this.cellCompare[1]] = 'hidden';
-    //setTimeout(this.flipCell(index, aux), 2000);
-
-}
-    this.userTurn = (this.userTurn == 1) ? 2 : 1;
-    this.click = 0;
-    this.cellCompare = [];
-}
-    break;
-    default:
-    this.click = 0;
-    this.cellCompare = [];
-    break;
-
-}
-    this.checkGameEnded();
+    this.$emit('fazer-jogada', index);
 },
+
+
+
+
     //compara as imagens
     flipCell: function(index, cellCompare) {
     this.board[index] = 'hidden';
@@ -261,17 +221,18 @@
 }
 }
 
+
 </script>
 
 
 <style>
 
     h2 {
-    text-align: center;
+    text - align: center;
 }
 
     .points {
-    text-align: center;
+    text - align: center;
     font-size: 15px;
 }
     .close-btn{
@@ -281,7 +242,7 @@
 }
 
     .board {
-    max-width: 276px;
+    max - width: 276px;
     margin: 0 auto;
     border-style: solid;
     border-width: 0px 0 0 0px;
