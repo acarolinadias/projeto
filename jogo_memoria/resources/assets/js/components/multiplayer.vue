@@ -17,8 +17,9 @@
                         <h4>Jogos Pendentes (<a @click.prevent="loadLobby">Refresh</a>)
                     </h4>
                     <lobby :games="lobbyGames" @join-click="join"></lobby>
-                <template v-for="game in activeGames">
-                    <game :game="game"></game>
+
+                    <template v-for="game in activeGames">
+                        <game :game="game"></game>
                     </template>
         </div>
     </div>

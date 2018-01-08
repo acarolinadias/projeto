@@ -1,5 +1,5 @@
 <template>
-    <div class="jumbotron">
+    <div class="jumbotron row">
         <h2>Criar jogo</h2>
         <div class="form-group">
             <label for="inputName">Nome da sala:</label>
