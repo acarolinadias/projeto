@@ -11,7 +11,7 @@
         <div class="form-group">
             <label for="inputName">Numero de jogadores:</label>
             <select v-model="maxPlayers">
-                <option selected >2</option>
+                <option >2</option>
                 <option >3</option>
                 <option>4</option>
             </select>
@@ -28,7 +28,7 @@
 <script type="text/javascript">
 module.exports={
     data: {
-        maxPlayers:'',
+        maxPlayers: '2',
         name:''
     },
     methods: {
