@@ -11,8 +11,8 @@
         <div class="form-group">
             <label for="inputName">Numero de jogadores:</label>
             <select v-model="maxPlayers">
-                <!--<option disabled value="">jogadores</option>-->
-                <option disabled value="">1</option>
+                <option disabled value="">Jogadores</option>
+                <option>1</option>
                 <option>2</option>
                 <option>3</option>
                 <option>4</option>

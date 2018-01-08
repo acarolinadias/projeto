@@ -84,6 +84,8 @@
       <path value="$PROJECT_DIR$/jogo_memoria/vendor/defuse/php-encryption" />
       <path value="$PROJECT_DIR$/jogo_memoria/vendor/psy/psysh" />
       <path value="$PROJECT_DIR$/jogo_memoria/vendor/filp/whoops" />
+      <path value="$PROJECT_DIR$/jogo_memoria/vendor/barryvdh/laravel-debugbar" />
+      <path value="$PROJECT_DIR$/jogo_memoria/vendor/maximebf/debugbar" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7" />

@@ -146,7 +146,6 @@
                             if(this.cellCompare[0] == this.board[index]) {
                                 console.log("Sao iguais");
                                 this.givePoints(this.userTurn);
-
                             }else{
                                 this.decreasePoints(this.userTurn);
                                 this.board[index] = 'hidden';
@@ -313,8 +312,4 @@
         padding: 0;
         border-style: none;
     }
-
-
-
-
 </style>

@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 
 define('YOUR_SERVER_URL', 'http://jogomemoria.test');
 // Check "oauth_clients" table for next 2 values:
 define('CLIENT_ID', '2');
-define('CLIENT_SECRET','pplVl3MUbLV91nbB4evYUTIFymo5FdY39sAyMph7');
+define('CLIENT_SECRET','tlBpDPJOWCVbwzNNRAFoRY6t03AU16c6ugoPzOea');
 
 class LoginControllerAPI extends Controller
 {
@@ -38,8 +39,8 @@ class LoginControllerAPI extends Controller
 
     public function logout()
     {
-        /*Auth::guard('api')->user()->token()->revoke();
-        Auth::guard('api')->user()->token()->delete();*/
+        Auth::guard('api')->user()->token()->revoke();
+        Auth::guard('api')->user()->token()->delete();
         return response()->json(['msg'=>'Token revoked'], 200);
     }
 

@@ -47893,7 +47893,6 @@ module.exports = Component.exports
 //
 //
 //
-//
 
 module.exports = {
     props: ['user'],
@@ -48190,7 +48189,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -48241,13 +48240,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            title: 'Jogo da Memória Multiplayer',
+            title: 'Jogo da Memória - Multiplayer',
             currentPlayer: 'Player X',
             lobbyGames: [],
             activeGames: [],
             socketId: "",
             createGameShow: false,
-            maxPlayers: []
+            maxPlayers: [],
+            click: 0,
+            cellCompare: [],
+            maxPlayer: '',
+            name: ''
         };
     },
     sockets: {
@@ -48273,13 +48276,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         invalid_play: function invalid_play(errorObject) {
             if (errorObject.type == 'Invalid_Game') {
-                alert("Error: Game does not exist on the server");
+                alert("Erro: o jogo não existe no servidor");
             } else if (errorObject.type == 'Invalid_Player') {
-                alert("Error: Player not valid for this game");
+                alert("Erro: Jogador não válido para este jogo");
             } else if (errorObject.type == 'Invalid_Play') {
-                alert("Error: Move is not valid or it's not your turn");
+                alert("Erro: Mover não é válido ou não é sua vez");
             } else {
-                alert("Error: " + errorObject.type);
+                alert("Erro: " + errorObject.type);
             }
         },
         game_changed: function game_changed(game) {
@@ -48341,9 +48344,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     methods: {
-        gameSaved: function gameSaved(name, maxPlayers) {
-            console.log(name + maxPlayers);
-            this.createGame(name, maxPlayers);
+        gameSaved: function gameSaved(name) {
+            console.log(name);
+            this.createGame(name);
         },
         showCreateGame: function showCreateGame() {
             this.createGameShow = true;
@@ -48354,18 +48357,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         loadActiveGames: function loadActiveGames() {
             this.$socket.emit('get_my_activegames');
         },
-        createGame: function createGame(name, maxPlayers) {
+        createGame: function createGame(name) {
             if (this.currentPlayer == "") {
-                alert('Current Player is Empty - Cannot Create a Game');
+                alert('O Player atual está vazio - Não é possível criar um jogo');
                 return;
             } else {
-                this.$socket.emit('create_game', { playerName: this.currentPlayer, name: name, maxPlayers: maxPlayers });
+                this.$socket.emit('create_game', { playerName: this.currentPlayer, name: name });
                 this.createGameShow = false;
             }
         },
         join: function join(game) {
             if (game.player1 == this.currentPlayer) {
-                alert('Cannot join a game because your name is the same as Player 1');
+                alert('Não pode participar de um jogo porque o seu nome é o mesmo que o Jogador 1');
                 return;
             }
 
@@ -48672,7 +48675,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\ntable[data-v-7c293f89] {\n    width: 100%;\n}\ntd[data-v-7c293f89] {\n    width: 33.333%;\n}\ntd[data-v-7c293f89]:after {\n    content: '';\n    display: block;\n    margin-top: 100%;\n}\n", ""]);
+exports.push([module.i, "\n.board[data-v-7c293f89] {\n    max-width: 276px;\n    margin: 0 auto;\n    border-style: solid;\n    border-width: 0px 0 0 0px;\n    border-color: black;\n}\n.cell[data-v-7c293f89] {\n    display: inline-block;\n    border-style: solid;\n    border-width: 2px 2px 2px 2px;\n    border-color: black;\n    margin-left: -2px;\n    margin-top: -2px;\n}\nimg[data-v-7c293f89] {\n    width: 50px;\n    height: 50px;\n    margin: 5px;\n    padding: 0;\n    border-style: none;\n}\n\n/*table {\n    width: 100%;\n}\n\ntd {\n    width: 33.333%;\n}\n\ntd:after {\n    content: '';\n    display: block;\n    margin-top: 100%;\n}*/\n\n", ""]);
 
 // exports
 
@@ -48712,11 +48715,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['game'],
     data: function data() {
-        return {};
+        return {
+            board: this.createTableHidden(24),
+            boardGame: this.createTable(24),
+            click: 0,
+            cellCompare: []
+        };
     },
     computed: {
         ownPlayerNumber: function ownPlayerNumber() {
@@ -48777,23 +48791,139 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     methods: {
-        pieceImageURL: function pieceImageURL(pieceNumber) {
-            var imgSrc = String(pieceNumber);
-            return 'img/' + imgSrc + '.png';
-        },
         closeGame: function closeGame() {
             this.$parent.close(this.game);
         },
-        clickPiece: function clickPiece(index) {
-            if (!this.game.gameEnded) {
-                if (this.game.playerTurn != this.ownPlayerNumber) {
-                    alert("It's not your turn to play");
-                } else {
-                    if (this.game.board[index] == 0) {
-                        this.$parent.play(this.game, index);
-                    }
-                }
+
+
+        //JOGO
+        pieceImageURL: function pieceImageURL(piece) {
+            var imgSrc = String(piece);
+            //a imagem hidden ele atribui o numero 0
+            if (imgSrc == '0') {
+                return 'img/hidden.png';
             }
+            return 'img/' + imgSrc + '.png';
+        },
+
+
+        //funcao criar matriz hidden
+        createTableHidden: function createTableHidden(index) {
+            var i;
+            var boardHidden = [];
+            //por cada linha cria uma coluna com imagens hidden
+            for (i = 0; i < index; i++) {
+                boardHidden[i] = 'hidden'; // ou 0
+            }
+            return boardHidden;
+        },
+
+
+        //funcao criar matriz jogo
+        createTable: function createTable(index) {
+            var i, j;
+            var array = [];
+            var board = [];
+            var imgLen = index / 2;
+            //por cada linha preenche uma coluna com as imagens
+            for (j = 1; j < imgLen + 1; j++) {
+                array.push(j);
+            }
+
+            var arrayAuxDup = array.slice(0);
+
+            var arrayF = array.concat(arrayAuxDup);
+
+            //Random
+            var currentIndex = arrayF.length,
+                temporaryValue,
+                randomIndex;
+            while (0 !== currentIndex) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex -= 1;
+                temporaryValue = arrayF[currentIndex];
+                arrayF[currentIndex] = arrayF[randomIndex];
+                arrayF[randomIndex] = temporaryValue;
+            }
+            //atribui aleatoriamente as imagens
+            for (i = 0; i < index; i++) {
+                board[i] = arrayF[i];
+            }
+
+            console.log(arrayF);
+            return board;
+        },
+        clickPiece: function clickPiece(index) {
+            var aux;
+
+            this.board[index] = this.boardGame[index];
+            this.currentValue = index;
+
+            switch (this.click) {
+                case 0:
+                    this.board[index] = this.boardGame[index];
+                    this.cellCompare[0] = this.board[index];
+                    this.cellCompare[1] = index;
+                    this.currentValue = index;
+                    this.click = 1;
+                    break;
+
+                case 1:
+                    aux = this.cellCompare[1];
+                    this.board[index] = this.boardGame[index];
+                    if (this.cellCompare[1] != index) {
+                        if (this.cellCompare[0] == this.board[index]) {
+                            console.log("Sao iguais");
+                        } else {
+                            this.board[index] = 'hidden';
+                            this.board[this.cellCompare[1]] = 'hidden';
+                            setTimeout(this.flipCell(index, aux), 2000);
+                        }
+                        this.userTurn = this.userTurn == 1 ? 2 : 1;
+                        this.click = 0;
+                        this.cellCompare = [];
+                    }
+                    break;
+                default:
+                    this.click = 0;
+                    this.cellCompare = [];
+                    break;
+
+            }
+            this.checkGameEnded();
+        },
+
+        //compara as imagens
+        flipCell: function flipCell(index, cellCompare) {
+            this.board[index] = 'hidden';
+            this.board[cellCompare] = 'hidden';
+        },
+
+        checkGameEnded: function checkGameEnded() {
+            //mostrar mensagens
+            if (this.isBoardComplete()) {
+                if (this.counterPlayer1 > this.counterPlayer2) {
+                    this.successMessage = 'O jogo terminou! Jogador 1 Ganhou!!!!!';
+                } else if (this.counterPlayer1 < this.counterPlayer2) {
+                    this.successMessage = 'O jogo terminou! Jogador 2 Ganhou!!!!!';
+                } else {
+                    this.successMessage = 'O jogo terminou! Empate';
+                }
+                this.showSuccess = true;
+                this.gameEnded = true;
+            }
+            return false;
+        },
+        isBoardComplete: function isBoardComplete() {
+            var returnValue = true;
+            this.board.forEach(function (element) {
+                if (element === 0 || element == 'hidden') {
+                    //console.log(element);
+                    returnValue = false;
+                    return;
+                }
+            });
+            return returnValue;
         }
     }
 });
@@ -48837,44 +48967,25 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("Close Game")]
+            [_vm._v("Fechar Jogo")]
           )
         ])
       ]),
       _vm._v(" "),
       _c(
-        "table",
-        { staticClass: "board grid" },
-        _vm._l(_vm.game.board, function(piece, index) {
-          return _c("td", [
+        "div",
+        { staticClass: "board" },
+        _vm._l(_vm.board, function(piece, key) {
+          return _c("div", { staticClass: "cell" }, [
             _c("img", {
               attrs: { src: _vm.pieceImageURL(piece) },
               on: {
                 click: function($event) {
-                  _vm.clickPiece(index)
+                  _vm.clickPiece(key)
                 }
               }
             })
           ])
-        })
-      ),
-      _vm._v(" "),
-      _c(
-        "table",
-        _vm._l(_vm.game.jogo, function(row) {
-          return _c(
-            "tr",
-            [
-              _vm._l(row, function(cell) {
-                return _c("td")
-              }),
-              _vm._v(" "),
-              _vm._l(row, function(cell) {
-                return _c("td")
-              })
-            ],
-            2
-          )
         })
       ),
       _vm._v(" "),
@@ -49105,7 +49216,11 @@ var render = function() {
           }
         },
         [
-          _c("option", { attrs: { disabled: "", value: "" } }, [_vm._v("1")]),
+          _c("option", { attrs: { disabled: "", value: "" } }, [
+            _vm._v("Jogadores")
+          ]),
+          _vm._v(" "),
+          _c("option", [_vm._v("1")]),
           _vm._v(" "),
           _c("option", [_vm._v("2")]),
           _vm._v(" "),
@@ -49220,7 +49335,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("Criar Jogo\n                        ")]
+            [_vm._v("Criar Jogo\n                    ")]
           )
         ]),
         _vm._v(" "),
@@ -49244,7 +49359,7 @@ var render = function() {
             },
             [_vm._v("Refresh")]
           ),
-          _vm._v(")\n                    ")
+          _vm._v(")\n                ")
         ]),
         _vm._v(" "),
         _c("lobby", {
@@ -49363,7 +49478,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\nh2 {\n    text-align: center;\n}\n.points {\n    text-align: center;\n    font-size: 15px;\n}\n\n/*table {\n    width: 100%;\n}\n\ntd {\n    width: 33.333%;\n}\n\ntd:after {\n    content: '';\n    display: block;\n    margin-top: 100%;\n}*/\n.close-btn{\n    border: none;\n    float: right;\n    background-color: transparent;\n}\n.board {\n    max-width: 276px;\n    margin: 0 auto;\n    border-style: solid;\n    border-width: 0px 0 0 0px;\n    border-color: black;\n}\n.cell {\n    display: inline-block;\n    border-style: solid;\n    border-width: 2px 2px 2px 2px;\n    border-color: black;\n    margin-left: -2px;\n    margin-top: -2px;\n}\nimg {\n    width: 50px;\n    height: 50px;\n    margin: 5px;\n    padding: 0;\n    border-style: none;\n}\n\n\n\n\n", ""]);
+exports.push([module.i, "\nh2 {\n    text-align: center;\n}\n.points {\n    text-align: center;\n    font-size: 15px;\n}\n\n/*table {\n    width: 100%;\n}\n\ntd {\n    width: 33.333%;\n}\n\ntd:after {\n    content: '';\n    display: block;\n    margin-top: 100%;\n}*/\n.close-btn{\n    border: none;\n    float: right;\n    background-color: transparent;\n}\n.board {\n    max-width: 276px;\n    margin: 0 auto;\n    border-style: solid;\n    border-width: 0px 0 0 0px;\n    border-color: black;\n}\n.cell {\n    display: inline-block;\n    border-style: solid;\n    border-width: 2px 2px 2px 2px;\n    border-color: black;\n    margin-left: -2px;\n    margin-top: -2px;\n}\nimg {\n    width: 50px;\n    height: 50px;\n    margin: 5px;\n    padding: 0;\n    border-style: none;\n}\n", ""]);
 
 // exports
 
@@ -49938,18 +50053,48 @@ module.exports = Component.exports
 //
 //
 //
+//
+//
+//
 
 module.exports = {
     props: ['user'],
+    data: {
+        email: '',
+        password: ''
+    },
     methods: {
-        saveUser: function saveUser() {
+        loginUser: function loginUser() {
             var _this = this;
 
-            axios.put('api/users/' + this.user, this.user).then(function (response) {
-                // Copy object properties from response.data.data to this.user
-                // without creating a new reference
-                Object.assign(_this.user, response.data.data);
-                _this.$emit('user-saved', _this.user);
+            axios.post('api/login', {
+                email: this.email,
+                password: this.password
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(function (response) {
+                console.log(response.data.access_token);
+                Object.assign(_this.user, response.data.access_token);
+                //Object.assign(this.user, response.data.refresh_token);
+                _this.$emit('user-login', _this.user);
+            });
+        },
+        logoutUser: function logoutUser() {
+            var _this2 = this;
+
+            axios.post('api/test', {
+                access_token: this.access_token
+                //refresh_token: this.refresh_token
+            }, {
+                headers: {
+                    'Authorization': 'Bearer Token'
+                }
+            }).then(function (response) {
+                console.log(response.data);
+                Object.assign(_this2.user, response.data.access_token);
+                _this2.$emit('user-login', _this2.user);
             });
         },
         recuperarSenha: function recuperarSenha() {
@@ -49961,15 +50106,14 @@ module.exports = {
                     this.$emit('user-saved', this.user);
                 });*/
         },
-        loginUser: function loginUser() {
-            var _this2 = this;
-
-            axios.post('api/login').then(function (response) {
-                // Copy object properties from response.data.data to this.user
-                // without creating a new reference
-                Object.assign(_this2.user, response.data.data);
-                _this2.$emit('user-login', _this2.user);
-            });
+        createUser: function createUser() {
+            /*axios.put('api/users/'+this.user.id, this.user)
+                .then(response=>{
+                    // Copy object properties from response.data.data to this.user
+                    // without creating a new reference
+                    Object.assign(this.user, response.data.data);
+                    this.$emit('user-saved', this.user);
+                });*/
         }
     }
 };
@@ -49988,11 +50132,72 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
         _c("form", [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+              _vm._v("Email")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.email,
+                  expression: "email"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                id: "exampleInputEmail1",
+                type: "email",
+                "aria-describedby": "emailHelp",
+                placeholder: "Email"
+              },
+              domProps: { value: _vm.email },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.email = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "exampleInputPassword1" } }, [
+              _vm._v("Senha")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.password,
+                  expression: "password"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                id: "exampleInputPassword1",
+                type: "password",
+                placeholder: "Senha"
+              },
+              domProps: { value: _vm.password },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.password = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
           _vm._m(0),
-          _vm._v(" "),
-          _vm._m(1),
-          _vm._v(" "),
-          _vm._m(2),
           _vm._v(" "),
           _c(
             "a",
@@ -50006,6 +50211,20 @@ var render = function() {
               }
             },
             [_vm._v("LOGIN")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-primary btn-block",
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.logoutUser()
+                }
+              }
+            },
+            [_vm._v("LOGOUT")]
           ),
           _vm._v(" "),
           _c(
@@ -50029,7 +50248,7 @@ var render = function() {
               on: {
                 click: function($event) {
                   $event.preventDefault()
-                  _vm.saveUser()
+                  _vm.createUser()
                 }
               }
             },
@@ -50041,43 +50260,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "exampleInputEmail1" } }, [_vm._v("Email")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: {
-          id: "exampleInputEmail1",
-          type: "email",
-          "aria-describedby": "emailHelp",
-          placeholder: "Email"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "exampleInputPassword1" } }, [
-        _vm._v("Senha")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: {
-          id: "exampleInputPassword1",
-          type: "password",
-          placeholder: "Senha"
-        }
-      })
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

@@ -12,7 +12,7 @@ use App\Http\Controllers;
 */
 
 Route::get('/userlogin', 'UserController@utilizadores');
-Route::get('/', 'UserController@index')->name("home");
-Route::get('/users', 'UserController@users')->name("users");
-Route::get('/images', 'ImageController@all')->name("imgs");
-Route::get('/games', 'GameController@all')->name("games");
+Route::get('/', 'UserController@index');
+Route::get('/users', 'UserController@users');
+Route::get('/images', 'ImageController@all');
+Route::get('/games', 'GameController@all');

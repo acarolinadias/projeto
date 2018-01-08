@@ -3,7 +3,6 @@
         <div class="card card-register mx-auto mt-5">
             <div class="card-header">Alterar Informações</div>
             <div class="card-body">
-
                 <form>
                     <div class="form-group">
                         <div class="form-row">

@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-            <h3 class="text-center">{{title}}</h3>
+            <h3 class="text-center">{{ title }}</h3>
             <br>
                 <h2>Seu nome atual: {{currentPlayer}}</h2>
                 <p>Alterar nome atual <input v-model.trim="currentPlayer"></p>
@@ -19,9 +19,9 @@
                     <lobby :games="lobbyGames" @join-click="join"></lobby>
                 <template v-for="game in activeGames">
                     <game :game="game"></game>
-</template>
-</div>
-</div>
+                    </template>
+        </div>
+    </div>
 </template>
 
 <script type="text/javascript">
@@ -32,13 +32,17 @@
     export default {
         data: function () {
             return {
-                title: 'Jogo da Memória Multiplayer',
+                title: 'Jogo da Memória - Multiplayer',
                 currentPlayer: 'Player X',
                 lobbyGames: [],
                 activeGames: [],
                 socketId: "",
                 createGameShow: false,
-                maxPlayers:[]
+                maxPlayers:[],
+                click: 0,
+                cellCompare: [],
+                maxPlayer: '',
+                name: ''
             }
         },
         sockets: {
@@ -64,13 +68,13 @@
             },
             invalid_play(errorObject) {
                 if (errorObject.type == 'Invalid_Game') {
-                    alert("Error: Game does not exist on the server");
+                    alert("Erro: o jogo não existe no servidor");
                 } else if (errorObject.type == 'Invalid_Player') {
-                    alert("Error: Player not valid for this game");
+                    alert("Erro: Jogador não válido para este jogo");
                 } else if (errorObject.type == 'Invalid_Play') {
-                    alert("Error: Move is not valid or it's not your turn");
+                    alert("Erro: Mover não é válido ou não é sua vez");
                 } else {
-                    alert("Error: " + errorObject.type);
+                    alert("Erro: " + errorObject.type);
                 }
             },
             game_changed(game) {
@@ -89,9 +93,9 @@
             },
         },
         methods: {
-            gameSaved(name, maxPlayers) {
-                console.log(name + maxPlayers);
-                this.createGame(name, maxPlayers);
+            gameSaved(name) {
+                console.log(name);
+                this.createGame(name);
             },
             showCreateGame() {
                 this.createGameShow = true;
@@ -103,19 +107,19 @@
             loadActiveGames() {
                 this.$socket.emit('get_my_activegames');
             },
-            createGame(name, maxPlayers) {
+            createGame(name) {
                 if (this.currentPlayer == "") {
-                    alert('Current Player is Empty - Cannot Create a Game');
+                    alert('O Player atual está vazio - Não é possível criar um jogo');
                     return;
                 }
                 else {
-                    this.$socket.emit('create_game', {playerName: this.currentPlayer, name, maxPlayers});
+                    this.$socket.emit('create_game', {playerName: this.currentPlayer, name});
                     this.createGameShow = false;
                 }
             },
             join(game) {
                 if (game.player1 == this.currentPlayer) {
-                    alert('Cannot join a game because your name is the same as Player 1');
+                    alert('Não pode participar de um jogo porque o seu nome é o mesmo que o Jogador 1');
                     return;
                 }
 
