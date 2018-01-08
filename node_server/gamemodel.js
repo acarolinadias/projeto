@@ -11,59 +11,80 @@ class Game {
         this.player2 = '';
         this.playerTurn = 1;
         this.winner = 0;
+        this.board = {};
+        this.board = this.createTableHidden(16);
+        this.boardGame = {};
+        this.boardGame = this.populate(16);
+        this.click = 0;
+        this.cellCompare = [];
     }
 
     populate(value) {
-        var x, y;
-        for (x = 0; x < 4; x++) {
-            for (y = 0; y < 10; y++) {
-                this.jogo[x][y] == value;
-            }
+        var i, j;
+        var array = [];
+        var imgLen = value / 2;
+        //por cada linha preenche uma coluna com as imagens
+        for (j = 1; j < imgLen + 1; j++) {
+            array.push(j);
         }
+
+        var arrayAuxDup = array.slice(0);
+
+        var arrayF = array.concat(arrayAuxDup);
+
+        //Random
+        var currentIndex = arrayF.length,
+            temporaryValue, randomIndex;
+        while (0 !== currentIndex) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+            temporaryValue = arrayF[currentIndex];
+            arrayF[currentIndex] = arrayF[randomIndex];
+            arrayF[randomIndex] = temporaryValue;
+        }
+        for (i = 0; i < value; i++) {
+
+            this.boardGame[i] = arrayF[i];
+        }
+
+
     }
 
+    createTableHidden(index) {
+        var i;
+        var boardHidden = [];
+        //por cada linha cria uma coluna com imagens hidden
+        for (i = 0; i < index; i++) {
+            this.board[i] = 0; // ou 0
+        }
+    }
 
     join(player2Name) {
         this.player2 = player2Name;
         this.gameStarted = true;
     }
 
-    /*hasRow(value){
-        if(this.maxPlayers == 2){
-            return
-                ((this.jogo2[0]==value) && (this.jogo2[1]==value) && (this.jogo2[2]==value) && (this.jogo2[3]==value)) ||
-                ((this.jogo2[4]==value) && (this.jogo2[5]==value) && (this.jogo2[6]==value) && (this.jogo2[7]==value)) ||
-                ((this.jogo2[8]==value) && (this.jogo2[10]==value) && (this.jogo2[11]==value) && (this.jogo2[12]==value)) ||
-                ((this.jogo2[13]==value) && (this.jogo2[14]==value) && (this.jogo2[15]==value) || (this.jogo2[16]==value));
+    decreasePoints(userTurn) {
+        if (userTurn == 1) {
+            this.counterPlayer1 -= 20;
+            this.counterPlayer1 = Math.max(0, this.counterPlayer1);
+        } else {
+            this.counterPlayer2 -= 20;
+            this.counterPlayer2 = Math.max(0, this.counterPlayer2);
         }
-    } */
-
-    /*checkGameEnded(){
-        //mostrar mensagens
-        if (this.isBoardComplete()) {
-            if(this.counterPlayer1 > this.counterPlayer2){
-                this.successMessage = 'O jogo terminou! Jogador 1 Ganhou!!!!!';
-            }else if(this.counterPlayer1 < this.counterPlayer2){
-                this.successMessage = 'O jogo terminou! Jogador 2 Ganhou!!!!!';
-            }else{
-                this.successMessage = 'O jogo terminou! Empate';
-            }
-            this.showSuccess = true;
-            this.gameEnded = true;
-        }
-        return false;
     }
-    isBoardComplete(){
-        var returnValue = true;
-        this.board.forEach(function(element) {
-            if (element === 0 || element == 'hidden') {
-                //console.log(element);
-                returnValue = false;
-                return;
-            }
-        });
-        return returnValue;
-    }*/
+
+    //incrementa pontos em caso de sucesso
+    givePoints(userTurn) {
+        if (userTurn == 1) {
+            this.counterPlayer1 += 30;
+        } else {
+            this.counterPlayer2 += 30;
+        }
+    }
+    getBoard() {
+        return this.board;
+    }
 
     play(playerNumber, index) {
         if (!this.gameStarted) {
@@ -85,6 +106,7 @@ class Game {
         return true;
     }
 }
+
 
 class cell {
     constructor(index, img) {

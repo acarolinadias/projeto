@@ -1,20 +1,18 @@
 <template>
     <div class="jumbotron row">
-        <h2>Criar jogo</h2>
+        <div class="col-md-6">
         <div class="form-group">
             <label for="inputName">Nome da sala:</label>
             <input
                 type="text" class="form-control" v-model="name"
                 name="name" id="inputName"
-                placeholder="Fullname"/>
+                placeholder="Nome da sala de jogo"/>
         </div>
         <div class="form-group">
             <label for="inputName">Numero de jogadores:</label>
             <select v-model="maxPlayers">
-                <option disabled value="">Jogadores</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
+                <option selected >2</option>
+                <option >3</option>
                 <option>4</option>
             </select>
         </div>
@@ -22,6 +20,8 @@
             <a class="btn btn-danger" v-on:click.prevent="createGame()">Criar</a>
             <a class="btn btn-danger" v-on:click.prevent="cancelCreate()">Cancelar</a>
         </div>
+        </div>
+
     </div>
 </template>
 

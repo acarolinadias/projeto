@@ -7,11 +7,12 @@
                 <p>Alterar nome atual <input v-model.trim="currentPlayer"></p>
                 <p><em></em></p>
                 <hr>
-                    <h3 class="text-center">Lobby</h3>
+                    <h3 class="text-center">Criar jogo</h3>
                     <p>
-                        <button class="btn btn-xs btn-success" v-on:click.prevent="showCreateGame">Criar Jogo
-                        </button>
+                        <button class="btn btn-xs btn-success" v-on:click.prevent="showCreateGame">Multiplayer</button>
+                        <a class="btn btn-xs btn-success" v-on:click.prevent="createSinglePlayer">Singleplayer</a>
                     </p>
+                    <div v-if="singlePlayer==false">
                     <createGame v-if="createGameShow" @game-saved="gameSaved"></createGame>
                     <hr>
                         <h4>Jogos Pendentes (<a @click.prevent="loadLobby">Refresh</a>)
@@ -21,6 +22,10 @@
                     <template v-for="game in activeGames">
                         <game :game="game"></game>
                     </template>
+                    </div>
+                    <div v-else>
+                        <singlePlayer></singlePlayer>
+                    </div>
         </div>
     </div>
 </template>
@@ -29,6 +34,7 @@
     import Lobby from './lobby.vue';
     import Game from './game.vue';
     import CreateGame from './createGame.vue';
+    import SiglePlayer from './singleplayer.vue';
 
     export default {
         data: function () {
@@ -43,7 +49,8 @@
                 click: 0,
                 cellCompare: [],
                 maxPlayer: '',
-                name: ''
+                name: '',
+                singlePlayer:false
             }
         },
         sockets: {
@@ -94,12 +101,17 @@
             },
         },
         methods: {
+            createSinglePlayer(){
+                console.log("Create");
+                this.singlePlayer=true;
+            },
             gameSaved(name) {
                 console.log(name);
                 this.createGame(name);
             },
             showCreateGame() {
                 this.createGameShow = true;
+                this.singlePlayer=false;
             },
             loadLobby() {
                 this.$socket.emit('get_my_lobby_games');
@@ -116,6 +128,7 @@
                 else {
                     this.$socket.emit('create_game', {playerName: this.currentPlayer, name});
                     this.createGameShow = false;
+
                 }
             },
             join(game) {
@@ -126,6 +139,7 @@
 
                 this.players += 1;
                 this.$socket.emit('join_game', {gameID: game.gameID, playerName: this.currentPlayer});
+                this.$socket.emit('get_game', {gameID: game.gameID});
             },
 
             play(game, index) {
@@ -140,7 +154,9 @@
         components: {
             'lobby': Lobby,
             'game': Game,
-            'createGame': CreateGame
+            'createGame': CreateGame,
+            'singlePlayer':SiglePlayer
+
         },
         mounted() {
             this.loadLobby();
