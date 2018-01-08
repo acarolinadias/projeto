@@ -48240,7 +48240,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -48306,12 +48306,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             activeGames: [],
             socketId: "",
             createGameShow: false,
-            maxPlayers: [],
+            maxPlayers: 0,
             click: 0,
             cellCompare: [],
             maxPlayer: '',
             name: '',
-            singlePlayer: false
+            singlePlayer: false,
+            playerTurn: ''
         };
     },
     sockets: {
@@ -48413,8 +48414,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             console.log("Create");
             this.singlePlayer = true;
         },
-        gameSaved: function gameSaved(name) {
+        gameSaved: function gameSaved(name, maxPlayers) {
             console.log(name);
+            this.maxPlayers = maxPlayers;
             this.createGame(name);
         },
         showCreateGame: function showCreateGame() {
@@ -48432,7 +48434,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 alert('O Player atual está vazio - Não é possível criar um jogo');
                 return;
             } else {
-                this.$socket.emit('create_game', { playerName: this.currentPlayer, name: name });
+                this.$socket.emit('create_game', { playerName: this.currentPlayer, name: name, maxPlayers: this.maxPlayers });
                 this.createGameShow = false;
             }
         },
@@ -48803,31 +48805,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             boardGame: this.getBoardGame(),
             click: 0,
-            cellCompare: []
+            cellCompare: [],
+            counterPlayer1: 0,
+            coutnerPlayer2: 0,
+            showSuccess: ""
         };
     },
 
     computed: {
-        ownPlayerNumber: function ownPlayerNumber() {
-            if (this.game.player1SocketID == this.$parent.socketId) {
-                return 1;
-            } else if (this.game.player2SocketID == this.$parent.socketId) {
-                return 2;
-            }
-            return 0;
-        },
-        ownPlayerName: function ownPlayerName() {
-            var ownNumber = this.ownPlayerNumber;
-            if (ownNumber == 1) return this.game.player1;
-            if (ownNumber == 2) return this.game.player2;
-            return "Unknown 1";
-        },
-        adversaryPlayerName: function adversaryPlayerName() {
-            var ownNumber = this.ownPlayerNumber;
-            if (ownNumber == 1) return this.game.player2;
-            if (ownNumber == 2) return this.game.player1;
-            return "Unknown 2";
-        },
         message: function message() {
             if (!this.game.gameStarted) {} else if (this.game.gameEnded) {
                 return "Jogo terminado";
@@ -48841,7 +48826,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (this.game.playerTurn == this.ownPlayerNumber) {
                     return "It's your turn";
                 } else {
-                    return "It's " + this.adversaryPlayerName + " turn";
+                    return "It's " + this.game.nextPlayer + " turn";
                 }
             }
             return "À espera de jogadores!";

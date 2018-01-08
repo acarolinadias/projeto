@@ -42,35 +42,15 @@
             return {
                 boardGame: this.getBoardGame(),
                 click: 0,
-                cellCompare: []
+                cellCompare: [],
+                counterPlayer1:0,
+                coutnerPlayer2:0,
+                showSuccess:"",
             }
         },
 
         computed: {
-            ownPlayerNumber() {
-                if (this.game.player1SocketID == this.$parent.socketId) {
-                    return 1;
-                } else if (this.game.player2SocketID == this.$parent.socketId) {
-                    return 2;
-                }
-                return 0;
-            },
-            ownPlayerName() {
-                var ownNumber = this.ownPlayerNumber;
-                if (ownNumber == 1)
-                    return this.game.player1;
-                if (ownNumber == 2)
-                    return this.game.player2;
-                return "Unknown 1";
-            },
-            adversaryPlayerName() {
-                var ownNumber = this.ownPlayerNumber;
-                if (ownNumber == 1)
-                    return this.game.player2;
-                if (ownNumber == 2)
-                    return this.game.player1;
-                return "Unknown 2";
-            },
+
             message() {
                 if (!this.game.gameStarted) {
 
@@ -89,7 +69,7 @@
                     if (this.game.playerTurn == this.ownPlayerNumber) {
                         return "It's your turn";
                     } else {
-                        return "It's " + this.adversaryPlayerName + " turn";
+                        return "It's " + this.game.nextPlayer + " turn";
                     }
                 }
                 return "À espera de jogadores!";

@@ -45,12 +45,13 @@
                 activeGames: [],
                 socketId: "",
                 createGameShow: false,
-                maxPlayers:[],
+                maxPlayers:0,
                 click: 0,
                 cellCompare: [],
                 maxPlayer: '',
                 name: '',
-                singlePlayer:false
+                singlePlayer:false,
+                playerTurn:''
             }
         },
         sockets: {
@@ -109,8 +110,9 @@
                 console.log("Create");
                 this.singlePlayer=true;
             },
-            gameSaved(name) {
+            gameSaved(name, maxPlayers) {
                 console.log(name);
+                this.maxPlayers=maxPlayers;
                 this.createGame(name);
             },
             showCreateGame() {
@@ -130,7 +132,7 @@
                     return;
                 }
                 else {
-                    this.$socket.emit('create_game', {playerName: this.currentPlayer, name});
+                    this.$socket.emit('create_game', {playerName: this.currentPlayer, name, maxPlayers:this.maxPlayers});
                     this.createGameShow = false;
 
                 }

@@ -8,7 +8,9 @@ class Game {
         this.name = name;
         this.maxPlayers = maxPlayers;
         this.player1 = player1Name;
-        this.player2 = '';
+        this.players = [];
+        this.players[1]=player1Name;
+        this.nextPlayer = player1Name;
         this.playerTurn = 1;
         this.winner = 0;
         this.board = [];
@@ -17,6 +19,8 @@ class Game {
         this.cellCompare = [];
         this.createTableHidden(16);
         this.populate(16);
+        this.numPlayer = 1;
+        this.turn=0;
     }
 
     populate(value) {
@@ -60,18 +64,22 @@ class Game {
     }
 
     join(player2Name) {
-        this.player2 = player2Name;
-        this.gameStarted = true;
+        this.players.push(player2Name);
+        console.log("max players" + this.maxPlayers);
+        console.log("max players" + this.players.length);
+        if (this.players.length-1 == this.maxPlayers) {
+            this.gameStarted = true;
+        }
     }
 
     decreasePoints(userTurn) {
-        if (userTurn == 1) {
+        /*if (userTurn == 1) {
             this.counterPlayer1 -= 20;
             this.counterPlayer1 = Math.max(0, this.counterPlayer1);
         } else {
             this.counterPlayer2 -= 20;
             this.counterPlayer2 = Math.max(0, this.counterPlayer2);
-        }
+        }*/
     }
 
     //incrementa pontos em caso de sucesso
@@ -82,80 +90,77 @@ class Game {
             this.counterPlayer2 += 30;
         }
     }
+
     getBoard() {
         return this.board;
     }
 
-    play(playerNumber, index) {
-        if (!this.gameStarted) {
-            return false;
-        }
-        if (this.gameEnded) {
-            return false;
-        }
-        if (playerNumber != this.playerTurn) {
-            return false;
-        }
-        if (this.board[index] !== 0) {
-            return false;
-        }
-        this.board[index] = playerNumber;
-        if (!this.checkGameEnded()) {
-            this.playerTurn = this.playerTurn == 1 ? 2 : 1;
-        }
-        return true;
+    currentPlayer()
+    {
+        return this.players[(this.turn+maxplayers)%this.maxPlayers];
     }
+    fazerJogada(index, player){
 
-    fazerJogada(index){
+        console.log(this.currentPlayer());
+        if(player == this.currentPlayer()) {
+            var aux;
+            this.board[index] = this.boardGame[index];
+            this.currentValue = index;
+            switch (this.click) {
+                case 0:
+                    this.board[index] = this.boardGame[index];
+                    this.cellCompare[0] = this.board[index];
+                    this.cellCompare[1] = index;
+                    this.currentValue = index;
+                    this.click = 1;
+                    return true;
+                    break;
 
-        var aux;
-        this.board[index] = this.boardGame[index];
-        this.currentValue = index;
-        switch (this.click) {
-            case 0:
-                this.board[index] = this.boardGame[index];
-                this.cellCompare[0] = this.board[index];
-                this.cellCompare[1] = index;
-                this.currentValue = index;
-                this.click = 1;
-                return true;
-                break;
-
-            case 1:
-                aux = this.cellCompare[1];
-                this.board[index] = this.boardGame[index];
-                if (this.cellCompare[1] != index) {
-                    if (this.cellCompare[0] == this.board[index]) {
-                        console.log("Sao iguais");
-                        return true;
-                        this.givePoints(this.userTurn);
-                    } else {
-                        this.decreasePoints(this.userTurn);
-                        this.board[index] = 'hidden';
-                        this.board[this.cellCompare[1]] = 'hidden';
-                        return true;
-                        //setTimeout(this.flipCell(index, aux), 2000);
-
+                case 1:
+                    if(this.numPlayer==1)
+                    {
+                        this.numPlayer=2;
                     }
+                    else{
+                        this.numPlayer=2;
+                    }
+                    aux = this.cellCompare[1];
+                    this.board[index] = this.boardGame[index];
+                    if (this.cellCompare[1] != index) {
+                        if (this.cellCompare[0] == this.board[index]) {
+                            console.log("Sao iguais");
+                            return true;
+                            this.givePoints(this.userTurn);
+                        } else {
+                            this.decreasePoints(this.userTurn);
+                            this.board[index] = 0;
+                            this.board[this.cellCompare[1]] = 0;
+                            return true;
+                            //setTimeout(this.flipCell(index, aux), 2000);
+
+                        }
+                        this.turn++;
+                        this.click = 0;
+                        this.cellCompare = [];
+                        return true;
+                    }
+                    break;
+                default:
                     this.click = 0;
                     this.cellCompare = [];
                     return true;
-                }
-                break;
-            default:
-                this.click = 0;
-                this.cellCompare = [];
-                return true;
-                break;
+                    break;
 
+            }
+            this.checkGameEnded();
         }
-        this.checkGameEnded();
+
     }
     checkGameEnded(){
 
             //mostrar mensagens
             if (this.isBoardComplete()) {
-                if (this.counterPlayer1 > this.counterPlayer2) {
+                /*if (this.counterPlayer1 > this.counterPlayer2) {
                     this.successMessage = 'O jogo terminou! Jogador 1 Ganhou!!!!!';
                 } else if (this.counterPlayer1 < this.counterPlayer2) {
                     this.successMessage = 'O jogo terminou! Jogador 2 Ganhou!!!!!';
@@ -163,7 +168,8 @@ class Game {
                     this.successMessage = 'O jogo terminou! Empate';
                 }
                 this.showSuccess = true;
-                this.gameEnded = true;
+                this.gameEnded = true;*/
+                return true;
             }
             return false;
 
