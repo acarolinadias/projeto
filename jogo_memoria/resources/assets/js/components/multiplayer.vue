@@ -101,8 +101,9 @@
             },
         },
         methods: {
-            fazerJogada(index){
-                this.$socket.emit('fazer_jogada', index);
+            fazerJogada(index, gameId){
+                console.log({index:index, socketId:gameId});
+                this.$socket.emit('fazer_jogada', {index:index, socketId:gameId});
             },
             createSinglePlayer(){
                 console.log("Create");

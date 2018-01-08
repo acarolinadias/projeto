@@ -118,6 +118,7 @@ class Game {
                 this.cellCompare[1] = index;
                 this.currentValue = index;
                 this.click = 1;
+                return true;
                 break;
 
             case 1:
@@ -126,25 +127,57 @@ class Game {
                 if (this.cellCompare[1] != index) {
                     if (this.cellCompare[0] == this.board[index]) {
                         console.log("Sao iguais");
+                        return true;
                         this.givePoints(this.userTurn);
                     } else {
                         this.decreasePoints(this.userTurn);
                         this.board[index] = 'hidden';
                         this.board[this.cellCompare[1]] = 'hidden';
+                        return true;
                         //setTimeout(this.flipCell(index, aux), 2000);
 
                     }
                     this.click = 0;
                     this.cellCompare = [];
+                    return true;
                 }
                 break;
             default:
                 this.click = 0;
                 this.cellCompare = [];
+                return true;
                 break;
 
         }
         this.checkGameEnded();
+    }
+    checkGameEnded(){
+
+            //mostrar mensagens
+            if (this.isBoardComplete()) {
+                if (this.counterPlayer1 > this.counterPlayer2) {
+                    this.successMessage = 'O jogo terminou! Jogador 1 Ganhou!!!!!';
+                } else if (this.counterPlayer1 < this.counterPlayer2) {
+                    this.successMessage = 'O jogo terminou! Jogador 2 Ganhou!!!!!';
+                } else {
+                    this.successMessage = 'O jogo terminou! Empate';
+                }
+                this.showSuccess = true;
+                this.gameEnded = true;
+            }
+            return false;
+
+    }
+    isBoardComplete() {
+        var returnValue = true;
+        this.board.forEach(function (element) {
+            if (element === 0 || element == 'hidden') {
+                //console.log(element);
+                returnValue = false;
+                return;
+            }
+        });
+        return returnValue;
     }
 }
 

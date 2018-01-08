@@ -90,7 +90,8 @@ io.on('connection', function (socket) {
         socket.emit('my_active_games', my_games);
     });
     socket.on('fazer_jogada', function (data){
-        let game = games.gameByID(data.gameID);
+        let game = games.gameByID(data.socketId);
+        console.log(game);
         if (game === null) {
             socket.emit('invalid_play', {'type': 'Invalid_Game', 'game': null});
             return;
@@ -105,7 +106,7 @@ io.on('connection', function (socket) {
             socket.emit('invalid_play', {'type': 'Invalid_Player', 'game': game});
             return;
         }
-        if (game.fazerJogada(numPlayer, data.index)) {
+        if (game.fazerJogada(data.index)) {
             io.to(game.gameID).emit('game_changed', game);
         } else {
             socket.emit('invalid_play', {'type': 'Invalid_Play', 'game': game});

@@ -141,7 +141,8 @@
 
             //decrementa pontos em caso de falha
             clickPiece: function (index) {
-                this.$emit('fazer-jogada', index);
+
+                this.$parent.fazerJogada(index, this.game.gameID);
             },
 
 
@@ -168,39 +169,9 @@
             // ----------------------------------------------------------------------------------------
             // GAME LOGIC - START
             // ----------------------------------------------------------------------------------------
-            hasRow: function (value) {
-                //console.log("Value: " + value);
-                return ((this.board[0] == value) && (this.board[1] == value) && (this.board[2] == value) && (this.board[3] == value)) ||
-                    ((this.board[4] == value) && (this.board[5] == value) && (this.board[6] == value) && (this.board[7] == value)) ||
-                    ((this.board[8] == value) && (this.board[9] == value) && (this.board[10] == value) && (this.board[11] == value)) ||
-                    ((this.board[12] == value) && (this.board[13] == value) && (this.board[14] == value) && (this.board[15] == value));
-            },
-            checkGameEnded: function () {
-                //mostrar mensagens
-                if (this.isBoardComplete()) {
-                    if (this.counterPlayer1 > this.counterPlayer2) {
-                        this.successMessage = 'O jogo terminou! Jogador 1 Ganhou!!!!!';
-                    } else if (this.counterPlayer1 < this.counterPlayer2) {
-                        this.successMessage = 'O jogo terminou! Jogador 2 Ganhou!!!!!';
-                    } else {
-                        this.successMessage = 'O jogo terminou! Empate';
-                    }
-                    this.showSuccess = true;
-                    this.gameEnded = true;
-                }
-                return false;
-            },
-            isBoardComplete: function () {
-                var returnValue = true;
-                this.board.forEach(function (element) {
-                    if (element === 0 || element == 'hidden') {
-                        //console.log(element);
-                        returnValue = false;
-                        return;
-                    }
-                });
-                return returnValue;
-            },
+
+
+
             // ----------------------------------------------------------------------------------------
             // GAME LOGIC - END
             // ----------------------------------------------------------------------------------------
@@ -216,7 +187,7 @@
                 return 'Jogador ' + playerNumber;
             }
         }
-
+    }
 
 </script>
 
