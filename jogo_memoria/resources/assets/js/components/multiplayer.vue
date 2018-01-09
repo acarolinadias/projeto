@@ -20,7 +20,7 @@
                     <lobby :games="lobbyGames" @join-click="join"></lobby>
 
                     <template v-for="game in activeGames">
-                        <game :game="game" @fazer-jogada="fazerJogada"></game>
+                        <game :game="game":currentPlayer="currentPlayer" @fazer-jogada="fazerJogada"></game>
                     </template>
                     </div>
                     <div v-else>
@@ -51,7 +51,8 @@
                 maxPlayer: '',
                 name: '',
                 singlePlayer:false,
-                playerTurn:''
+                playerTurn:'',
+
             }
         },
         sockets: {

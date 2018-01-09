@@ -21,6 +21,9 @@ class Game {
         this.populate(16);
         this.numPlayer = 1;
         this.turn=0;
+        this.getCurrentPlayerNumber = 0;
+        this.getCurrentPlayerName ="";
+
     }
 
     populate(value) {
@@ -69,6 +72,7 @@ class Game {
         console.log("max players" + this.players.length);
         if (this.players.length-1 == this.maxPlayers) {
             this.gameStarted = true;
+            this.setGetters();
         }
     }
 
@@ -97,11 +101,16 @@ class Game {
 
     currentPlayer()
     {
-        return this.players[(this.turn+maxplayers)%this.maxPlayers];
+        return (((this.turn+parseInt(this.maxPlayers))%parseInt(this.maxPlayers))+1);
+    }
+    currentPlayerName()
+    {
+        return (this.players[((this.turn+parseInt(this.maxPlayers))%parseInt(this.maxPlayers))+1]);
     }
     fazerJogada(index, player){
 
-        console.log(this.currentPlayer());
+        if(this.gameStarted==true){
+        console.log("turno: "+this.turn);
         if(player == this.currentPlayer()) {
             var aux;
             this.board[index] = this.boardGame[index];
@@ -127,6 +136,8 @@ class Game {
                     aux = this.cellCompare[1];
                     this.board[index] = this.boardGame[index];
                     if (this.cellCompare[1] != index) {
+                        this.nextTurn();
+
                         if (this.cellCompare[0] == this.board[index]) {
                             console.log("Sao iguais");
                             return true;
@@ -139,7 +150,7 @@ class Game {
                             //setTimeout(this.flipCell(index, aux), 2000);
 
                         }
-                        this.turn++;
+
                         this.click = 0;
                         this.cellCompare = [];
                         return true;
@@ -153,8 +164,19 @@ class Game {
 
             }
             this.checkGameEnded();
-        }
+        }}
 
+    }
+    nextTurn()
+    {
+        this.turn++;
+        this.setGetters();
+
+    }
+    setGetters()
+    {
+        this.getCurrentPlayerName=(this.players[((this.turn+parseInt(this.maxPlayers))%parseInt(this.maxPlayers))+1]);
+        this.getCurrentPlayerNumber=(((this.turn+parseInt(this.maxPlayers))%parseInt(this.maxPlayers))+1);
     }
     checkGameEnded(){
 

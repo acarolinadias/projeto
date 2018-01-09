@@ -91,7 +91,7 @@ io.on('connection', function (socket) {
     });
     socket.on('fazer_jogada', function (data){
         let game = games.gameByID(data.socketId);
-        console.log(game);
+        //console.log(game);
         if (game === null) {
             socket.emit('invalid_play', {'type': 'Invalid_Game', 'game': null});
             return;

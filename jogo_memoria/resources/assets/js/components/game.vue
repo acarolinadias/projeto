@@ -37,7 +37,7 @@
 
 <script type="text/javascript">
     export default {
-        props: ['game'],
+        props: ['game', 'currentPlayer'],
         data: function () {
             return {
                 boardGame: this.getBoardGame(),
@@ -57,7 +57,7 @@
                 }
                 else if (this.game.gameEnded) {
                     return "Jogo terminado";
-                    if (this.game.winner == this.ownPlayerNumber) {
+                    if (this.game.winner == this.playerNumber) {
                         return "Você ganhou!";
                     }
                     else if (this.game.winner == 0) {
@@ -66,10 +66,11 @@
                     return "Game has ended and " + this.adversaryPlayerName + " has won. You lost.";
                 }
                 else {
-                    if (this.game.playerTurn == this.ownPlayerNumber) {
-                        return "It's your turn";
+
+                    if (this.game.getCurrentPlayerName == this.currentPlayer) {
+                        return "É A TUA VEZ DE JOGAR";
                     } else {
-                        return "It's " + this.game.nextPlayer + " turn";
+                        return "É A VEZ DE  " + this.game.getCurrentPlayerName+ " JOGAR";
                     }
                 }
                 return "À espera de jogadores!";
@@ -78,14 +79,14 @@
                 if (!this.game.gameStarted) {
                     return "alert-warning";
                 } else if (this.game.gameEnded) {
-                    if (this.game.winner == this.ownPlayerNumber) {
+                    if (this.game.winner == this.playerNumber) {
                         return "alert-success";
                     } else if (this.game.winner == 0) {
                         return "alert-info";
                     }
                     return "alert-danger";
                 }
-                if (this.game.playerTurn == this.ownPlayerNumber) {
+                if (this.game.playerTurn == this.playerNumber) {
                     return "alert-success";
                 } else {
                     return "alert-info";
@@ -94,10 +95,7 @@
         },
         methods: {
             getBoardGame() {
-
                 console.log(this.game);
-
-
             },
 
             closeGame() {
@@ -143,8 +141,6 @@
                 this.gameEnded = false;
                 this.cellCompare = [];
                 this.click = 0;
-                this.counterPlayer1 = 0;
-                this.counterPlayer2 = 0;
             },
             // ----------------------------------------------------------------------------------------
             // GAME LOGIC - START
