@@ -17,7 +17,7 @@
                     <hr>
                         <h4>Jogos Pendentes (<a @click.prevent="loadLobby">Refresh</a>)
                     </h4>
-                    <lobby :games="lobbyGames" @join-click="join"></lobby>
+                    <lobby :games="lobbyGames" @join-click="join" @remove-click="remove"></lobby>
 
                     <template v-for="game in activeGames">
                         <game :game="game":currentPlayer="currentPlayer" @fazer-jogada="fazerJogada"></game>
@@ -147,6 +147,9 @@
                 this.players += 1;
                 this.$socket.emit('join_game', {gameID: game.gameID, playerName: this.currentPlayer});
                 this.$socket.emit('get_game', {gameID: game.gameID});
+            },
+            remove(game){
+                this.$socket.emit('remove_game', {gameID: game.gameID, socketId: game.socketId});
             },
 
             play(game, index) {

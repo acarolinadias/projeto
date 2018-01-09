@@ -15,6 +15,7 @@
         <td>{{ game.name }}/4</td>
         <td>
             <a class="btn btn-xs btn-primary" v-on:click.prevent="join(game)">Juntar</a>
+            <a class="btn btn-xs btn-primary" v-on:click.prevent="remove(game)">Remover</a>
         </td>
         </tr>
     </tbody>
@@ -28,6 +29,9 @@ module.exports={
     methods: {
         join(game) {
             this.$emit('join-click', game);
+        },
+        remove(game){
+            this.$emit('remove-click', game);
         },
     },
 }

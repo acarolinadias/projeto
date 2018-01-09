@@ -2,21 +2,6 @@
 
 var app = require('http').createServer();
 
-// CORS TRIALS
-// var app = require('http').createServer(function(req,res){
-// 	// Set CORS headers
-// 	res.setHeader('Access-Control-Allow-Origin', 'http://dad.p6.dev');
-// 	res.setHeader('Access-Control-Request-Method', '*');
-// 	res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
-// 	res.setHeader('Access-Control-Allow-Credentials', true);
-// 	res.setHeader('Access-Control-Allow-Headers', req.header.origin);
-// 	if ( req.method === 'OPTIONS' ) {
-// 		res.writeHead(200);
-// 		res.end();
-// 		return;
-// 	}
-// });
-
 var io = require('socket.io')(app);
 
 var Game = require('./gamemodel.js');
@@ -51,10 +36,16 @@ io.on('connection', function (socket) {
     });
 
 
-    socket.on('remove_game', function (data){
+    socket.on('remove_game1', function (data){
     	let game = games.removeGame(data.gameID, socket.id);
     	socket.emit('my_active_games_changed');
     });
+
+
+    socket.on('remove_game', function (data) {
+        let game = games.removeGame(data.gameID, socket.id);
+    });
+
 
     socket.on('play', function (data){
 		let game = games.gameByID(data.gameID);

@@ -32,18 +32,18 @@ class GameList {
     }
 
     removeGame(gameID, socketID) {
+        console.log("gameID: " + gameID + " - socketID: " +socketID);
     	let game = this.gameByID(gameID);
     	if (game===null) {
     		return null;
     	}
-    	if (game.player1SocketID == socketID) {
-    		game.player1SocketID = "";
-    	} else if (game.player2SocketID == socketID) {
-    		game.player2SocketID = "";
-    	} 
-    	if ((game.player1SocketID === "") && (game.player2SocketID === "")) {
-    		this.games.delete(gameID);
-    	}
+
+    	for(var player of game.players ){
+    		console.log("player: " + player);
+		}
+
+    	this.games.delete(gameID);
+
     	return game;
     }
 

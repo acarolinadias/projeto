@@ -76,6 +76,7 @@ class Game {
         }
     }
 
+
     decreasePoints(userTurn) {
         /*if (userTurn == 1) {
             this.counterPlayer1 -= 20;
@@ -214,13 +215,6 @@ class cell {
     constructor(index, img) {
         this.index = index;
         this.img = img;
-    }
-}
-
-class piece {
-    constructor(urlImage, status) {
-        this.urlImage = urlImage;
-        this.status = status;
     }
 }
 

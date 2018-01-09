@@ -48240,7 +48240,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -48313,7 +48313,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             name: '',
             singlePlayer: false,
             playerTurn: ''
-
         };
     },
     sockets: {
@@ -48801,7 +48800,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['game', 'currentPlayer'],
+    props: ['game'],
     data: function data() {
         return {
             boardGame: this.getBoardGame(),
@@ -48817,18 +48816,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         message: function message() {
             if (!this.game.gameStarted) {} else if (this.game.gameEnded) {
                 return "Jogo terminado";
-                if (this.game.winner == this.playerNumber) {
+                if (this.game.winner == this.ownPlayerNumber) {
                     return "Você ganhou!";
                 } else if (this.game.winner == 0) {
                     return "Game has ended. There was a tie.";
                 }
                 return "Game has ended and " + this.adversaryPlayerName + " has won. You lost.";
             } else {
-
-                if (this.game.getCurrentPlayerName == this.currentPlayer) {
-                    return "É A TUA VEZ DE JOGAR";
+                if (this.game.playerTurn == this.ownPlayerNumber) {
+                    return "It's your turn";
                 } else {
-                    return "É A VEZ DE  " + this.game.getCurrentPlayerName + " JOGAR";
+                    return "It's " + this.game.nextPlayer + " turn";
                 }
             }
             return "À espera de jogadores!";
@@ -48837,14 +48835,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (!this.game.gameStarted) {
                 return "alert-warning";
             } else if (this.game.gameEnded) {
-                if (this.game.winner == this.playerNumber) {
+                if (this.game.winner == this.ownPlayerNumber) {
                     return "alert-success";
                 } else if (this.game.winner == 0) {
                     return "alert-info";
                 }
                 return "alert-danger";
             }
-            if (this.game.playerTurn == this.playerNumber) {
+            if (this.game.playerTurn == this.ownPlayerNumber) {
                 return "alert-success";
             } else {
                 return "alert-info";
@@ -48853,6 +48851,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {
         getBoardGame: function getBoardGame() {
+
             console.log(this.game);
         },
         closeGame: function closeGame() {
@@ -48898,6 +48897,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.gameEnded = false;
             this.cellCompare = [];
             this.click = 0;
+            this.counterPlayer1 = 0;
+            this.counterPlayer2 = 0;
         },
         // ----------------------------------------------------------------------------------------
         // GAME LOGIC - START
@@ -49264,7 +49265,7 @@ var render = function() {
             }
           },
           [
-            _c("option", { attrs: { selected: "" } }, [_vm._v("2")]),
+            _c("option", [_vm._v("2")]),
             _vm._v(" "),
             _c("option", [_vm._v("3")]),
             _vm._v(" "),
@@ -49816,7 +49817,7 @@ var render = function() {
               _vm._l(_vm.activeGames, function(game) {
                 return [
                   _c("game", {
-                    attrs: { game: game, currentPlayer: _vm.currentPlayer },
+                    attrs: { game: game },
                     on: { "fazer-jogada": _vm.fazerJogada }
                   })
                 ]
