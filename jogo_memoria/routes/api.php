@@ -36,7 +36,10 @@ Route::put('users/{id}/unblock', 'UserControllerAPI@unblock');
 Route::delete('users/{id}', 'UserControllerAPI@delete');
 
 Route::get('/images', 'ImageControllerApi@all');
+Route::get('/images/{id}', 'ImageControllerApi@getImage');
 Route::delete('images/{id}', 'ImageControllerAPI@delete');
+Route::put('/images/{id}', 'ImageControllerAPI@update');
+Route::post('/images/store', 'ImageControllerAPI@store');
 
 Route::get('/games', 'GameControllerApi@all');
 
