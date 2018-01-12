@@ -48755,7 +48755,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\nh2 {\n    text-align: center;\n}\n.points {\n    text-align: center;\n    font-size: 15px;\n}\n.close-btn{\n    border: none;\n    float: right;\n    background-color: transparent;\n}\n.board {\n    max-width: 276px;\n    margin: 0 auto;\n    border-style: solid;\n    border-width: 0px 0 0 0px;\n    border-color: black;\n}\n.cell {\n    display: inline-block;\n    border-style: solid;\n    border-width: 2px 2px 2px 2px;\n    border-color: black;\n    margin-left: -2px;\n    margin-top: -2px;\n}\nimg {\n    width: 50px;\n    height: 50px;\n    margin: 5px;\n    padding: 0;\n    border-style: none;\n}\n", ""]);
+exports.push([module.i, "\nh2 {\n    text-align: center;\n}\n.points {\n    text-align: center;\n    font-size: 15px;\n}\n.close-btn{\n    border: none;\n    float: right;\n    background-color: transparent;\n}\n.board {\n    max-width: 276px;\n    margin: 0 auto;\n    border-style: solid;\n    border-width: 0px 0 0 0px;\n    border-color: black;\n}\n.boardGrande {\n    max-width: 400px;\n    margin: 0 auto;\n    border-style: solid;\n    border-width: 0px 0 0 0px;\n    border-color: black;\n}\n.cell {\n    display: inline-block;\n    border-style: solid;\n    border-width: 2px 2px 2px 2px;\n    border-color: black;\n    margin-left: -2px;\n    margin-top: -2px;\n}\nimg {\n    width: 50px;\n    height: 50px;\n    margin: 5px;\n    padding: 0;\n    border-style: none;\n}\n", ""]);
 
 // exports
 
@@ -48790,6 +48790,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['game', 'currentPlayer'],
@@ -48798,7 +48803,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             click: 0,
             cellCompare: [],
             showSuccess: "",
-            lastclick: 0
+            lastclick: 0,
+            message: message()
         };
     },
 
@@ -48927,7 +48933,7 @@ var render = function() {
             ),
             _vm._v(" "),
             _c("strong", [
-              _vm._v(_vm._s(_vm.successMessage) + "     "),
+              _vm._v(_vm._s(_vm.message) + "     "),
               _c(
                 "a",
                 {
@@ -48952,26 +48958,45 @@ var render = function() {
           ])
         : _vm._e(),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "board" },
-        _vm._l(_vm.game.board, function(piece, key) {
-          return _c("div", { staticClass: "cell" }, [
-            _c("img", {
-              attrs: { src: _vm.pieceImageURL(piece) },
-              on: {
-                click: function($event) {
-                  _vm.clickPiece(key)
-                }
-              }
+      _vm.game.maxPlayers == 2
+        ? _c(
+            "div",
+            { staticClass: "board" },
+            _vm._l(_vm.game.board, function(piece, key) {
+              return _c("div", { staticClass: "cell" }, [
+                _c("img", {
+                  attrs: { src: _vm.pieceImageURL(piece) },
+                  on: {
+                    click: function($event) {
+                      _vm.clickPiece(key)
+                    }
+                  }
+                })
+              ])
             })
-          ])
-        })
-      ),
+          )
+        : _c(
+            "div",
+            { staticClass: "boardGrande" },
+            _vm._l(_vm.game.board, function(piece, key) {
+              return _c("div", { staticClass: "cell" }, [
+                _c("img", {
+                  attrs: { src: _vm.pieceImageURL(piece) },
+                  on: {
+                    click: function($event) {
+                      _vm.clickPiece(key)
+                    }
+                  }
+                })
+              ])
+            })
+          ),
       _vm._v(" "),
       _c("hr"),
       _vm._v(" "),
-      _c("div", { staticClass: "points" })
+      _c("div", { staticClass: "points" }, [
+        _vm._v("\n//meter a aparecer a mesnagem\n")
+      ])
     ])
   ])
 }

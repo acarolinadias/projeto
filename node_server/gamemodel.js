@@ -18,8 +18,26 @@ class Game {
         this.cartasVirada=[];
         this.click = 0;
         this.cellCompare = [];
-        this.createTableHidden(16);
-        this.populate(16);
+        console.log("HERE");
+        switch (parseInt(this.maxPlayers))
+        {
+
+            case 2:
+                console.log("HERE2");
+                this.createTableHidden(16);
+                this.populate(16);
+                break;
+            case 3:
+                console.log("HERE3");
+                this.createTableHidden(24);
+                this.populate(24);
+                break;
+            case 4:
+                this.createTableHidden(36);
+                this.populate(36);
+                break;
+        }
+
 
         this.turn=0;
 

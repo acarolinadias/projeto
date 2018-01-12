@@ -4,17 +4,22 @@
 <div class="game-zone-content">
     <div class="alert alert-success" v-if="showSuccess">
     <button type="button" class="close-btn" v-on:click="showSuccess=false">&times;</button>
-<strong>{{ successMessage }} &nbsp;&nbsp;&nbsp;&nbsp;<a v-show="gameEnded" v-on:click.prevent="restartGame">Restart</a></strong>
+<strong>{{ message }} &nbsp;&nbsp;&nbsp;&nbsp;<a v-show="gameEnded" v-on:click.prevent="restartGame">Restart</a></strong>
 </div>
 
-<div class="board">
+<div v-if="(game.maxPlayers==2)" class="board">
+    <div class="cell" v-for="(piece, key) of game.board" >
+        <img v-bind:src="pieceImageURL(piece)" v-on:click="clickPiece(key)">
+    </div>
+    </div>
+    <div v-else class="boardGrande">
     <div class="cell" v-for="(piece, key) of game.board" >
     <img v-bind:src="pieceImageURL(piece)" v-on:click="clickPiece(key)">
     </div>
     </div>
     <hr>
     <div class="points" >
-
+//meter a aparecer a mesnagem
 </div>
 </div>
 </div>
@@ -31,6 +36,7 @@
                 cellCompare: [],
                 showSuccess:"",
                 lastclick:0,
+                message:message(),
             }
         },
 
@@ -172,6 +178,15 @@
     border-width: 0px 0 0 0px;
     border-color: black;
 }
+
+.boardGrande {
+    max-width: 400px;
+    margin: 0 auto;
+    border-style: solid;
+    border-width: 0px 0 0 0px;
+    border-color: black;
+}
+
 
 .cell {
     display: inline-block;
