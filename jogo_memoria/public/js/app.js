@@ -48795,6 +48795,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['game', 'currentPlayer'],
@@ -48802,15 +48803,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             click: 0,
             cellCompare: [],
-            showSuccess: "",
-            lastclick: 0,
-            message: message()
+            showSuccess: true,
+            lastclick: 0
+
         };
     },
 
     computed: {
         message: function message() {
             if (!this.game.gameStarted) {} else if (this.game.gameEnded) {
+                this.showSuccess = true;
                 return "Jogo terminado";
                 if (this.game.winner == this.playerNumber) {
                     return "Você ganhou!";
@@ -48819,7 +48821,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
                 return "Game has ended and " + this.adversaryPlayerName + " has won. You lost.";
             } else {
-
+                this.showSuccess = true;
                 if (this.game.getCurrentPlayerName == this.currentPlayer) {
                     return "É A TUA VEZ DE JOGAR";
                 } else {
@@ -48916,47 +48918,31 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "game-zone-content" }, [
-      _vm.showSuccess
-        ? _c("div", { staticClass: "alert alert-success" }, [
-            _c(
-              "button",
-              {
-                staticClass: "close-btn",
-                attrs: { type: "button" },
-                on: {
-                  click: function($event) {
-                    _vm.showSuccess = false
-                  }
-                }
-              },
-              [_vm._v("×")]
-            ),
-            _vm._v(" "),
-            _c("strong", [
-              _vm._v(_vm._s(_vm.message) + "     "),
-              _c(
-                "a",
+      _c("div", { staticClass: "alert", class: _vm.alerttype }, [
+        _c("strong", [
+          _vm._v(_vm._s(_vm.message) + "     "),
+          _c(
+            "a",
+            {
+              directives: [
                 {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.gameEnded,
-                      expression: "gameEnded"
-                    }
-                  ],
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      _vm.restartGame($event)
-                    }
-                  }
-                },
-                [_vm._v("Restart")]
-              )
-            ])
-          ])
-        : _vm._e(),
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.game.gameEnded,
+                  expression: "game.gameEnded"
+                }
+              ],
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.closeGame($event)
+                }
+              }
+            },
+            [_vm._v("Fechar\nJogo")]
+          )
+        ])
+      ]),
       _vm._v(" "),
       _vm.game.maxPlayers == 2
         ? _c(

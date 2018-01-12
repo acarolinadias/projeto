@@ -5,7 +5,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jogo_memoria/public/js/app.js" afterPath="$PROJECT_DIR$/jogo_memoria/public/js/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/game.vue" afterPath="$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/game.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_server/gamemodel.js" afterPath="$PROJECT_DIR$/node_server/gamemodel.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -43,28 +42,8 @@
       <file leaf-file-name="game.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/game.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="23" column="6" lean-forward="true" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="singleplayer.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/singleplayer.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="616">
-              <caret line="293" column="8" lean-forward="true" selection-start-line="253" selection-start-column="4" selection-end-line="293" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="createGame.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/createGame.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+            <state relative-caret-position="120">
+              <caret line="8" column="6" lean-forward="false" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -111,7 +90,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>,</find>
       <find>hasRow</find>
       <find>root</find>
       <find>closeGame</find>
@@ -141,6 +119,7 @@
       <find>socket</find>
       <find>create</find>
       <find>join</find>
+      <find>message</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -514,7 +493,7 @@
       <workItem from="1515339717555" duration="12731000" />
       <workItem from="1515368433089" duration="202000" />
       <workItem from="1515407245488" duration="27000" />
-      <workItem from="1515754391061" duration="11631000" />
+      <workItem from="1515754391061" duration="12663000" />
     </task>
     <task id="LOCAL-00001" summary="jogo a dar">
       <created>1515083768440</created>
@@ -572,11 +551,18 @@
       <option name="project" value="LOCAL" />
       <updated>1515768643384</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="grid a funcionar bem">
+      <created>1515769814218</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1515769814218</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="101732000" />
+    <option name="totallyTimeSpent" value="102764000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -613,7 +599,8 @@
     <MESSAGE value="Jogo" />
     <MESSAGE value="Nogoasdlknansdnklasklnasdklasdkln" />
     <MESSAGE value="Jogo a funcionar" />
-    <option name="LAST_COMMIT_MESSAGE" value="Jogo a funcionar" />
+    <MESSAGE value="grid a funcionar bem" />
+    <option name="LAST_COMMIT_MESSAGE" value="grid a funcionar bem" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -859,22 +846,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/createGame.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/singleplayer.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="293" column="8" lean-forward="true" selection-start-line="253" selection-start-column="4" selection-end-line="293" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_server/gamelist.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1050">
@@ -891,10 +862,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/singleplayer.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4035">
+          <caret line="269" column="12" lean-forward="true" selection-start-line="269" selection-start-column="12" selection-end-line="269" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/createGame.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/game.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="23" column="6" lean-forward="true" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
+        <state relative-caret-position="120">
+          <caret line="8" column="6" lean-forward="false" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
           <folding />
         </state>
       </provider>

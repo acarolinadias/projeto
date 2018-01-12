@@ -2,9 +2,10 @@
 <div>
 
 <div class="game-zone-content">
-    <div class="alert alert-success" v-if="showSuccess">
-    <button type="button" class="close-btn" v-on:click="showSuccess=false">&times;</button>
-<strong>{{ message }} &nbsp;&nbsp;&nbsp;&nbsp;<a v-show="gameEnded" v-on:click.prevent="restartGame">Restart</a></strong>
+    <div class="alert"
+:class="alerttype">
+    <strong>{{message}} &nbsp;&nbsp;&nbsp;&nbsp;<a v-show="game.gameEnded" v-on:click.prevent="closeGame">Fechar
+Jogo</a></strong>
 </div>
 
 <div v-if="(game.maxPlayers==2)" class="board">
@@ -34,9 +35,9 @@
             return {
                 click: 0,
                 cellCompare: [],
-                showSuccess:"",
+                showSuccess:true,
                 lastclick:0,
-                message:message(),
+
             }
         },
 
@@ -47,6 +48,7 @@
 
                 }
                 else if (this.game.gameEnded) {
+                    this.showSuccess=true;
                     return "Jogo terminado";
                     if (this.game.winner == this.playerNumber) {
                         return "Você ganhou!";
@@ -57,7 +59,7 @@
                     return "Game has ended and " + this.adversaryPlayerName + " has won. You lost.";
                 }
                 else {
-
+                    this.showSuccess=true;
                     if (this.game.getCurrentPlayerName == this.currentPlayer) {
                         return "É A TUA VEZ DE JOGAR";
                     } else {
