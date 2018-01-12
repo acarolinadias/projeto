@@ -32,7 +32,7 @@ class GameList {
 
     removeGame(gameID, socketID) {
     	let game = this.gameByID(gameID);
-    	game.players=[];
+    	//game.players=[];
 		this.games.delete(gameID);
     	return game;
     }

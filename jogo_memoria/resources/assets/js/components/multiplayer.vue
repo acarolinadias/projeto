@@ -153,7 +153,13 @@
                 this.$socket.emit('get_game', {gameID: game.gameID});
             },
             remove(game){
-                this.$socket.emit('remove_game', {gameID: game.gameID, socketId: game.socketId});
+
+                if(game.players[1].playerName == this.currentPlayer){
+                    this.$socket.emit('remove_game', {gameID: game.gameID, socketId: game.socketId});
+                }else{
+                    alert('Não é dono do jogo para remover');
+                }
+
             },
 
             play(game, index) {

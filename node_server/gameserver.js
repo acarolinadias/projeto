@@ -28,6 +28,7 @@ io.on('connection', function (socket) {
 		io.emit('lobby_changed');
     });
 
+
     socket.on('join_game', function (data){
     	let game = games.joinGame(data.gameID, data.playerName, socket.id);
 		socket.join(game.gameID);
@@ -36,14 +37,16 @@ io.on('connection', function (socket) {
     });
 
 
-    socket.on('remove_game1', function (data){
-    	let game = games.removeGame(data.gameID, socket.id);
-    	socket.emit('my_active_games_changed');
-    });
-
-
     socket.on('remove_game', function (data) {
         let game = games.removeGame(data.gameID, socket.id);
+        socket.emit('my_active_games_changed');
+
+    });
+
+    socket.on('my_active_games_changed', function (data) {
+        var my_games= games.getConnectedGamesOf(socket.id);
+        console.log("Data" + socket.id);
+        socket.emit('my_active_games', my_games);
     });
 
 
@@ -71,6 +74,8 @@ io.on('connection', function (socket) {
         var my_games= games.getConnectedGamesOf(socket.id);
         socket.emit('my_active_games', my_games);
     });
+
+
     socket.on('fazer_jogada', function (data){
         let game = games.gameByID(data.socketId);
         //console.log(game);
@@ -86,6 +91,8 @@ io.on('connection', function (socket) {
         io.to(game.gameID).emit('game_changed', game);
 
     });
+
+
     socket.on('check-pair', function (data){
         let game = games.gameByID(data.socketId);
         //console.log(game);
@@ -105,6 +112,7 @@ io.on('connection', function (socket) {
     socket.on('get_my_lobby_games', function (){
     	var my_games= games.getLobbyGamesOf(socket.id);
     	socket.emit('my_lobby_games', my_games);
+        console.log("get_my_lobby_games");
     });
 
 });

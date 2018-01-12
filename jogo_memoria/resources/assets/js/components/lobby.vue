@@ -11,8 +11,8 @@
         <tbody>
         <tr v-for="game in games"  :key="game.gameID">
         <td>{{ game.gameID }}</td>
-        <td>{{ game.players }}/4</td>
-        <td>{{ game.name }}/4</td>
+        <td>{{ game.players }}</td>
+        <td>{{ game.name }}</td>
         <td>
             <a class="btn btn-xs btn-primary" v-on:click.prevent="join(game)">Juntar</a>
             <a class="btn btn-xs btn-primary" v-on:click.prevent="remove(game)">Remover</a>
