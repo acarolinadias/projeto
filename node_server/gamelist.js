@@ -15,7 +15,7 @@ class GameList {
 
     createGame(playerName, socketID, name, maxPlayers) {
     	this.contadorID = this.contadorID+1;
-    	var game = new Game(this.contadorID, playerName, name, maxPlayers);
+    	var game = new Game(this.contadorID, playerName, name, maxPlayers, socketID);
     	game.player1SocketID = socketID;
     	this.games.set(game.gameID, game);
     	return game;
@@ -26,46 +26,53 @@ class GameList {
     	if (game===null) {
     		return null;
     	}
-    	game.join(playerName);
-    	game.player2SocketID = socketID;
+    	game.join(playerName, socketID);
     	return game;
     }
 
     removeGame(gameID, socketID) {
     	let game = this.gameByID(gameID);
-    	if (game===null) {
-    		return null;
-    	}
-    	if (game.player1SocketID == socketID) {
-    		game.player1SocketID = "";
-    	} else if (game.player2SocketID == socketID) {
-    		game.player2SocketID = "";
-    	} 
-    	if ((game.player1SocketID === "") && (game.player2SocketID === "")) {
-    		this.games.delete(gameID);
-    	}
+    	game.players=[];
+		this.games.delete(gameID);
     	return game;
     }
 
     getConnectedGamesOf(socketID) {
     	let games = [];
     	for (var [key, value] of this.games) {
-    		if ((value.player1SocketID == socketID) || (value.player2SocketID == socketID)) {
-    			games.push(value);
-    		}
+    		for(var player of value.players) {
+                if(player != null) {
+                    //console.log("socket do player:"+player.socketId);
+                    //console.log("socket do jogo:"+socketID);
+                	if (( player.socketId == socketID)) {
+                        games.push(value);
+                    }
+                }
+            }
 		}
 		return games;
     }
 
     getLobbyGamesOf(socketID) {
     	let games = [];
-    	for (var [key, value] of this.games) {
-    		if ((!value.gameStarted) && (!value.gameEnded))  {
-    			if ((value.player1SocketID != socketID) && (value.player2SocketID != socketID)) {
-    				games.push(value);
-    			}
-    		}
-		}
+		var verifica = 0;
+
+        for (var [key, value] of this.games) {
+        	if((!value.gameStarted) && (!value.gameEnded))
+        		for(var player of value.players) {
+					if(player != null) {
+						if (( player.socketId != socketID)) {
+						}
+						else{
+                            verifica ++;
+						}
+					}
+            }else{
+        		verifica++;
+			}
+        }
+        if(verifica==0)
+        games.push(value);
 		return games;
     }
 }

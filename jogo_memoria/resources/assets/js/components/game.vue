@@ -1,38 +1,25 @@
 <template>
-    <div class="gameseparator">
-        <div>
-            <h2 class="text-center">JOGO {{game.gameID}}</h2>
-            <br>
-        </div>
-        <div class="game-zone-content">
-            <div class="alert"
-                 :class="alerttype">
-                <strong>{{message}} &nbsp;&nbsp;&nbsp;&nbsp;<a v-show="game.gameEnded" v-on:click.prevent="closeGame">Fechar
-                    Jogo</a></strong>
-            </div>
+<div>
 
-            <div class="game-zone-content">
-                <div class="alert alert-success" v-if="showSuccess">
-                    <button type="button" class="close-btn" v-on:click="showSuccess=false">&times;</button>
-                    <strong>{{successMessage}} &nbsp;&nbsp;&nbsp;&nbsp;<a v-show="gameEnded"
-                                                                          v-on:click.prevent="restartGame">Restart</a></strong>
-                </div>
+<div class="game-zone-content">
+    <div class="alert alert-success" v-if="showSuccess">
+    <button type="button" class="close-btn" v-on:click="showSuccess=false">&times;</button>
+<strong>{{ successMessage }} &nbsp;&nbsp;&nbsp;&nbsp;<a v-show="gameEnded" v-on:click.prevent="restartGame">Restart</a></strong>
+</div>
 
-                <div class="board">
-                    <div class="cell" v-for="(piece, key) of game.board">
-                        <img v-bind:src="pieceImageURL(piece)" v-on:click="clickPiece(key)">
-                    </div>
-                </div>
-                <hr>
-                <div class="points">
-                    <p>Pontuação Jogador 1 : {{counterPlayer1}}</p>
-                    <p>Pontuação Jogador 2 : {{counterPlayer2}}</p>
-                </div>
-            </div>
-            <hr>
-        </div>
+<div class="board">
+    <div class="cell" v-for="(piece, key) of game.board" >
+    <img v-bind:src="pieceImageURL(piece)" v-on:click="clickPiece(key)">
     </div>
+    </div>
+    <hr>
+    <div class="points" >
+
+</div>
+</div>
+</div>
 </template>
+
 
 
 <script type="text/javascript">
@@ -40,12 +27,10 @@
         props: ['game', 'currentPlayer'],
         data: function () {
             return {
-                boardGame: this.getBoardGame(),
                 click: 0,
                 cellCompare: [],
-                counterPlayer1:0,
-                coutnerPlayer2:0,
                 showSuccess:"",
+                lastclick:0,
             }
         },
 
@@ -94,9 +79,6 @@
             }
         },
         methods: {
-            getBoardGame() {
-                console.log(this.game);
-            },
 
             closeGame() {
                 this.$parent.close(this.game);
@@ -119,8 +101,21 @@
 
             //decrementa pontos em caso de falha
             clickPiece: function (index) {
+                if(this.lastclick==null)
+                {
+                    this.lastclick=index;
+                }
+                else{
+                    if(index!=this.lastclick)
+                    {
+                        this.$parent.fazerJogada(index, this.game.gameID);
+                        this.$parent.checkPair(index, this.game.gameID);
 
-                this.$parent.fazerJogada(index, this.game.gameID);
+                    }
+                    this.lastclick=index;
+                }
+
+
             },
 
 
@@ -131,14 +126,8 @@
             },
 
             restartGame: function () {
-                console.log('restartGame');
-                this.board = this.createTableHidden(16);
                 this.showSuccess = false;
-                this.showFailure = false;
                 this.successMessage = '';
-                this.failMessage = '';
-                //this.currentValue= 1;
-                this.gameEnded = false;
                 this.cellCompare = [];
                 this.click = 0;
             },
@@ -152,14 +141,6 @@
             // GAME LOGIC - END
             // ----------------------------------------------------------------------------------------
             playerName: function (playerNumber) {
-                console.log("Player num: " + playerNumber);
-                console.log("Nome: " + this.player1User);
-                /*if(this.player1User != undefined && playerNumber == 1){
-                    return this.player1User.name;
-                }
-                if(this.player2User != undefined && playerNumber == 2){
-                    return this.player2User.name;
-                }*/
                 return 'Jogador ' + playerNumber;
             }
         }
@@ -168,45 +149,44 @@
 </script>
 
 
-<style>
+    <style>
 
     h2 {
-        text -align: center;
-    }
+    text-align: center;
+}
 
-    .points {
-        text -align: center;
-        font-size: 15px;
-    }
+.points {
+    text-align: center;
+    font-size: 15px;
+}
+.close-btn{
+    border: none;
+    float: right;
+    background-color: transparent;
+}
 
-    .close-btn {
-        border: none;
-        float: right;
-        background-color: transparent;
-    }
+.board {
+    max-width: 276px;
+    margin: 0 auto;
+    border-style: solid;
+    border-width: 0px 0 0 0px;
+    border-color: black;
+}
 
-    .board {
-        max -width: 276px;
-        margin: 0 auto;
-        border-style: solid;
-        border-width: 0px 0 0 0px;
-        border-color: black;
-    }
+.cell {
+    display: inline-block;
+    border-style: solid;
+    border-width: 2px 2px 2px 2px;
+    border-color: black;
+    margin-left: -2px;
+    margin-top: -2px;
+}
 
-    .cell {
-        display: inline-block;
-        border-style: solid;
-        border-width: 2px 2px 2px 2px;
-        border-color: black;
-        margin-left: -2px;
-        margin-top: -2px;
-    }
-
-    img {
-        width: 50px;
-        height: 50px;
-        margin: 5px;
-        padding: 0;
-        border-style: none;
-    }
+img {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    padding: 0;
+    border-style: none;
+}
 </style>
