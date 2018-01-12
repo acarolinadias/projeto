@@ -4,8 +4,8 @@
 <div class="game-zone-content">
     <div class="alert"
 :class="alerttype">
-    <strong>{{message}} &nbsp;&nbsp;&nbsp;&nbsp;<a v-show="game.gameEnded" v-on:click.prevent="closeGame">Fechar
-Jogo</a></strong>
+    <strong>{{message}} &nbsp;&nbsp;&nbsp;&nbsp;<a v-show="game.gameEnded"
+        v-on:click.prevent="closeGame">Fechar Jogo</a></strong>
 </div>
 
 <div v-if="(game.maxPlayers==2)" class="board">
@@ -19,8 +19,10 @@ Jogo</a></strong>
     </div>
     </div>
     <hr>
-    <div class="points" >
-//meter a aparecer a mesnagem
+    <div class="points" v-for="(player) of game.players" >
+        <p v-if="(player!=null)">Player : {{player.playerName}} -> {{player.pontuacao}} pontos</p>
+
+
 </div>
 </div>
 </div>
@@ -50,7 +52,7 @@ Jogo</a></strong>
                 else if (this.game.gameEnded) {
                     this.showSuccess=true;
                     return "Jogo terminado";
-                    if (this.game.winner == this.playerNumber) {
+                    if (this.game.winner == this.currentPlayer) {
                         return "Você ganhou!";
                     }
                     else if (this.game.winner == 0) {
