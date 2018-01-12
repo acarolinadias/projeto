@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e5c41ba6-b07e-41de-8757-7feed5996543" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/projetoDAD.iml" afterPath="$PROJECT_DIR$/.idea/projetoDAD.iml" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/jogo_memoria/public/js/app.js" afterPath="$PROJECT_DIR$/jogo_memoria/public/js/app.js" />
-      <change beforePath="$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/lobby.vue" afterPath="$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/lobby.vue" />
-      <change beforePath="$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/multiplayer.vue" afterPath="$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/multiplayer.vue" />
-      <change beforePath="$PROJECT_DIR$/node_server/gamelist.js" afterPath="$PROJECT_DIR$/node_server/gamelist.js" />
-      <change beforePath="$PROJECT_DIR$/node_server/gamemodel.js" afterPath="$PROJECT_DIR$/node_server/gamemodel.js" />
-      <change beforePath="$PROJECT_DIR$/node_server/gameserver.js" afterPath="$PROJECT_DIR$/node_server/gameserver.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jogo_memoria/public/js/app.js" afterPath="$PROJECT_DIR$/jogo_memoria/public/js/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/game.vue" afterPath="$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/game.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_server/gamemodel.js" afterPath="$PROJECT_DIR$/node_server/gamemodel.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -45,31 +40,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="lobby.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/lobby.vue">
+      <file leaf-file-name="game.vue" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/game.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="594">
-              <caret line="33" column="36" lean-forward="false" selection-start-line="33" selection-start-column="31" selection-end-line="33" selection-end-column="36" />
+            <state relative-caret-position="229">
+              <caret line="23" column="6" lean-forward="true" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="multiplayer.vue" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/multiplayer.vue">
+      <file leaf-file-name="singleplayer.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/singleplayer.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2700">
-              <caret line="154" column="31" lean-forward="false" selection-start-line="154" selection-start-column="31" selection-end-line="154" selection-end-column="31" />
+            <state relative-caret-position="616">
+              <caret line="293" column="8" lean-forward="true" selection-start-line="253" selection-start-column="4" selection-end-line="293" selection-end-column="8" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gamemodel.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/node_server/gamemodel.js">
+      <file leaf-file-name="createGame.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/createGame.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-90">
-              <caret line="10" column="20" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="20" />
+            <state relative-caret-position="540">
+              <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -78,8 +73,18 @@
       <file leaf-file-name="gameserver.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/node_server/gameserver.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="44" column="46" lean-forward="false" selection-start-line="44" selection-start-column="46" selection-end-line="44" selection-end-column="46" />
+            <state relative-caret-position="449">
+              <caret line="106" column="26" lean-forward="false" selection-start-line="106" selection-start-column="17" selection-end-line="106" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gamemodel.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_server/gamemodel.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="23" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -88,8 +93,8 @@
       <file leaf-file-name="gamelist.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/node_server/gamelist.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="44" column="8" lean-forward="false" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="8" />
+            <state relative-caret-position="1050">
+              <caret line="70" column="27" lean-forward="false" selection-start-line="70" selection-start-column="27" selection-end-line="70" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -108,7 +113,6 @@
     <findStrings>
       <find>,</find>
       <find>hasRow</find>
-      <find>join</find>
       <find>root</find>
       <find>closeGame</find>
       <find>currentPlayer</find>
@@ -123,11 +127,20 @@
       <find>TicTacToeGame</find>
       <find>max</find>
       <find>name</find>
-      <find>currentpla</find>
-      <find>current</find>
-      <find>join-</find>
-      <find>Juntar</find>
-      <find>remove_game</find>
+      <find>play</find>
+      <find>mover</find>
+      <find>inval</find>
+      <find>shows</find>
+      <find>invalid</find>
+      <find>turn</find>
+      <find>counter</find>
+      <find>log</find>
+      <find>turn+</find>
+      <find>it's</find>
+      <find>close</find>
+      <find>socket</find>
+      <find>create</find>
+      <find>join</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -143,7 +156,6 @@
         <option value="$PROJECT_DIR$/jogo_memoria/app/Http/Controllers/LoginControllerAPI.php" />
         <option value="$PROJECT_DIR$/jogo_memoria/routes/web.php" />
         <option value="$PROJECT_DIR$/jogo_memoria/routes/api.php" />
-        <option value="$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/singleplayer.vue" />
         <option value="$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/userLogin.vue" />
         <option value="$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/administrator.vue" />
         <option value="$PROJECT_DIR$/jogo_memoria/resources/views/backend/partial/login.blade.php" />
@@ -152,13 +164,14 @@
         <option value="$PROJECT_DIR$/jogo_memoria/resources/views/backend/master.blade.php" />
         <option value="$PROJECT_DIR$/jogo_memoria/resources/assets/js/app.js" />
         <option value="$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/userGameEdit.vue" />
+        <option value="$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/multiplayergame.vue" />
         <option value="$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/createGame.vue" />
-        <option value="$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/game.vue" />
-        <option value="$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/lobby.vue" />
-        <option value="$PROJECT_DIR$/node_server/gamemodel.js" />
+        <option value="$PROJECT_DIR$/node_server/gamelist.js" />
         <option value="$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/multiplayer.vue" />
         <option value="$PROJECT_DIR$/node_server/gameserver.js" />
-        <option value="$PROJECT_DIR$/node_server/gamelist.js" />
+        <option value="$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/singleplayer.vue" />
+        <option value="$PROJECT_DIR$/node_server/gamemodel.js" />
+        <option value="$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/game.vue" />
       </list>
     </option>
   </component>
@@ -260,7 +273,7 @@
       <path value="$PROJECT_DIR$/jogo_memoria/vendor/maximebf/debugbar" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" fullScreen="true">
     <option name="x" value="618" />
     <option name="y" value="2" />
     <option name="width" value="697" />
@@ -282,7 +295,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -334,13 +346,14 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="nodejs_interpreter_path" value="node" />
+    <property name="nodejs_interpreter_path" value="D:/node" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL&#10;HSQLDB (Remote)" />
     <property name="SearchEverywhereHistoryKey" value="Login&#9;FILE&#9;file://D:/DAD/projeto/jogo_memoria/app/Http/Controllers/LoginControllerAPI.php&#10;api&#9;FILE&#9;file://D:/DAD/projeto/jogo_memoria/routes/api.php&#10;.env&#9;FILE&#9;file://D:/DAD/projeto/jogo_memoria/.env" />
   </component>
@@ -358,12 +371,10 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/jogo_memoria/app/Http/Controllers/ImageControllerApi.php</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/jogo_memoria/public/js/app.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/createGame.vue</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/game.vue</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/multiplayer.vue</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_server/gamemodel.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_server/gameserver.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/imageUpload.vue</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/jogo_memoria/routes/api.php</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Created" />
@@ -371,6 +382,7 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="CREATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/jogo_memoria/app/Http/Resources/Image.php</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Deleted" />
@@ -502,11 +514,7 @@
       <workItem from="1515339717555" duration="12731000" />
       <workItem from="1515368433089" duration="202000" />
       <workItem from="1515407245488" duration="27000" />
-      <workItem from="1515433157908" duration="1636000" />
-      <workItem from="1515494439245" duration="1101000" />
-      <workItem from="1515495652115" duration="811000" />
-      <workItem from="1515496639440" duration="759000" />
-      <workItem from="1515497541020" duration="1497000" />
+      <workItem from="1515754391061" duration="11631000" />
     </task>
     <task id="LOCAL-00001" summary="jogo a dar">
       <created>1515083768440</created>
@@ -536,18 +544,46 @@
       <option name="project" value="LOCAL" />
       <updated>1515085270012</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Jogo">
+      <created>1515431997332</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1515431997332</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Jogo">
+      <created>1515434944033</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1515434944033</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Nogoasdlknansdnklasklnasdklasdkln">
+      <created>1515498635440</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1515498635440</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Jogo a funcionar">
+      <created>1515768643384</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1515768643384</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85343000" />
+    <option name="totallyTimeSpent" value="101732000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="618" y="2" width="1303" height="780" extended-state="6" />
+    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23750961" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39140624" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.193265" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -561,6 +597,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32847896" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -574,7 +611,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="jogo a dar" />
     <MESSAGE value="Jogo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Jogo" />
+    <MESSAGE value="Nogoasdlknansdnklasklnasdklasdkln" />
+    <MESSAGE value="Jogo a funcionar" />
+    <option name="LAST_COMMIT_MESSAGE" value="Jogo a funcionar" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -583,6 +622,16 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/jogo_memoria/public/img/unblock.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jogo_memoria/public/img/hidden.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/jogo_memoria/public/img/block.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -616,6 +665,13 @@
     <entry file="file://$PROJECT_DIR$/jogo_memoria/public/img/2.png">
       <provider selected="true" editor-type-id="images">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jogo_memoria/public/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="847518">
+          <caret line="49195" column="16" lean-forward="false" selection-start-line="49195" selection-start-column="16" selection-end-line="49195" selection-end-column="16" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/jogo_memoria/app/Http/Controllers/ImageControllerApi.php">
@@ -674,6 +730,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/websocket.vue" />
+    <entry file="file://$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/lobby.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-161">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/jogo_memoria/app/Http/Controllers/LoginControllerAPI.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="332">
@@ -732,6 +796,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="31" column="40" lean-forward="false" selection-start-line="31" selection-start-column="40" selection-end-line="31" selection-end-column="40" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -770,93 +835,66 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/singleplayer.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="31" column="20" lean-forward="false" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/createUser.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-648">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/multiplayergame.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="33" column="30" lean-forward="true" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jogo_memoria/public/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="49831" column="22" lean-forward="false" selection-start-line="49831" selection-start-column="22" selection-end-line="49831" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/createGame.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-302">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es2015.collection.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="22" column="4" lean-forward="false" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/game.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1044">
-          <caret line="58" column="29" lean-forward="false" selection-start-line="58" selection-start-column="29" selection-end-line="58" selection-end-column="29" />
+        <state relative-caret-position="128">
+          <caret line="118" column="14" lean-forward="true" selection-start-line="118" selection-start-column="14" selection-end-line="118" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/node_server/gameserver.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="44" column="46" lean-forward="false" selection-start-line="44" selection-start-column="46" selection-end-line="44" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_server/gamelist.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="44" column="8" lean-forward="false" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_server/gamemodel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-90">
-          <caret line="10" column="20" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/lobby.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="33" column="36" lean-forward="false" selection-start-line="33" selection-start-column="31" selection-end-line="33" selection-end-column="36" />
+        <state relative-caret-position="449">
+          <caret line="106" column="26" lean-forward="false" selection-start-line="106" selection-start-column="17" selection-end-line="106" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/multiplayer.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2700">
-          <caret line="154" column="31" lean-forward="false" selection-start-line="154" selection-start-column="31" selection-end-line="154" selection-end-column="31" />
+        <state relative-caret-position="15">
+          <caret line="1" column="6" lean-forward="false" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/createGame.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/singleplayer.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="616">
+          <caret line="293" column="8" lean-forward="true" selection-start-line="253" selection-start-column="4" selection-end-line="293" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_server/gamelist.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1050">
+          <caret line="70" column="27" lean-forward="false" selection-start-line="70" selection-start-column="27" selection-end-line="70" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_server/gamemodel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="23" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jogo_memoria/resources/assets/js/components/game.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="23" column="6" lean-forward="true" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
           <folding />
         </state>
       </provider>

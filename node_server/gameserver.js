@@ -53,16 +53,7 @@ io.on('connection', function (socket) {
 			socket.emit('invalid_play', {'type': 'Invalid_Game', 'game': null});
 			return;
 		}
-		var numPlayer = 0;
-		if (game.player1SocketID == socket.id) {
-			numPlayer = 1;
-		} else if (game.player2SocketID == socket.id) {
-			numPlayer = 2;
-		} 
-		if (numPlayer === 0) {
-			socket.emit('invalid_play', {'type': 'Invalid_Player', 'game': game});
-			return;
-		}
+
 		if (game.play(numPlayer, data.index)) {
 			io.to(game.gameID).emit('game_changed', game);
 		} else {
@@ -87,17 +78,26 @@ io.on('connection', function (socket) {
             socket.emit('invalid_play', {'type': 'Invalid_Game', 'game': null});
             return;
         }
-        var numPlayer = 0;
-        if (game.player1SocketID == socket.id) {
-            numPlayer = 1;
-        } else if (game.player2SocketID == socket.id) {
-            numPlayer = 2;
+        if(data.index != null && data.currentPlayer != null)
+        {
+            game.fazerJogada(data.index, data.currentPlayer);
         }
-        if (numPlayer === 0) {
-            socket.emit('invalid_play', {'type': 'Invalid_Player', 'game': game});
+
+        io.to(game.gameID).emit('game_changed', game);
+
+    });
+    socket.on('check-pair', function (data){
+        let game = games.gameByID(data.socketId);
+        //console.log(game);
+        if (game === null) {
+            socket.emit('invalid_play', {'type': 'Invalid_Game', 'game': null});
             return;
         }
-        game.fazerJogada(data.index, numPlayer);
+        if(data.index != null && data.currentPlayer != null)
+        {
+            game.checkPair(data.index, data.currentPlayer);
+        }
+
         io.to(game.gameID).emit('game_changed', game);
 
     });

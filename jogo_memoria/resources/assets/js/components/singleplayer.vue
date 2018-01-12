@@ -251,8 +251,7 @@
         }
     }
 </script>
-
-<style>
+    <style>
 
     h2 {
         text-align: center;

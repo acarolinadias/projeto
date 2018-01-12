@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
 
 class Game {
-    constructor(ID, player1Name, name, maxPlayers) {
+    constructor(ID, player1Name, name, maxPlayers, socketId) {
         this.gameID = ID;
         this.gameEnded = false;
         this.gameStarted = false;
@@ -9,20 +9,40 @@ class Game {
         this.maxPlayers = maxPlayers;
         this.player1 = player1Name;
         this.players = [];
-        this.players[1]=player1Name;
-        this.nextPlayer = player1Name;
+        console.log(this.players);
+        this.players[1]=new Player(player1Name, socketId);
         this.playerTurn = 1;
         this.winner = 0;
         this.board = [];
         this.boardGame = [];
+        this.cartasVirada=[];
         this.click = 0;
         this.cellCompare = [];
-        this.createTableHidden(16);
-        this.populate(16);
-        this.numPlayer = 1;
+        console.log("HERE");
+        switch (parseInt(this.maxPlayers))
+        {
+
+            case 2:
+                console.log("HERE2");
+                this.createTableHidden(16);
+                this.populate(16);
+                break;
+            case 3:
+                console.log("HERE3");
+                this.createTableHidden(24);
+                this.populate(24);
+                break;
+            case 4:
+                this.createTableHidden(36);
+                this.populate(36);
+                break;
+        }
+
+
         this.turn=0;
-        this.getCurrentPlayerNumber = 0;
+
         this.getCurrentPlayerName ="";
+        this.lastClick=-1;
 
     }
 
@@ -66,8 +86,9 @@ class Game {
         }
     }
 
-    join(player2Name) {
-        this.players.push(player2Name);
+    join(player2Name, socketId) {
+        var player = new Player(player2Name, socketId);
+        this.players.push(player);
         console.log("max players" + this.maxPlayers);
         console.log("max players" + this.players.length);
         if (this.players.length-1 == this.maxPlayers) {
@@ -75,7 +96,6 @@ class Game {
             this.setGetters();
         }
     }
-
 
     decreasePoints(userTurn) {
         /*if (userTurn == 1) {
@@ -106,66 +126,75 @@ class Game {
     }
     currentPlayerName()
     {
-        return (this.players[((this.turn+parseInt(this.maxPlayers))%parseInt(this.maxPlayers))+1]);
+        return (this.players[((this.turn+parseInt(this.maxPlayers))%parseInt(this.maxPlayers))+1].playerName);
+    }
+    checkPair(index, player)
+    {
+
+        if(this.gameStarted==true){
+            if(player == this.currentPlayerName()) {
+                if(!this.cartasVirada.includes(index)){
+                    if (this.click==2) {
+                        console.log(this.boardGame[index]!=this.boardGame[this.lastClick]);
+                        console.log(this.boardGame[index]);
+                        console.log(this.boardGame[this.lastClick]);
+                            if(this.boardGame[index]!=this.boardGame[this.lastClick])
+                            {
+
+                                var waitTill = new Date(new Date().getTime() + 1.5 * 1000);
+                                while(waitTill > new Date()){}
+                                this.board[index]=0;
+                                this.board[this.lastClick]=0;
+                                this.nextTurn();
+                            }
+                            //delay
+                            this.click=0;
+
+
+
+                    }
+                    this.checkGameEnded();
+                }
+
+            }
+
+        }
     }
     fazerJogada(index, player){
 
         if(this.gameStarted==true){
-        console.log("turno: "+this.turn);
-        if(player == this.currentPlayer()) {
-            var aux;
-            this.board[index] = this.boardGame[index];
-            this.currentValue = index;
+
+            if(player == this.currentPlayerName()) {
+            if(!this.cartasVirada.includes(index)){
+
+
             switch (this.click) {
                 case 0:
-                    this.board[index] = this.boardGame[index];
-                    this.cellCompare[0] = this.board[index];
-                    this.cellCompare[1] = index;
-                    this.currentValue = index;
-                    this.click = 1;
-                    return true;
+                    this.board[index]=this.boardGame[index];
+                    this.lastClick=index;
+                    this.click=1;
                     break;
-
                 case 1:
-                    if(this.numPlayer==1)
+                    this.board[index]=this.boardGame[index];
+                    if(this.boardGame[index]==this.boardGame[this.lastClick])
                     {
-                        this.numPlayer=2;
-                    }
-                    else{
-                        this.numPlayer=2;
-                    }
-                    aux = this.cellCompare[1];
-                    this.board[index] = this.boardGame[index];
-                    if (this.cellCompare[1] != index) {
-                        this.nextTurn();
+                        this.cartasVirada.push(index);
+                        this.cartasVirada.push(this.lastClick);
+                        this.click=0;
+                        this.lastClick=-1;
 
-                        if (this.cellCompare[0] == this.board[index]) {
-                            console.log("Sao iguais");
-                            return true;
-                            this.givePoints(this.userTurn);
-                        } else {
-                            this.decreasePoints(this.userTurn);
-                            this.board[index] = 0;
-                            this.board[this.cellCompare[1]] = 0;
-                            return true;
-                            //setTimeout(this.flipCell(index, aux), 2000);
-
-                        }
-
-                        this.click = 0;
-                        this.cellCompare = [];
-                        return true;
+                    }else{
+                        this.click=2;
                     }
-                    break;
-                default:
-                    this.click = 0;
-                    this.cellCompare = [];
-                    return true;
+
+
+
                     break;
 
             }
-            this.checkGameEnded();
         }}
+
+        }
 
     }
     nextTurn()
@@ -176,8 +205,8 @@ class Game {
     }
     setGetters()
     {
-        this.getCurrentPlayerName=(this.players[((this.turn+parseInt(this.maxPlayers))%parseInt(this.maxPlayers))+1]);
-        this.getCurrentPlayerNumber=(((this.turn+parseInt(this.maxPlayers))%parseInt(this.maxPlayers))+1);
+        this.getCurrentPlayerName=(this.players[((this.turn+parseInt(this.maxPlayers))%parseInt(this.maxPlayers))+1].playerName);
+
     }
     checkGameEnded(){
 
@@ -215,6 +244,20 @@ class cell {
     constructor(index, img) {
         this.index = index;
         this.img = img;
+    }
+}
+
+class piece {
+    constructor(urlImage, status) {
+        this.urlImage = urlImage;
+        this.status = status;
+    }
+}
+class Player{
+    constructor(playerName, socketId)
+    {
+        this.playerName=playerName;
+        this.socketId=socketId;
     }
 }
 

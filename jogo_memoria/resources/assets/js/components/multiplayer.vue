@@ -105,7 +105,11 @@
         methods: {
             fazerJogada(index, gameId){
                 console.log({index:index, socketId:gameId});
-                this.$socket.emit('fazer_jogada', {index:index, socketId:gameId});
+                this.$socket.emit('fazer_jogada', {index:index, socketId:gameId, currentPlayer:this.currentPlayer});
+            },
+            checkPair(index, gameId){
+                console.log({index:index, socketId:gameId});
+                this.$socket.emit('check-pair', {index:index, socketId:gameId, currentPlayer:this.currentPlayer});
             },
             createSinglePlayer(){
                 console.log("Create");
