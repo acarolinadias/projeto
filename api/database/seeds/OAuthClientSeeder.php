@@ -17,13 +17,3 @@ class OAuthClientSeeder extends Seeder {
     }
 }
 
-id	int(10) unsigned Auto Increment
-user_id	int(11) NULL
-name	varchar(255)
-secret	varchar(100)
-redirect	text
-personal_access_client	tinyint(1)
-password_client	tinyint(1)
-revoked	tinyint(1)
-created_at	timestamp NULL
-updated_at

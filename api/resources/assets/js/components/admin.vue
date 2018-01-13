@@ -1,6 +1,6 @@
 <template>
     <div>
-        <user-login v-if="(!currentUser && !createUser)" :user="currentUser" @login-click="loginUser"></user-login>
+        <user-login v-if="(!logged && !createUser)" :user="currentUser" @login-click="loginUser"></user-login>
         <users-estatisticas v-if="currentUser" :user="currentUser" ></users-estatisticas>
         <user-create v-if="createUser" :user="currentUser"></user-create>
     </div>
@@ -21,7 +21,8 @@ export default {
         return {
             showSuccess: false,
             successMessage: '',
-            currentUser: null,
+            currentUser: {},
+            logged:false,
             createUser: false,
             users: [],
         }

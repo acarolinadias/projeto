@@ -7,22 +7,22 @@
                     <div class="form-group">
                         <div class="form-row">
                             <label for="exampleInputName">Nome Completo</label>
-                            <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Nome Completo">
+                            <input v-model="user.name" class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Nome Completo">
                         </div>
                         <div class="form-row">
                             <label for="exampleInputLastName">Nickname</label>
-                            <input class="form-control" id="exampleInputLastName" type="text" aria-describedby="nameHelp" placeholder="Nickname">
+                            <input v-model="user.nickname" class="form-control" id="exampleInputLastName" type="text" aria-describedby="nameHelp" placeholder="Nickname">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email</label>
-                        <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Email">
+                        <input v-model="user.email" class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Email">
                     </div>
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-md-6">
                                 <label for="exampleInputPassword1">Senha</label>
-                                <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Senha">
+                                <inputv-model="user.password" class="form-control" id="exampleInputPassword1" type="password" placeholder="Senha">
                             </div>
                             <div class="col-md-6">
                                 <label for="exampleConfirmPassword">Confirmar Senha</label>

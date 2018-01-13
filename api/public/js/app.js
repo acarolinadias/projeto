@@ -46910,11 +46910,108 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
         _c("form", [
+          _c("div", { staticClass: "form-group" }, [
+            _c("div", { staticClass: "form-row" }, [
+              _c("label", { attrs: { for: "exampleInputName" } }, [
+                _vm._v("Nome Completo")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.user.name,
+                    expression: "user.name"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  id: "exampleInputName",
+                  type: "text",
+                  "aria-describedby": "nameHelp",
+                  placeholder: "Nome Completo"
+                },
+                domProps: { value: _vm.user.name },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.user, "name", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-row" }, [
+              _c("label", { attrs: { for: "exampleInputLastName" } }, [
+                _vm._v("Nickname")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.user.nickname,
+                    expression: "user.nickname"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  id: "exampleInputLastName",
+                  type: "text",
+                  "aria-describedby": "nameHelp",
+                  placeholder: "Nickname"
+                },
+                domProps: { value: _vm.user.nickname },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.user, "nickname", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+              _vm._v("Email")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.user.email,
+                  expression: "user.email"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                id: "exampleInputEmail1",
+                type: "email",
+                "aria-describedby": "emailHelp",
+                placeholder: "Email"
+              },
+              domProps: { value: _vm.user.email },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.user, "email", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
           _vm._m(0),
-          _vm._v(" "),
-          _vm._m(1),
-          _vm._v(" "),
-          _vm._m(2),
           _vm._v(" "),
           _c(
             "a",
@@ -46955,75 +47052,14 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-group" }, [
       _c("div", { staticClass: "form-row" }, [
-        _c("label", { attrs: { for: "exampleInputName" } }, [
-          _vm._v("Nome Completo")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            id: "exampleInputName",
-            type: "text",
-            "aria-describedby": "nameHelp",
-            placeholder: "Nome Completo"
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-row" }, [
-        _c("label", { attrs: { for: "exampleInputLastName" } }, [
-          _vm._v("Nickname")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            id: "exampleInputLastName",
-            type: "text",
-            "aria-describedby": "nameHelp",
-            placeholder: "Nickname"
-          }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "exampleInputEmail1" } }, [_vm._v("Email")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: {
-          id: "exampleInputEmail1",
-          type: "email",
-          "aria-describedby": "emailHelp",
-          placeholder: "Email"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("div", { staticClass: "form-row" }, [
         _c("div", { staticClass: "col-md-6" }, [
           _c("label", { attrs: { for: "exampleInputPassword1" } }, [
             _vm._v("Senha")
           ]),
           _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              id: "exampleInputPassword1",
-              type: "password",
-              placeholder: "Senha"
-            }
-          })
+          _vm._v(
+            '="user.password" class="form-control" id="exampleInputPassword1" type="password" placeholder="Senha">\n                        '
+          )
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-6" }, [
@@ -48298,6 +48334,9 @@ if (false) {
 //
 //
 //
+//
+//
+//
 
 module.exports = {
     props: ['user'],
@@ -48326,6 +48365,7 @@ module.exports = {
 
             this.$emit('login-click', this.token);
         },
+        loginFace: function loginFace() {},
         logoutUser: function logoutUser() {
             axios.post('api/test', {
                 access_token: this.access_token
@@ -48447,6 +48487,40 @@ var render = function() {
               }
             },
             [_vm._v("Login")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            { staticClass: "btn btn-primary", attrs: { href: "/redirect" } },
+            [_vm._v("Login with Facebook")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-primary btn-block",
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.loginUser()
+                }
+              }
+            },
+            [_vm._v("LOGIN")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-primary btn-block",
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.logoutUser()
+                }
+              }
+            },
+            [_vm._v("LOGOUT")]
           ),
           _vm._v(" "),
           _c(
@@ -49267,7 +49341,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             showSuccess: false,
             successMessage: '',
-            currentUser: null,
+            currentUser: {},
+            logged: false,
             createUser: false,
             users: []
         };
@@ -49332,7 +49407,7 @@ var render = function() {
   return _c(
     "div",
     [
-      !_vm.currentUser && !_vm.createUser
+      !_vm.logged && !_vm.createUser
         ? _c("user-login", {
             attrs: { user: _vm.currentUser },
             on: { "login-click": _vm.loginUser }
