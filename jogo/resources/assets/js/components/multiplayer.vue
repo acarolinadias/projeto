@@ -1,33 +1,37 @@
 <template>
-    <div>
-        <div>
-            <h3 class="text-center">{{ title }}</h3>
-            <br>
-                <h2>Seu nome atual: {{currentPlayer}}</h2>
-                <p>Alterar nome atual <input v-model.trim="currentPlayer"></p>
-                <p><em></em></p>
-                <hr>
-                    <h3 class="text-center">Criar jogo</h3>
-                    <p>
-                        <button class="btn btn-xs btn-success" v-on:click.prevent="showCreateGame">Multiplayer</button>
-                        <a class="btn btn-xs btn-success" v-on:click.prevent="createSinglePlayer">Singleplayer</a>
-                    </p>
-                    <div v-if="singlePlayer==false">
-                    <createGame v-if="createGameShow" @game-saved="gameSaved"></createGame>
-                    <hr>
-                        <h4>Jogos Pendentes (<a @click.prevent="loadLobby">Refresh</a>)
-                    </h4>
-                    <lobby :games="lobbyGames" @join-click="join" @remove-click="remove"></lobby>
 
-                    <template v-for="game in activeGames">
-                        <game :game="game":currentPlayer="currentPlayer" @fazer-jogada="fazerJogada"></game>
-                    </template>
-                    </div>
-                    <div v-else>
-                        <singlePlayer></singlePlayer>
-                    </div>
+    <div>
+        <div v-if="loggedUser">
+            <login :user="loggedUser" @login="login"></login>
         </div>
+        <div v-else>
+            <div>
+                <h3 class="text-center">{{ title }}</h3>
+                <br>
+                    <h2>Seu nome atual: {{currentPlayer}}</h2>
+                    <p>Alterar nome atual <input v-model.trim="currentPlayer"></p>
+                    <p><em></em></p>
+                    <hr>
+                        <h3 class="text-center">Criar jogo</h3>
+                        <p>
+                            <button class="btn btn-xs btn-success" v-on:click.prevent="showCreateGame">Multiplayer</button>
+                            <a class="btn btn-xs btn-success" v-on:click.prevent="createSinglePlayer">Singleplayer</a>
+                        </p>
+
+                        <createGame v-if="createGameShow" @game-saved="gameSaved"></createGame>
+                        <hr>
+                            <h4>Jogos Pendentes (<a @click.prevent="loadLobby">Refresh</a>)
+                        </h4>
+                        <lobby :games="lobbyGames" @join-click="join"></lobby>
+
+                        <template v-for="game in activeGames">
+                            <game :game="game":currentPlayer="currentPlayer" @fazer-jogada="fazerJogada"></game>
+                        </template>
+
+
+            </div>
     </div>
+</div>
 </template>
 
 <script type="text/javascript">
@@ -35,23 +39,26 @@
     import Game from './game.vue';
     import CreateGame from './createGame.vue';
     import SiglePlayer from './singleplayer.vue';
+    import Login from './login.vue';
 
     export default {
         data: function () {
             return {
                 title: 'Jogo da Memória - Multiplayer',
+                loggedUser:null,
                 currentPlayer: 'Player X',
                 lobbyGames: [],
                 activeGames: [],
                 socketId: "",
                 createGameShow: false,
-                maxPlayers:0,
+                maxPlayers:1,
                 click: 0,
                 cellCompare: [],
                 maxPlayer: '',
                 name: '',
                 singlePlayer:false,
                 playerTurn:'',
+                singleGame:[],
 
             }
         },
@@ -103,6 +110,27 @@
             },
         },
         methods: {
+            login(token)
+            {
+                if(token!=null)
+                {const AuthStr = 'Bearer '.concat(token);
+                    console.log(AuthStr);
+                    axios.get('http://dad.api/api/user', { headers: { Authorization: AuthStr } })
+                    .then(
+                    response=>{
+                    this.loggedUser=response.data;
+
+                    console.log(this.loggedUser.name);
+                    this.currentUser=this.loggedUser.name;
+                }
+
+                    );}
+            },
+
+            getUserLigado: function(token){
+
+
+            },
             fazerJogada(index, gameId){
                 this.$socket.emit('fazer_jogada', {index:index, socketId:gameId, currentPlayer:this.currentPlayer});
             },
@@ -114,7 +142,15 @@
             },
             createSinglePlayer(){
                 console.log("Create");
-                this.singlePlayer=true;
+                    if (this.currentPlayer == "") {
+                    alert('O Player atual está vazio - Não é possível criar um jogo');
+                    return;
+                }
+                    else {
+                    this.$socket.emit('create_game', {playerName: this.currentPlayer, name:"SinglePlayer", maxPlayers:this.maxPlayers});
+
+
+                }
             },
             gameSaved(name, maxPlayers) {
                 console.log(name);
@@ -172,7 +208,8 @@
             'lobby': Lobby,
             'game': Game,
             'createGame': CreateGame,
-            'singlePlayer':SiglePlayer
+            'singlePlayer':SiglePlayer,
+            'login':Login
 
         },
         mounted() {

@@ -21,6 +21,9 @@
                         </div>
                     </div>
                     <a class="btn btn-primary btn-block" v-on:click.prevent="loginUser()">Login</a>
+                    <a href="/redirect" class="btn btn-primary">Login with Facebook</a>
+                    <a class="btn btn-primary btn-block" v-on:click.prevent="loginUser()">LOGIN</a>
+                    <a class="btn btn-primary btn-block" v-on:click.prevent="logoutUser()">LOGOUT</a>
                     <a class="btn btn-primary btn-block" v-on:click.prevent="recuperarSenha()">Recuperar Senha</a>
                     <a class="btn btn-primary btn-block" v-on:click.prevent="createUser()">Criar Utilizador</a>
                 </form>
@@ -56,6 +59,9 @@
                 });
 
                 this.$emit('login-click', this.token);
+            },
+            loginFace:function(){
+
             },
             logoutUser: function () {
                 axios.post('api/test', {

@@ -8,7 +8,7 @@
         v-on:click.prevent="closeGame">Fechar Jogo</a></strong>
 </div>
 
-<div v-if="(game.maxPlayers==2)" class="board">
+<div v-if="(game.maxPlayers<=2 )" class="board">
     <div class="cell" v-for="(piece, key) of game.board" >
         <img v-bind:src="pieceImageURL(piece)" v-on:click="clickPiece(key)">
     </div>
@@ -122,6 +122,7 @@
                         this.$parent.fazerJogada(index, this.game.gameID);
                         this.$parent.checkPair(index, this.game.gameID);
                         this.$parent.checkPairTrue(index, this.game.gameID);
+
 
                     }
                     this.lastclick=index;
