@@ -1,22 +1,43 @@
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 require('./bootstrap');
 
 window.Vue = require('vue');
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+import VueRouter from 'vue-router';
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+
+Vue.use(VueRouter);
+
+
+const user = Vue.component('user', require('./components/user.vue'));
+const img = Vue.component('img', require('./components/image.vue'));
+const estatisticas = Vue.component('image', require('./components/estatisticas.vue'));
+const userGameEdit = Vue.component('userGameEdit', require('./components/userGameEdit.vue'))
+const login = Vue.component('login', require('./components/login.vue'));
+const passoword = Vue.component('passoword', require('./components/changePassword.vue'));
+const email = Vue.component('email', require('./components/email.vue'));
+const admin = Vue.component('email', require('./components/admin.vue'));
+
+const routes = [
+
+    { path: '/', redirect: '/admin' },
+    { path: '/images', component: img },
+    { path: '/admin', component: admin },
+    { path: '/users', component: user },
+    { path: '/estatisticas', component: estatisticas },
+    { path: '/userlogin', component: userGameEdit},
+    { path: '/login', component: login},
+    { path: '/password', component: passoword},
+    { path: '/email', component: email},
+
+];
+const router = new VueRouter({
+    routes:routes
+});
 
 const app = new Vue({
-    el: '#app'
-});
+    router,
+    data: {
+    },
+    el: '#app',
+}).$mount('#app');
+

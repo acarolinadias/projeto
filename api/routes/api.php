@@ -16,3 +16,27 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('login', 'LoginControllerAPI@login');
+
+Route::middleware('auth:api')->post('logout',
+    'LoginControllerAPI@logout');
+
+
+
+Route::middleware('auth:api')->get('users', 'UserControllerAPI@getUsers');
+Route::get('users/emailavailable', 'UserControllerAPI@emailAvailable');
+Route::get('users/{id}', 'UserControllerAPI@getUser');
+Route::post('users', 'UserControllerAPI@store');
+Route::put('users/{id}', 'UserControllerAPI@update');
+Route::put('users/{id}/block', 'UserControllerAPI@block');
+Route::put('users/{id}/unblock', 'UserControllerAPI@unblock');
+Route::delete('users/{id}', 'UserControllerAPI@delete');
+
+Route::get('/images', 'ImageControllerApi@all');
+Route::get('/images/{id}', 'ImageControllerApi@getImage');
+Route::delete('images/{id}', 'ImageControllerAPI@delete');
+Route::put('/images/{id}', 'ImageControllerAPI@update');
+Route::post('/images/store', 'ImageControllerAPI@store');
+
+Route::get('/games', 'GameControllerApi@all');
