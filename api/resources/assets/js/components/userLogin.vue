@@ -20,6 +20,7 @@
                                 <input class="form-check-input" type="checkbox"> Lembrar Senha</label>
                         </div>
                     </div>
+                    <a href="/redirect" class="btn btn-primary">Login with Facebook</a>
                     <a class="btn btn-primary btn-block" v-on:click.prevent="loginUser()">LOGIN</a>
                     <a class="btn btn-primary btn-block" v-on:click.prevent="logoutUser()">LOGOUT</a>
                     <a class="btn btn-primary btn-block" v-on:click.prevent="recuperarSenha()">Recuperar Senha</a>
@@ -57,6 +58,9 @@
                 });
 
                 this.$emit('login-click', this.token);
+            },
+            loginFace:function(){
+
             },
             logoutUser: function () {
                 axios.post('api/test', {

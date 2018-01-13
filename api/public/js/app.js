@@ -48439,6 +48439,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 module.exports = {
     props: ['user'],
@@ -48467,6 +48468,7 @@ module.exports = {
 
             this.$emit('login-click', this.token);
         },
+        loginFace: function loginFace() {},
         logoutUser: function logoutUser() {
             axios.post('api/test', {
                 access_token: this.access_token
@@ -48580,6 +48582,12 @@ var render = function() {
           ]),
           _vm._v(" "),
           _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "a",
+            { staticClass: "btn btn-primary", attrs: { href: "/redirect" } },
+            [_vm._v("Login with Facebook")]
+          ),
           _vm._v(" "),
           _c(
             "a",

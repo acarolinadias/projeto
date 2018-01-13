@@ -9,16 +9,18 @@ class Game {
         this.maxPlayers = maxPlayers;
         this.player1 = player1Name;
         this.players = [];
-        this.players[1]=new Player(player1Name, socketId);
+        console.log(this.players);
+        this.players[1] = new Player(player1Name, socketId);
         this.playerTurn = 1;
         this.winner = 0;
         this.board = [];
         this.boardGame = [];
-        this.cartasVirada=[];
+        this.cartasVirada = [];
         this.click = 0;
         this.cellCompare = [];
-        switch (parseInt(this.maxPlayers))
-        {
+        console.log("HERE");
+        switch (parseInt(this.maxPlayers)) {
+            case 1:
             case 2:
                 this.createTableHidden(16);
                 this.populate(16);
@@ -33,7 +35,10 @@ class Game {
                 break;
         }
 
-
+        if (this.maxPlayers == 1)
+        {
+            this.gameStarted=true;
+        }
         this.turn=0;
 
         this.getCurrentPlayerName ="";
@@ -200,6 +205,9 @@ class Game {
             }
         }}
 
+        }
+        else{
+            console.log("GAME NOT STARTED");
         }
 
     }

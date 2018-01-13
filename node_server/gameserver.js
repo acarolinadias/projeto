@@ -23,7 +23,6 @@ io.on('connection', function (socket) {
     socket.on('create_game', function (data){
     	let game = games.createGame(data.playerName, socket.id, data.name, data.maxPlayers);
 		socket.join(game.gameID);
-		// Notifications to the client
 		socket.emit('my_active_games_changed');
 		io.emit('lobby_changed');
     });

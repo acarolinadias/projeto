@@ -12,3 +12,5 @@
 */
 
 Route::get('/', 'UserController@index');
+Route::get('/redirect', 'SocialAuthFacebookController@redirect');
+Route::get('/callback', 'SocialAuthFacebookController@callback');

@@ -1,68 +1,86 @@
 <template>
-    <div>
-        <div class="alert alert-success" v-if="showSuccess">
-
-            <button type="button" class="close-btn" v-on:click="showSuccess=false">&times;</button>
-            <strong>{{ successMessage }}</strong>
+    <div class="container">
+        <div class="card card-login mx-auto mt-5">
+            <div class="card-header">Login</div>
+            <div class="card-body">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email</label>
+                        <input v-model="email" class="form-control" id="exampleInputEmail1" type="email"
+                               aria-describedby="emailHelp" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Senha</label>
+                        <input v-model="password" class="form-control" id="exampleInputPassword1" type="password"
+                               placeholder="Senha">
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox"> Lembrar Senha</label>
+                        </div>
+                    </div>
+                    <a class="btn btn-primary btn-block" v-on:click.prevent="loginUser()">LOGIN</a>
+                    <a class="btn btn-primary btn-block" v-on:click.prevent="logoutUser()">LOGOUT</a>
+                    <a class="btn btn-primary btn-block" v-on:click.prevent="recuperarSenha()">Recuperar Senha</a>
+                    <a class="btn btn-primary btn-block" v-on:click.prevent="createUser()">CRIAR UTILIZADOR</a>
+                </form>
+            </div>
         </div>
-
-        <user-login :user="currentUser" @block-click="loginUser"></user-login>
-        <users-password :user="currentUser" @block-click="passwordUser"></users-password>
-        <user-create :user="currentUser" @block-click="createUser"></user-create>
-        <users-estatisticas :user="currentUser" ></users-estatisticas>
-
-
     </div>
 </template>
 
 <script type="text/javascript">
-    import UserLogin from './userLogin.vue';
-    import UserCreate from './createUser.vue';
-    import Estatitiscas from './estatisticas.vue';
-    import ForgetPassword from './forgetPassword.vue';
+    module.exports = {
+    props: ['user'],
+    data: {
+    email: '',
+    password: '',
+    token:''
+},
+    methods: {
+    loginUser: function () {
 
-    export default {
-        data: function(){
-            return {
-                showSuccess: false,
-                successMessage: '',
-                currentUser: null,
-                users: [],
-            }
-        },
-        methods: {
-            childMessage: function(message){
-                this.showSuccess = true;
-                this.successMessage = message;
-                window.scrollTo(0, 0);
-            },
-            loginUser: function(){
-                this.currentUser = null;
-                this.showSuccess = true;
-                this.successMessage = 'Utilizador Logado';
-            },
-            createUser: function(user){
-                this.currentUser=user;
-                this.showSuccess = true;
-                this.successMessage = 'Utilizador Criado';
-            },
-            passwordUser: function(user){
-                this.currentUser=user;
-                this.showSuccess = true;
-                this.successMessage = 'Utilizador Criado';
-            }
-        },
-        components: {
-            'user-create': UserCreate,
-            'user-login': UserLogin,
-            'users-estatisticas': Estatitiscas,
-            'users-password': ForgetPassword,
+    axios.post('http://dad.api/api/login', {
+    email: this.email,
+    password: this.password
+}, {
+    headers: {
+    'Accept': 'application/json',
+}
+}).then(response => {
+    this.token=response.data.access_token;
+    this.$emit('login-click', this.token);
 
-        },
-        mounted() {
-            this.user();
-            console.log("ola");
-        }
+}).catch(error => {
+    console.log(error);
+});
 
-    }
+    this.$emit('login', this.token);
+},
+    logoutUser: function () {
+    axios.post('http://dad.api/api/test', {
+    access_token: this.access_token,
+    //refresh_token: this.refresh_token
+}, {
+    headers: {
+    'Authorization': 'Bearer Token',
+}
+})
+    .then(response => {
+    console.log(response.data);
+
+});
+
+
+
+},
+    recuperarSenha: function () {
+
+},
+    createUser: function () {
+
+}
+}
+}
 </script>

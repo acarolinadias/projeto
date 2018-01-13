@@ -1426,7 +1426,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(14);
-module.exports = __webpack_require__(72);
+module.exports = __webpack_require__(75);
 
 
 /***/ }),
@@ -46197,7 +46197,7 @@ var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(51)
 /* template */
-var __vue_template__ = __webpack_require__(71)
+var __vue_template__ = __webpack_require__(74)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -46270,7 +46270,11 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
+<<<<<<< Updated upstream
 exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+=======
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+>>>>>>> Stashed changes
 
 // exports
 
@@ -46322,6 +46326,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__createGame_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__createGame_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__singleplayer_vue__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__singleplayer_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__singleplayer_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__login_vue__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__login_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__login_vue__);
 //
 //
 //
@@ -46354,6 +46360,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+
 
 
 
@@ -46364,18 +46375,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             title: 'Jogo da Memória - Multiplayer',
+            loggedUser: null,
             currentPlayer: 'Player X',
             lobbyGames: [],
             activeGames: [],
             socketId: "",
             createGameShow: false,
-            maxPlayers: 0,
+            maxPlayers: 1,
             click: 0,
             cellCompare: [],
             maxPlayer: '',
             name: '',
             singlePlayer: false,
-            playerTurn: ''
+            playerTurn: '',
+            singleGame: []
 
         };
     },
@@ -46470,6 +46483,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     methods: {
+        login: function login(token) {
+            var _this = this;
+
+            if (token != null) {
+                var AuthStr = 'Bearer '.concat(token);
+                console.log(AuthStr);
+                axios.get('http://dad.api/api/user', { headers: { Authorization: AuthStr } }).then(function (response) {
+                    _this.loggedUser = response.data;
+
+                    console.log(_this.loggedUser.name);
+                    _this.currentUser = _this.loggedUser.name;
+                });
+            }
+        },
+
+
+        getUserLigado: function getUserLigado(token) {},
         fazerJogada: function fazerJogada(index, gameId) {
             this.$socket.emit('fazer_jogada', { index: index, socketId: gameId, currentPlayer: this.currentPlayer });
         },
@@ -46481,7 +46511,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         createSinglePlayer: function createSinglePlayer() {
             console.log("Create");
-            this.singlePlayer = true;
+            if (this.currentPlayer == "") {
+                alert('O Player atual está vazio - Não é possível criar um jogo');
+                return;
+            } else {
+                this.$socket.emit('create_game', { playerName: this.currentPlayer, name: "SinglePlayer", maxPlayers: this.maxPlayers });
+            }
         },
         gameSaved: function gameSaved(name, maxPlayers) {
             console.log(name);
@@ -46532,7 +46567,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         'lobby': __WEBPACK_IMPORTED_MODULE_0__lobby_vue___default.a,
         'game': __WEBPACK_IMPORTED_MODULE_1__game_vue___default.a,
         'createGame': __WEBPACK_IMPORTED_MODULE_2__createGame_vue___default.a,
-        'singlePlayer': __WEBPACK_IMPORTED_MODULE_3__singleplayer_vue___default.a
+        'singlePlayer': __WEBPACK_IMPORTED_MODULE_3__singleplayer_vue___default.a,
+        'login': __WEBPACK_IMPORTED_MODULE_4__login_vue___default.a
 
     },
     mounted: function mounted() {
@@ -47038,7 +47074,7 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm.game.maxPlayers == 2
+        _vm.game.maxPlayers <= 2
           ? _c(
               "div",
               { staticClass: "board" },
@@ -47402,7 +47438,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\nh2 {\n    text-align: center;\n}\n.points {\n    text-align: center;\n    font-size: 15px;\n}\n.close-btn{\n    border: none;\n    float: right;\n    background-color: transparent;\n}\n.board {\n    max-width: 276px;\n    margin: 0 auto;\n    border-style: solid;\n    border-width: 0px 0 0 0px;\n    border-color: black;\n}\n.cell {\n    display: inline-block;\n    border-style: solid;\n    border-width: 2px 2px 2px 2px;\n    border-color: black;\n    margin-left: -2px;\n    margin-top: -2px;\n}\nimg {\n    width: 50px;\n    height: 50px;\n    margin: 5px;\n    padding: 0;\n    border-style: none;\n}\n", ""]);
+exports.push([module.i, "\nh2 {\n    text-align: center;\n}\n.points {\n    text-align: center;\n    font-size: 15px;\n}\n.close-btn{\n    border: none;\n    float: right;\n    background-color: transparent;\n}\n.board {\n    max-width: 276px;\n    margin: 0 auto;\n    border-style: solid;\n    border-width: 0px 0 0 0px;\n    border-color: black;\n}\n.boardGrande {\n    max-width: 400px;\n    margin: 0 auto;\n    border-style: solid;\n    border-width: 0px 0 0 0px;\n    border-color: black;\n}\n.cell {\n    display: inline-block;\n    border-style: solid;\n    border-width: 2px 2px 2px 2px;\n    border-color: black;\n    margin-left: -2px;\n    margin-top: -2px;\n}\nimg {\n    width: 50px;\n    height: 50px;\n    margin: 5px;\n    padding: 0;\n    border-style: none;\n}\n", ""]);
 
 // exports
 
@@ -47436,30 +47472,83 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['game', 'currentPlayer'],
     data: function data() {
         return {
-            title: 'Jogo da memória - SinglePlayer',
-            showSuccess: false,
-            showFailure: false,
-            successMessage: '',
-            failMessage: '',
-            currentValue: 1,
-            gameEnded: false,
-            player1User: '',
-            player2User: '',
-            userTurn: 1,
-            counterPlayer1: 0,
-            counterPlayer2: 0,
-            board: this.createTableHidden(16),
-            boardGame: this.createTable(16),
             click: 0,
-            cellCompare: []
+            cellCompare: [],
+            showSuccess: true,
+            lastclick: 0
+
         };
     },
 
+    computed: {
+        message: function message() {
+            if (!this.game.gameStarted) {} else if (this.game.gameEnded) {
+                this.showSuccess = true;
+                return "Jogo terminado";
+                if (this.game.winner == this.currentPlayer) {
+                    return "Você ganhou!";
+                } else if (this.game.winner == 0) {
+                    return "Game has ended. There was a tie.";
+                }
+                return "Game has ended and " + this.adversaryPlayerName + " has won. You lost.";
+            } else {
+                this.showSuccess = true;
+                if (this.game.getCurrentPlayerName == this.currentPlayer) {
+                    return "É A TUA VEZ DE JOGAR";
+                } else {
+                    return "É A VEZ DE  " + this.game.getCurrentPlayerName + " JOGAR";
+                }
+            }
+            return "À espera de jogadores!";
+        },
+        alerttype: function alerttype() {
+            if (!this.game.gameStarted) {
+                return "alert-warning";
+            } else if (this.game.gameEnded) {
+                if (this.game.winner == this.playerNumber) {
+                    return "alert-success";
+                } else if (this.game.winner == 0) {
+                    return "alert-info";
+                }
+                return "alert-danger";
+            }
+            if (this.game.playerTurn == this.playerNumber) {
+                return "alert-success";
+            } else {
+                return "alert-info";
+            }
+        }
+    },
     methods: {
+        closeGame: function closeGame() {
+            this.$parent.close(this.game);
+        },
+
+
+        //JOGO
         pieceImageURL: function pieceImageURL(piece) {
             var imgSrc = String(piece);
             //a imagem hidden ele atribui o numero 0
@@ -47470,112 +47559,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
 
         //funcao criar matriz hidden
-        createTableHidden: function createTableHidden(index) {
-            var i;
-            var boardHidden = [];
-            //por cada linha cria uma coluna com imagens hidden
-            for (i = 0; i < index; i++) {
-                boardHidden[i] = 'hidden'; // ou 0
-            }
-            return boardHidden;
-        },
 
         //funcao criar matriz jogo
-        createTable: function createTable(index) {
-            var i, j;
-            var array = [];
-            var board = [];
-            var imgLen = index / 2;
-            //por cada linha preenche uma coluna com as imagens
-            for (j = 1; j < imgLen + 1; j++) {
-                array.push(j);
-            }
 
-            var arrayAuxDup = array.slice(0);
-
-            var arrayF = array.concat(arrayAuxDup);
-
-            //Random
-            var currentIndex = arrayF.length,
-                temporaryValue,
-                randomIndex;
-            while (0 !== currentIndex) {
-                randomIndex = Math.floor(Math.random() * currentIndex);
-                currentIndex -= 1;
-                temporaryValue = arrayF[currentIndex];
-                arrayF[currentIndex] = arrayF[randomIndex];
-                arrayF[randomIndex] = temporaryValue;
-            }
-            //atribui aleatoriamente as imagens
-            for (i = 0; i < index; i++) {
-                board[i] = arrayF[i];
-            }
-
-            console.log(arrayF);
-
-            return board;
-        },
 
         //decrementa pontos em caso de falha
-        decreasePoints: function decreasePoints(userTurn) {
-            if (userTurn == 1) {
-                this.counterPlayer1 -= 20;
-                this.counterPlayer1 = Math.max(0, this.counterPlayer1);
-            } else {
-                this.counterPlayer2 -= 20;
-                this.counterPlayer2 = Math.max(0, this.counterPlayer2);
-            }
-        },
-        //incrementa pontos em caso de sucesso
-        givePoints: function givePoints(userTurn) {
-            if (userTurn == 1) {
-                this.counterPlayer1 += 30;
-            } else {
-                this.counterPlayer2 += 30;
-            }
-        },
-
         clickPiece: function clickPiece(index) {
-            var aux;
-
-            this.board[index] = this.boardGame[index];
-            this.currentValue = index;
-
-            switch (this.click) {
-                case 0:
-                    this.board[index] = this.boardGame[index];
-                    this.cellCompare[0] = this.board[index];
-                    this.cellCompare[1] = index;
-                    this.currentValue = index;
-                    this.click = 1;
-                    break;
-
-                case 1:
-                    aux = this.cellCompare[1];
-                    this.board[index] = this.boardGame[index];
-                    if (this.cellCompare[1] != index) {
-                        if (this.cellCompare[0] == this.board[index]) {
-                            console.log("Sao iguais");
-                            this.givePoints(this.userTurn);
-                        } else {
-                            this.decreasePoints(this.userTurn);
-                            this.board[index] = 'hidden';
-                            this.board[this.cellCompare[1]] = 'hidden';
-                            //setTimeout(this.flipCell(index, aux), 2000);
-                        }
-                        this.userTurn = this.userTurn == 1 ? 2 : 1;
-                        this.click = 0;
-                        this.cellCompare = [];
-                    }
-                    break;
-                default:
-                    this.click = 0;
-                    this.cellCompare = [];
-                    break;
-
+            if (this.lastclick == null) {
+                this.lastclick = index;
+            } else {
+                if (index != this.lastclick) {
+                    this.$parent.fazerJogada(index, this.game.gameID);
+                    this.$parent.checkPair(index, this.game.gameID);
+                }
+                this.lastclick = index;
             }
-            this.checkGameEnded();
         },
+
         //compara as imagens
         flipCell: function flipCell(index, cellCompare) {
             this.board[index] = 'hidden';
@@ -47583,82 +47583,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
 
         restartGame: function restartGame() {
-            console.log('restartGame');
-            this.board = this.createTableHidden(16);
             this.showSuccess = false;
-            this.showFailure = false;
             this.successMessage = '';
-            this.failMessage = '';
-            //this.currentValue= 1;
-            this.gameEnded = false;
             this.cellCompare = [];
             this.click = 0;
-            this.counterPlayer1 = 0;
-            this.counterPlayer2 = 0;
         },
         // ----------------------------------------------------------------------------------------
         // GAME LOGIC - START
         // ----------------------------------------------------------------------------------------
-        hasRow: function hasRow(value) {
-            //console.log("Value: " + value);
-            return this.board[0] == value && this.board[1] == value && this.board[2] == value && this.board[3] == value || this.board[4] == value && this.board[5] == value && this.board[6] == value && this.board[7] == value || this.board[8] == value && this.board[9] == value && this.board[10] == value && this.board[11] == value || this.board[12] == value && this.board[13] == value && this.board[14] == value && this.board[15] == value;
-        },
-        checkGameEnded: function checkGameEnded() {
-            //mostrar mensagens
-            if (this.isBoardComplete()) {
-                if (this.counterPlayer1 > this.counterPlayer2) {
-                    this.successMessage = 'O jogo terminou! Jogador 1 Ganhou!!!!!';
-                } else if (this.counterPlayer1 < this.counterPlayer2) {
-                    this.successMessage = 'O jogo terminou! Jogador 2 Ganhou!!!!!';
-                } else {
-                    this.successMessage = 'O jogo terminou! Empate';
-                }
-                this.showSuccess = true;
-                this.gameEnded = true;
-            }
-            return false;
-        },
-        isBoardComplete: function isBoardComplete() {
-            var returnValue = true;
-            this.board.forEach(function (element) {
-                if (element === 0 || element == 'hidden') {
-                    //console.log(element);
-                    returnValue = false;
-                    return;
-                }
-            });
-            return returnValue;
-        },
+
+
         // ----------------------------------------------------------------------------------------
         // GAME LOGIC - END
         // ----------------------------------------------------------------------------------------
         playerName: function playerName(playerNumber) {
-            console.log("Player num: " + playerNumber);
-            console.log("Nome: " + this.player1User);
-            /*if(this.player1User != undefined && playerNumber == 1){
-                return this.player1User.name;
-            }
-            if(this.player2User != undefined && playerNumber == 2){
-                return this.player2User.name;
-            }*/
             return 'Jogador ' + playerNumber;
-        }
-    },
-
-    computed: {
-        currentPlayer: function currentPlayer() {
-            console.log("Turn: " + this.userTurn);
-            console.log("Player: " + this.playerName(this.userTurn));
-            this.playerName(this.currentValue);
-            return 'Jogador ' + this.userTurn;
-        }
-    },
-    mounted: function mounted() {
-        if (this.$data.player1) {
-            this.player1User = this.$data.player1;
-        }
-        if (this.$data.player2) {
-            this.player2User = this.$data.player2;
         }
     }
 });
@@ -47672,76 +47611,121 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "game-zone-content" }, [
-      _vm.showSuccess
-        ? _c("div", { staticClass: "alert alert-success" }, [
-            _c(
-              "button",
-              {
-                staticClass: "close-btn",
-                attrs: { type: "button" },
-                on: {
-                  click: function($event) {
-                    _vm.showSuccess = false
-                  }
-                }
-              },
-              [_vm._v("×")]
-            ),
-            _vm._v(" "),
-            _c("strong", [
-              _vm._v(_vm._s(_vm.successMessage) + "     "),
-              _c(
-                "a",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.gameEnded,
-                      expression: "gameEnded"
-                    }
-                  ],
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      _vm.restartGame($event)
-                    }
-                  }
-                },
-                [_vm._v("Restart")]
-              )
-            ])
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "board" },
-        _vm._l(_vm.board, function(piece, key) {
-          return _c("div", { staticClass: "cell" }, [
-            _c("img", {
-              attrs: { src: _vm.pieceImageURL(piece) },
+    _vm.modoJogo == null
+      ? _c("div", [
+          _c("h2", [_vm._v("Escolher modo de Jogo")]),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-success",
               on: {
                 click: function($event) {
-                  _vm.clickPiece(key)
+                  $event.preventDefault()
+                  _vm.createVSbot()
                 }
               }
-            })
-          ])
-        })
-      ),
-      _vm._v(" "),
-      _c("hr"),
-      _vm._v(" "),
-      _c("div", { staticClass: "points" }, [
-        _c("p", [
-          _vm._v("Pontuação Jogador 1 : " + _vm._s(_vm.counterPlayer1))
-        ]),
-        _vm._v(" "),
-        _c("p", [_vm._v("Pontuação Jogador 2 : " + _vm._s(_vm.counterPlayer2))])
-      ])
-    ])
+            },
+            [_vm._v("Contra BOTS")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-success",
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.createVSele()
+                }
+              }
+            },
+            [_vm._v("Contra Ninguém")]
+          )
+        ])
+      : _c("div", [
+          _vm.modoJogo == true
+            ? _c("div", [_vm._v("\n            //contra bot\n        ")])
+            : _c("div", [
+                _vm._v("\n            //alone\n            "),
+                _c("div", { staticClass: "game-zone-content" }, [
+                  _vm.showSuccess
+                    ? _c("div", { staticClass: "alert alert-success" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "close-btn",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                _vm.showSuccess = false
+                              }
+                            }
+                          },
+                          [_vm._v("×")]
+                        ),
+                        _vm._v(" "),
+                        _c("strong", [
+                          _vm._v(_vm._s(_vm.successMessage) + "     "),
+                          _c(
+                            "a",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.gameEnded,
+                                  expression: "gameEnded"
+                                }
+                              ],
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  _vm.restartGame($event)
+                                }
+                              }
+                            },
+                            [_vm._v("Restart")]
+                          )
+                        ])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "board" },
+                    _vm._l(_vm.board, function(piece, key) {
+                      return _c("div", { staticClass: "cell" }, [
+                        _c("img", {
+                          attrs: { src: _vm.pieceImageURL(piece) },
+                          on: {
+                            click: function($event) {
+                              _vm.clickPiece(key)
+                            }
+                          }
+                        })
+                      ])
+                    })
+                  ),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "points" }, [
+                    _c("p", [
+                      _vm._v(
+                        "Pontuação Jogador 1 : " + _vm._s(_vm.counterPlayer1)
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        "Pontuação Jogador 2 : " + _vm._s(_vm.counterPlayer2)
+                      )
+                    ])
+                  ])
+                ])
+              ])
+        ])
   ])
 }
 var staticRenderFns = []
@@ -47758,85 +47742,395 @@ if (false) {
 /* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(72)
+/* template */
+var __vue_template__ = __webpack_require__(73)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/login.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-69787b62", Component.options)
+  } else {
+    hotAPI.reload("data-v-69787b62", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 72 */
+/***/ (function(module, exports) {
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+module.exports = {
+    props: ['user'],
+    data: {
+        email: '',
+        password: '',
+        token: ''
+    },
+    methods: {
+        loginUser: function loginUser() {
+            var _this = this;
+
+            axios.post('http://dad.api/api/login', {
+                email: this.email,
+                password: this.password
+            }, {
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(function (response) {
+                _this.token = response.data.access_token;
+                _this.$emit('login-click', _this.token);
+            }).catch(function (error) {
+                console.log(error);
+            });
+
+            this.$emit('login', this.token);
+        },
+        logoutUser: function logoutUser() {
+            axios.post('http://dad.api/api/test', {
+                access_token: this.access_token
+                //refresh_token: this.refresh_token
+            }, {
+                headers: {
+                    'Authorization': 'Bearer Token'
+                }
+            }).then(function (response) {
+                console.log(response.data);
+            });
+        },
+        recuperarSenha: function recuperarSenha() {},
+        createUser: function createUser() {}
+    }
+};
+
+/***/ }),
+/* 73 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "card card-login mx-auto mt-5" }, [
+      _c("div", { staticClass: "card-header" }, [_vm._v("Login")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _c("form", [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+              _vm._v("Email")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.email,
+                  expression: "email"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                id: "exampleInputEmail1",
+                type: "email",
+                "aria-describedby": "emailHelp",
+                placeholder: "Email"
+              },
+              domProps: { value: _vm.email },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.email = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "exampleInputPassword1" } }, [
+              _vm._v("Senha")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.password,
+                  expression: "password"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                id: "exampleInputPassword1",
+                type: "password",
+                placeholder: "Senha"
+              },
+              domProps: { value: _vm.password },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.password = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-primary btn-block",
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.loginUser()
+                }
+              }
+            },
+            [_vm._v("LOGIN")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-primary btn-block",
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.logoutUser()
+                }
+              }
+            },
+            [_vm._v("LOGOUT")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-primary btn-block",
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.recuperarSenha()
+                }
+              }
+            },
+            [_vm._v("Recuperar Senha")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-primary btn-block",
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.createUser()
+                }
+              }
+            },
+            [_vm._v("CRIAR UTILIZADOR")]
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("div", { staticClass: "form-check" }, [
+        _c("label", { staticClass: "form-check-label" }, [
+          _c("input", {
+            staticClass: "form-check-input",
+            attrs: { type: "checkbox" }
+          }),
+          _vm._v(" Lembrar Senha")
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-69787b62", module.exports)
+  }
+}
+
+/***/ }),
+/* 74 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", [
-      _c("h3", { staticClass: "text-center" }, [_vm._v(_vm._s(_vm.title))]),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("h2", [_vm._v("Seu nome atual: " + _vm._s(_vm.currentPlayer))]),
-      _vm._v(" "),
-      _c("p", [
-        _vm._v("Alterar nome atual "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model.trim",
-              value: _vm.currentPlayer,
-              expression: "currentPlayer",
-              modifiers: { trim: true }
-            }
+    _vm.loggedUser
+      ? _c(
+          "div",
+          [
+            _c("login", {
+              attrs: { user: _vm.loggedUser },
+              on: { login: _vm.login }
+            })
           ],
-          domProps: { value: _vm.currentPlayer },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.currentPlayer = $event.target.value.trim()
-            },
-            blur: function($event) {
-              _vm.$forceUpdate()
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _vm._m(0),
-      _vm._v(" "),
-      _c("hr"),
-      _vm._v(" "),
-      _c("h3", { staticClass: "text-center" }, [_vm._v("Criar jogo")]),
-      _vm._v(" "),
-      _c("p", [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-xs btn-success",
-            on: {
-              click: function($event) {
-                $event.preventDefault()
-                _vm.showCreateGame($event)
-              }
-            }
-          },
-          [_vm._v("Multiplayer")]
-        ),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-xs btn-success",
-            on: {
-              click: function($event) {
-                $event.preventDefault()
-                _vm.createSinglePlayer($event)
-              }
-            }
-          },
-          [_vm._v("Singleplayer")]
+          1
         )
-      ]),
-      _vm._v(" "),
-      _vm.singlePlayer == false
-        ? _c(
+      : _c("div", [
+          _c(
             "div",
             [
+              _c("h3", { staticClass: "text-center" }, [
+                _vm._v(_vm._s(_vm.title))
+              ]),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
+              _c("h2", [
+                _vm._v("Seu nome atual: " + _vm._s(_vm.currentPlayer))
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v("Alterar nome atual "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model.trim",
+                      value: _vm.currentPlayer,
+                      expression: "currentPlayer",
+                      modifiers: { trim: true }
+                    }
+                  ],
+                  domProps: { value: _vm.currentPlayer },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.currentPlayer = $event.target.value.trim()
+                    },
+                    blur: function($event) {
+                      _vm.$forceUpdate()
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _vm._m(0),
+              _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
+              _c("h3", { staticClass: "text-center" }, [_vm._v("Criar jogo")]),
+              _vm._v(" "),
+              _c("p", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-xs btn-success",
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        _vm.showCreateGame($event)
+                      }
+                    }
+                  },
+                  [_vm._v("Multiplayer")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-xs btn-success",
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        _vm.createSinglePlayer($event)
+                      }
+                    }
+                  },
+                  [_vm._v("Singleplayer")]
+                )
+              ]),
+              _vm._v(" "),
               _vm.createGameShow
                 ? _c("createGame", { on: { "game-saved": _vm.gameSaved } })
                 : _vm._e(),
@@ -47857,7 +48151,7 @@ var render = function() {
                   },
                   [_vm._v("Refresh")]
                 ),
-                _vm._v(")\n                ")
+                _vm._v(")\n                        ")
               ]),
               _vm._v(" "),
               _c("lobby", {
@@ -47876,8 +48170,7 @@ var render = function() {
             ],
             2
           )
-        : _c("div", [_c("singlePlayer")], 1)
-    ])
+        ])
   ])
 }
 var staticRenderFns = [
@@ -47898,7 +48191,7 @@ if (false) {
 }
 
 /***/ }),
-/* 72 */
+/* 75 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
