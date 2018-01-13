@@ -77,7 +77,6 @@ export default {
     },
     mounted() {
         this.user();
-        console.log("ola");
     }
 
 }

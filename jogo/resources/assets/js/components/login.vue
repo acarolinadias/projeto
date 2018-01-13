@@ -21,7 +21,6 @@
                         </div>
                     </div>
                     <a class="btn btn-primary btn-block" v-on:click.prevent="loginUser()">LOGIN</a>
-                    <a class="btn btn-primary btn-block" v-on:click.prevent="logoutUser()">LOGOUT</a>
                     <a class="btn btn-primary btn-block" v-on:click.prevent="recuperarSenha()">Recuperar Senha</a>
                     <a class="btn btn-primary btn-block" v-on:click.prevent="createUser()">CRIAR UTILIZADOR</a>
                 </form>
@@ -32,55 +31,52 @@
 
 <script type="text/javascript">
     module.exports = {
-    props: ['user'],
-    data: {
-    email: '',
-    password: '',
-    token:''
-},
-    methods: {
-    loginUser: function () {
+        props: ['user'],
+        data: {
+            email: '',
+            password: '',
+            token: ''
+        },
+        methods: {
+            loginUser: function () {
 
-    axios.post('http://dad.api/api/login', {
-    email: this.email,
-    password: this.password
-}, {
-    headers: {
-    'Accept': 'application/json',
-}
-}).then(response => {
-    this.token=response.data.access_token;
-    this.$emit('login-click', this.token);
+                axios.post('http://dad.api/api/login', {
+                    email: this.email,
+                    password: this.password
+                }, {
+                    headers: {
+                        'Accept': 'application/json',
+                    }
+                }).then(response => {
+                    this.token = response.data.access_token;
+                    this.$emit('login-click', this.token);
 
-}).catch(error => {
-    console.log(error);
-});
+                }).catch(error => {
+                    console.log(error);
+                });
 
-    this.$emit('login', this.token);
-},
-    logoutUser: function () {
-    axios.post('http://dad.api/api/test', {
-    access_token: this.access_token,
-    //refresh_token: this.refresh_token
-}, {
-    headers: {
-    'Authorization': 'Bearer Token',
-}
-})
-    .then(response => {
-    console.log(response.data);
+                this.$emit('login', this.token);
+            },
+            logoutUser: function () {
+                axios.post('http://dad.api/api/test', {
+                    access_token: this.access_token,
+                    //refresh_token: this.refresh_token
+                }, {
+                    headers: {
+                        'Authorization': 'Bearer Token',
+                    }
+                })
+                    .then(response => {
+                        console.log(response.data);
 
-});
+                    });
+            },
+            recuperarSenha: function () {
 
+            },
+            createUser: function () {
 
-
-},
-    recuperarSenha: function () {
-
-},
-    createUser: function () {
-
-}
-}
-}
+            }
+        }
+    }
 </script>
