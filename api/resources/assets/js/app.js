@@ -12,7 +12,7 @@ const user = Vue.component('user', require('./components/user.vue'));
 const img = Vue.component('img', require('./components/image.vue'));
 const estatisticas = Vue.component('image', require('./components/estatisticas.vue'));
 const userGameEdit = Vue.component('userGameEdit', require('./components/userGameEdit.vue'))
-const login = Vue.component('login', require('./components/login.vue'));
+//const login = Vue.component('login', require('./components/login.vue'));
 const passoword = Vue.component('passoword', require('./components/changePassword.vue'));
 const email = Vue.component('email', require('./components/email.vue'));
 const admin = Vue.component('email', require('./components/admin.vue'));
@@ -25,7 +25,7 @@ const routes = [
     { path: '/users', component: user },
     { path: '/estatisticas', component: estatisticas },
     { path: '/userlogin', component: userGameEdit},
-    { path: '/login', component: login},
+    //{ path: '/login', component: login},
     { path: '/password', component: passoword},
     { path: '/email', component: email},
 

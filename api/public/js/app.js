@@ -1329,12 +1329,14 @@ var user = Vue.component('user', __webpack_require__(45));
 var img = Vue.component('img', __webpack_require__(61));
 var estatisticas = Vue.component('image', __webpack_require__(5));
 var userGameEdit = Vue.component('userGameEdit', __webpack_require__(72));
-var login = Vue.component('login', __webpack_require__(75));
+//const login = Vue.component('login', require('./components/login.vue'));
 var passoword = Vue.component('passoword', __webpack_require__(14));
 var email = Vue.component('email', __webpack_require__(84));
 var admin = Vue.component('email', __webpack_require__(90));
 
-var routes = [{ path: '/', redirect: '/admin' }, { path: '/images', component: img }, { path: '/admin', component: admin }, { path: '/users', component: user }, { path: '/estatisticas', component: estatisticas }, { path: '/userlogin', component: userGameEdit }, { path: '/login', component: login }, { path: '/password', component: passoword }, { path: '/email', component: email }];
+var routes = [{ path: '/', redirect: '/admin' }, { path: '/images', component: img }, { path: '/admin', component: admin }, { path: '/users', component: user }, { path: '/estatisticas', component: estatisticas }, { path: '/userlogin', component: userGameEdit },
+//{ path: '/login', component: login},
+{ path: '/password', component: passoword }, { path: '/email', component: email }];
 var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
     routes: routes
 });
@@ -46888,7 +46890,7 @@ module.exports = {
                 // Copy object properties from response.data.data to this.user
                 // without creating a new reference
                 Object.assign(_this2.user, response.data.data);
-                _this2.$emit('user-create', _this2.user);
+                _this2.$emit('user-cancel', _this2.user);
             });
         }
     }
@@ -48260,154 +48262,11 @@ if (false) {
 }
 
 /***/ }),
-/* 75 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(76)
-/* template */
-var __vue_template__ = __webpack_require__(81)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/login.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-69787b62", Component.options)
-  } else {
-    hotAPI.reload("data-v-69787b62", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 76 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__userLogin_vue__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__userLogin_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__userLogin_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__createUser_vue__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__createUser_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__createUser_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__estatisticas_vue__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__estatisticas_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__estatisticas_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__forgetPassword_vue__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__forgetPassword_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__forgetPassword_vue__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            showSuccess: false,
-            successMessage: '',
-            currentUser: {},
-            users: []
-        };
-    },
-    methods: {
-        childMessage: function childMessage(message) {
-            this.showSuccess = true;
-            this.successMessage = message;
-            window.scrollTo(0, 0);
-        },
-        loginUser: function loginUser(token) {
-            this.showSuccess = true;
-            this.successMessage = 'Utilizador Logado';
-            if (token != null) this.getUserLigado(token);
-        },
-        getUserLigado: function getUserLigado(token) {
-            var _this = this;
-
-            var AuthStr = 'Bearer '.concat(token);
-            console.log(AuthStr);
-            axios.get('api/user', { headers: { Authorization: AuthStr } }).then(function (response) {
-                _this.currentUser = response.data;
-                console.log(_this.currentUser.name);
-                _this.successMessage = 'Bem vindo ' + _this.currentUser.name;
-            });
-        },
-        createUser: function createUser(user) {
-            this.currentUser = user;
-            this.showSuccess = true;
-            this.successMessage = 'Utilizador Criado';
-        },
-        passwordUser: function passwordUser(user) {
-            this.currentUser = user;
-            this.showSuccess = true;
-            this.successMessage = 'Utilizador Criado';
-        }
-    },
-    components: {
-        'user-create': __WEBPACK_IMPORTED_MODULE_1__createUser_vue___default.a,
-        'user-login': __WEBPACK_IMPORTED_MODULE_0__userLogin_vue___default.a,
-        'users-estatisticas': __WEBPACK_IMPORTED_MODULE_2__estatisticas_vue___default.a,
-        'users-password': __WEBPACK_IMPORTED_MODULE_3__forgetPassword_vue___default.a
-
-    },
-    mounted: function mounted() {
-        this.user();
-        console.log("ola");
-    }
-});
-
-/***/ }),
+/* 75 */,
+/* 76 */,
 /* 77 */
 /***/ (function(module, exports) {
 
-//
 //
 //
 //
@@ -48489,13 +48348,8 @@ module.exports = {
                 });*/
         },
         createUser: function createUser() {
-            /*axios.put('api/users/'+this.user.id, this.user)
-                .then(response=>{
-                    // Copy object properties from response.data.data to this.user
-                    // without creating a new reference
-                    Object.assign(this.user, response.data.data);
-                    this.$emit('user-saved', this.user);
-                });*/
+
+            this.$parent.createUser = true;
         }
     }
 };
@@ -48592,21 +48446,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("LOGIN")]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-primary btn-block",
-              on: {
-                click: function($event) {
-                  $event.preventDefault()
-                  _vm.logoutUser()
-                }
-              }
-            },
-            [_vm._v("LOGOUT")]
+            [_vm._v("Login")]
           ),
           _vm._v(" "),
           _c(
@@ -48634,7 +48474,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("CRIAR UTILIZADOR")]
+            [_vm._v("Criar Utilizador")]
           )
         ])
       ])
@@ -48761,73 +48601,7 @@ if (false) {
 }
 
 /***/ }),
-/* 81 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "div",
-        [
-          _vm.showSuccess != null
-            ? _c("div", { staticClass: "alert alert-success" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "close-btn",
-                    on: {
-                      click: function($event) {
-                        _vm.showSuccess = false
-                      }
-                    }
-                  },
-                  [_vm._v("×")]
-                ),
-                _vm._v(" "),
-                _c("strong", [_vm._v(_vm._s(_vm.successMessage))])
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _vm._v('"(currentUser!=null)" >\n                '),
-          _c("user-login", {
-            attrs: { user: _vm.currentUser },
-            on: { "login-click": _vm.loginUser }
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("users-password", {
-        attrs: { user: _vm.currentUser },
-        on: { "block-click": _vm.passwordUser }
-      }),
-      _vm._v(" "),
-      _c("user-create", {
-        attrs: { user: _vm.currentUser },
-        on: { "block-click": _vm.createUser }
-      }),
-      _vm._v(" "),
-      _c("users-estatisticas", { attrs: { user: _vm.currentUser } })
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-69787b62", module.exports)
-  }
-}
-
-/***/ }),
+/* 81 */,
 /* 82 */
 /***/ (function(module, exports) {
 
@@ -49480,6 +49254,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -49493,6 +49268,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             showSuccess: false,
             successMessage: '',
             currentUser: null,
+            createUser: false,
             users: []
         };
     },
@@ -49519,7 +49295,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.successMessage = 'Bem vindo ' + _this.currentUser.name;
             });
         },
-        createUser: function createUser(user) {
+        createUserclick: function createUserclick() {
+            consolo.log("ENTROU");
+            this.createUser = true;
             this.currentUser = user;
             this.showSuccess = true;
             this.successMessage = 'Utilizador Criado';
@@ -49554,7 +49332,7 @@ var render = function() {
   return _c(
     "div",
     [
-      !_vm.currentUser
+      !_vm.currentUser && !_vm.createUser
         ? _c("user-login", {
             attrs: { user: _vm.currentUser },
             on: { "login-click": _vm.loginUser }
@@ -49563,6 +49341,10 @@ var render = function() {
       _vm._v(" "),
       _vm.currentUser
         ? _c("users-estatisticas", { attrs: { user: _vm.currentUser } })
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.createUser
+        ? _c("user-create", { attrs: { user: _vm.currentUser } })
         : _vm._e()
     ],
     1

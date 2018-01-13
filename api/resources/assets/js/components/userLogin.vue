@@ -20,10 +20,9 @@
                                 <input class="form-check-input" type="checkbox"> Lembrar Senha</label>
                         </div>
                     </div>
-                    <a class="btn btn-primary btn-block" v-on:click.prevent="loginUser()">LOGIN</a>
-                    <a class="btn btn-primary btn-block" v-on:click.prevent="logoutUser()">LOGOUT</a>
+                    <a class="btn btn-primary btn-block" v-on:click.prevent="loginUser()">Login</a>
                     <a class="btn btn-primary btn-block" v-on:click.prevent="recuperarSenha()">Recuperar Senha</a>
-                    <a class="btn btn-primary btn-block" v-on:click.prevent="createUser()">CRIAR UTILIZADOR</a>
+                    <a class="btn btn-primary btn-block" v-on:click.prevent="createUser()">Criar Utilizador</a>
                 </form>
             </div>
         </div>
@@ -85,13 +84,8 @@
                     });*/
             },
             createUser: function () {
-                /*axios.put('api/users/'+this.user.id, this.user)
-                    .then(response=>{
-                        // Copy object properties from response.data.data to this.user
-                        // without creating a new reference
-                        Object.assign(this.user, response.data.data);
-                        this.$emit('user-saved', this.user);
-                    });*/
+
+               this.$parent.createUser = true;
             }
         }
     }

@@ -1,7 +1,8 @@
 <template>
     <div>
-        <user-login v-if="!currentUser" :user="currentUser" @login-click="loginUser"></user-login>
+        <user-login v-if="(!currentUser && !createUser)" :user="currentUser" @login-click="loginUser"></user-login>
         <users-estatisticas v-if="currentUser" :user="currentUser" ></users-estatisticas>
+        <user-create v-if="createUser" :user="currentUser"></user-create>
     </div>
 
 
@@ -21,6 +22,7 @@ export default {
             showSuccess: false,
             successMessage: '',
             currentUser: null,
+            createUser: false,
             users: [],
         }
     },
@@ -51,7 +53,9 @@ export default {
                 );
 
         },
-        createUser: function(user){
+        createUserclick: function(){
+            consolo.log("ENTROU");
+            this.createUser = true;
             this.currentUser=user;
             this.showSuccess = true;
             this.successMessage = 'Utilizador Criado';
