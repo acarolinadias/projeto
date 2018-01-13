@@ -1,33 +1,32 @@
 <template>
-<div>
+    <div>
 
-<div class="game-zone-content">
-    <div class="alert"
-:class="alerttype">
-    <strong>{{message}} &nbsp;&nbsp;&nbsp;&nbsp;<a v-show="game.gameEnded"
-        v-on:click.prevent="closeGame">Fechar Jogo</a></strong>
-</div>
+        <div class="game-zone-content">
+            <div class="alert"
+                 :class="alerttype">
+                <strong>{{message}} &nbsp;&nbsp;&nbsp;&nbsp;<a v-show="game.gameEnded"
+                                                               v-on:click.prevent="closeGame">Fechar Jogo</a></strong>
+            </div>
 
-<div v-if="(game.maxPlayers<=2 )" class="board">
-    <div class="cell" v-for="(piece, key) of game.board" >
-        <img v-bind:src="pieceImageURL(piece)" v-on:click="clickPiece(key)">
-    </div>
-    </div>
-    <div v-else class="boardGrande">
-    <div class="cell" v-for="(piece, key) of game.board" >
-    <img v-bind:src="pieceImageURL(piece)" v-on:click="clickPiece(key)">
-    </div>
-    </div>
-    <hr>
-    <div class="points" v-for="(player) of game.players" >
-        <p v-if="(player!=null)">Player : {{player.playerName}} -> {{player.pontuacao}} pontos</p>
+            <div v-if="(game.maxPlayers<=2 )" class="board">
+                <div class="cell" v-for="(piece, key) of game.board">
+                    <img v-bind:src="pieceImageURL(piece)" v-on:click="clickPiece(key)">
+                </div>
+            </div>
+            <div v-else class="boardGrande">
+                <div class="cell" v-for="(piece, key) of game.board">
+                    <img v-bind:src="pieceImageURL(piece)" v-on:click="clickPiece(key)">
+                </div>
+            </div>
+            <hr>
+            <div class="points" v-for="(player) of game.players">
+                <p v-if="(player!=null)">Player : {{player.playerName}} -> {{player.pontuacao}} pontos</p>
 
 
-</div>
-</div>
-</div>
+            </div>
+        </div>
+    </div>
 </template>
-
 
 
 <script type="text/javascript">
@@ -37,8 +36,8 @@
             return {
                 click: 0,
                 cellCompare: [],
-                showSuccess:true,
-                lastclick:0,
+                showSuccess: true,
+                lastclick: 0,
 
             }
         },
@@ -50,7 +49,7 @@
 
                 }
                 else if (this.game.gameEnded) {
-                    this.showSuccess=true;
+                    this.showSuccess = true;
                     return "Jogo terminado";
                     if (this.game.winner == this.currentPlayer) {
                         return "Você ganhou!";
@@ -61,11 +60,11 @@
                     return "O jogo terminou, o " + this.adversaryPlayerName + " ganhou. Perdes-te";
                 }
                 else {
-                    this.showSuccess=true;
+                    this.showSuccess = true;
                     if (this.game.getCurrentPlayerName == this.currentPlayer) {
                         return "É A TUA VEZ DE JOGAR";
                     } else {
-                        return "É A VEZ DE  " + this.game.getCurrentPlayerName+ " JOGAR";
+                        return "É A VEZ DE  " + this.game.getCurrentPlayerName + " JOGAR";
                     }
                 }
                 return "À espera de jogadores!";
@@ -104,33 +103,22 @@
                 return 'img/' + imgSrc + '.png';
             },
 
-            //funcao criar matriz hidden
-
-            //funcao criar matriz jogo
-
 
             //decrementa pontos em caso de falha
             clickPiece: function (index) {
-                if(this.lastclick==null)
-                {
-                    this.lastclick=index;
+                if (this.lastclick == null) {
+                    this.lastclick = index;
                 }
 
-                else{
-                    if(index!=this.lastclick)
-                    {
+                else {
+                    if (index != this.lastclick) {
                         this.$parent.fazerJogada(index, this.game.gameID);
                         this.$parent.checkPair(index, this.game.gameID);
                         this.$parent.checkPairTrue(index, this.game.gameID);
-
-
                     }
-                    this.lastclick=index;
+                    this.lastclick = index;
                 }
-
-
             },
-
 
             //compara as imagens
             flipCell: function (index, cellCompare) {
@@ -144,15 +132,7 @@
                 this.cellCompare = [];
                 this.click = 0;
             },
-            // ----------------------------------------------------------------------------------------
-            // GAME LOGIC - START
-            // ----------------------------------------------------------------------------------------
 
-
-
-            // ----------------------------------------------------------------------------------------
-            // GAME LOGIC - END
-            // ----------------------------------------------------------------------------------------
             playerName: function (playerNumber) {
                 return 'Jogador ' + playerNumber;
             }
@@ -162,53 +142,53 @@
 </script>
 
 
-    <style>
+<style>
 
     h2 {
-    text-align: center;
-}
+        text-align: center;
+    }
 
-.points {
-    text-align: center;
-    font-size: 15px;
-}
-.close-btn{
-    border: none;
-    float: right;
-    background-color: transparent;
-}
+    .points {
+        text-align: center;
+        font-size: 15px;
+    }
 
-.board {
-    max-width: 276px;
-    margin: 0 auto;
-    border-style: solid;
-    border-width: 0px 0 0 0px;
-    border-color: black;
-}
+    .close-btn {
+        border: none;
+        float: right;
+        background-color: transparent;
+    }
 
-.boardGrande {
-    max-width: 400px;
-    margin: 0 auto;
-    border-style: solid;
-    border-width: 0px 0 0 0px;
-    border-color: black;
-}
+    .board {
+        max-width: 276px;
+        margin: 0 auto;
+        border-style: solid;
+        border-width: 0px 0 0 0px;
+        border-color: black;
+    }
 
+    .boardGrande {
+        max-width: 400px;
+        margin: 0 auto;
+        border-style: solid;
+        border-width: 0px 0 0 0px;
+        border-color: black;
+    }
 
-.cell {
-    display: inline-block;
-    border-style: solid;
-    border-width: 2px 2px 2px 2px;
-    border-color: black;
-    margin-left: -2px;
-    margin-top: -2px;
-}
+    .cell {
+        display: inline-block;
+        border-style: solid;
+        border-width: 2px 2px 2px 2px;
+        border-color: black;
+        margin-left: -2px;
+        margin-top: -2px;
+    }
 
-img {
-    width: 50px;
-    height: 50px;
-    margin: 5px;
-    padding: 0;
-    border-style: none;
-}
+    img {
+        width: 50px;
+        height: 50px;
+        margin: 5px;
+        padding: 0;
+        border-style: none;
+    }
 </style>

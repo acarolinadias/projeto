@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
 
 class Game {
-    constructor(ID, player1Name, name, maxPlayers, socketId) {
+    constructor(ID, player1Name, name, maxPlayers, socketId, bot) {
         this.gameID = ID;
         this.gameEnded = false;
         this.gameStarted = false;
@@ -9,7 +9,6 @@ class Game {
         this.maxPlayers = maxPlayers;
         this.player1 = player1Name;
         this.players = [];
-        console.log(this.players);
         this.players[1] = new Player(player1Name, socketId);
         this.playerTurn = 1;
         this.winner = 0;
@@ -18,7 +17,8 @@ class Game {
         this.cartasVirada = [];
         this.click = 0;
         this.cellCompare = [];
-        console.log("HERE");
+        this.bot = bot;
+        this.botplayer = null;
         switch (parseInt(this.maxPlayers)) {
             case 1:
             case 2:
@@ -35,14 +35,21 @@ class Game {
                 break;
         }
 
-        if (this.maxPlayers == 1)
-        {
-            this.gameStarted=true;
-        }
-        this.turn=0;
+        if (this.maxPlayers == 1 && this.bot == false) {
+            this.gameStarted = true;
 
-        this.getCurrentPlayerName ="";
-        this.lastClick=-1;
+        }else if(this.maxPlayers == 1 && this.bot == true){
+            this.gameStarted = true;
+            this.botplayer = new Player(bot, 1);
+            this.players.push(this.botplayer);
+            this.maxPlayers = 2;
+        }
+
+
+        this.turn = 0;
+
+        this.getCurrentPlayerName = "";
+        this.lastClick = -1;
         this.acertou = false;
 
     }
@@ -90,7 +97,7 @@ class Game {
     join(player2Name, socketId) {
         var player = new Player(player2Name, socketId);
         this.players.push(player);
-        if (this.players.length-1 == this.maxPlayers) {
+        if (this.players.length - 1 == this.maxPlayers) {
             this.gameStarted = true;
             this.setGetters();
         }
@@ -119,132 +126,146 @@ class Game {
         return this.board;
     }
 
-    currentPlayer()
-    {
-        return (((this.turn+parseInt(this.maxPlayers))%parseInt(this.maxPlayers))+1);
-    }
-    currentPlayerClass()
-    {
-        return this.players[(((this.turn+parseInt(this.maxPlayers))%parseInt(this.maxPlayers))+1)];
-    }
-    currentPlayerName()
-    {
-        return (this.players[((this.turn+parseInt(this.maxPlayers))%parseInt(this.maxPlayers))+1].playerName);
-    }
-    checkPair(index, player)
-    {
-
-        if(this.gameStarted==true){
-            if(player == this.currentPlayerName()) {
-                if(!this.cartasVirada.includes(index)){
-                    if (this.click==2) {
-                            if(this.boardGame[index]!=this.boardGame[this.lastClick])
-                            {
-                                var waitTill = new Date(new Date().getTime() + 1.5 * 1000);
-                                while(waitTill > new Date()){}
-                                this.board[index]=0;
-                                this.board[this.lastClick]=0;
-                                this.nextTurn();
-                            }
-
-                            this.click=0;
-                    }
-
-                }
-
-            }
-
-        }
+    currentPlayer() {
+        return (((this.turn + parseInt(this.maxPlayers)) % parseInt(this.maxPlayers)) + 1);
     }
 
-    checkPairTrue(index, player){
-        if(this.gameStarted==true) {
+    currentPlayerClass() {
+        return this.players[(((this.turn + parseInt(this.maxPlayers)) % parseInt(this.maxPlayers)) + 1)];
+    }
+
+    currentPlayerName() {
+        return (this.players[((this.turn + parseInt(this.maxPlayers)) % parseInt(this.maxPlayers)) + 1].playerName);
+    }
+
+    checkPair(index, player) {
+
+        if (this.gameStarted == true) {
             if (player == this.currentPlayerName()) {
-                if(this.cartasVirada.includes(index)){
-                   if(this.acertou){
-                       var waitTill = new Date(new Date().getTime() + 1.5 * 1000);
-                       while(waitTill > new Date()){}
-                       this.board[index]= 200;
-                       this.board[this.lastClick] = 200;
-                       this.acertou = false;
-                       this.lastClick=-1;
-                   }
+                if (!this.cartasVirada.includes(index)) {
+                    if (this.click == 2) {
+                        if (this.boardGame[index] != this.boardGame[this.lastClick]) {
+                            var waitTill = new Date(new Date().getTime() + 1.5 * 1000);
+                            while (waitTill > new Date()) {
+                            }
+                            this.board[index] = 0;
+                            this.board[this.lastClick] = 0;
+                            this.nextTurn();
+                        }
+
+                        this.click = 0;
+                    }
+
+                }
+
+            }
+
+        }
+    }
+
+    checkPairTrue(index, player) {
+        if (this.gameStarted == true) {
+            if (player == this.currentPlayerName()) {
+                if (this.cartasVirada.includes(index)) {
+                    if (this.acertou) {
+                        var waitTill = new Date(new Date().getTime() + 1.5 * 1000);
+                        while (waitTill > new Date()) {
+                        }
+                        this.board[index] = 200;
+                        this.board[this.lastClick] = 200;
+                        this.acertou = false;
+                        this.lastClick = -1;
+                    }
                 }
             }
         }
     }
 
-    fazerJogada(index, player){
+    fazerJogada(index, player) {
 
-        if(this.gameStarted==true){
+        if (this.gameStarted == true) {
 
-            if(player == this.currentPlayerName()) {
-            if(!this.cartasVirada.includes(index)){
+            if (player == this.currentPlayerName()) {
 
-
-            switch (this.click) {
-                case 0:
-                    this.board[index]=this.boardGame[index];
-                    this.lastClick=index;
-                    this.click=1;
-                    break;
-                case 1:
-                    this.board[index]=this.boardGame[index];
-                    if(this.boardGame[index]==this.boardGame[this.lastClick])
-                    {
-                        this.cartasVirada.push(index);
-                        this.cartasVirada.push(this.lastClick);
-                        this.acertou = true;
-                        this.click=0;
-                        this.currentPlayerClass().pontuacao+=10;
-                        this.checkGameEnded();
-                    }else{
-                        this.click=2;
+                if (!this.cartasVirada.includes(index)) {
+                    switch (this.click) {
+                        case 0:
+                            this.board[index] = this.boardGame[index];
+                            this.lastClick = index;
+                            this.click = 1;
+                            break;
+                        case 1:
+                            this.board[index] = this.boardGame[index];
+                            if (this.boardGame[index] == this.boardGame[this.lastClick]) {
+                                this.cartasVirada.push(index);
+                                this.cartasVirada.push(this.lastClick);
+                                this.acertou = true;
+                                this.click = 0;
+                                this.currentPlayerClass().pontuacao += 10;
+                                this.checkGameEnded();
+                            } else {
+                                this.click = 2;
+                            }
+                            break;
                     }
-                    break;
+                }
             }
-        }}
+
 
         }
-        else{
-            console.log("GAME NOT STARTED");
+
+        else {
+            console
+                .log(
+                    "GAME NOT STARTED"
+                )
+            ;
         }
+
 
     }
-    nextTurn()
-    {
+
+    nextTurn() {
         this.turn++;
         this.setGetters();
 
     }
-    setGetters()
-    {
-        this.getCurrentPlayerName=(this.players[((this.turn+parseInt(this.maxPlayers))%parseInt(this.maxPlayers))+1].playerName);
 
+    setGetters() {
+        this.getCurrentPlayerName = (this.players[((this.turn + parseInt(this.maxPlayers)) % parseInt(this.maxPlayers)) + 1].playerName);
+
+        console.log("play:" + this.currentPlayerName());
+
+        if(this.bot == true && this.currentPlayerName() == this.botplayer){
+            this.fazerJogada(1,this.botplayer);
+            this.checkPair(1,this.botplayer);
+            this.checkPairTrue(1, this.botplayer);
+            console.log("passa");
+        }
     }
-    checkGameEnded(){
+
+    checkGameEnded() {
 
 
-            if (this.isBoardComplete()) {
-                var winner=this.players[1];
-                for(var player of this.players)
-                {
-                    if(player!=null){
-                        if(winner.pontuacao<player.pontuacao)
-                        {
-                            winner=player;
-                        }
+        if (this.isBoardComplete()) {
+            var winner = this.players[1];
+            for (var player of this.players) {
+                if (player != null) {
+                    if (winner.pontuacao < player.pontuacao) {
+                        winner = player;
                     }
-
                 }
-                this.winner=winner.playerName;
-                this.gameEnded=true;
-                console.log("WINNER : " +this.winner);
-                return true;
+
             }
-            return false;
+            this.winner = winner.playerName;
+            this.gameEnded = true;
+            console.log("WINNER : " + this.winner);
+            return true;
+        }
+        return false;
 
     }
+
     isBoardComplete() {
         var returnValue = true;
         this.board.forEach(function (element) {
@@ -271,12 +292,12 @@ class piece {
         this.status = status;
     }
 }
-class Player{
-    constructor(playerName, socketId)
-    {
-        this.playerName=playerName;
-        this.socketId=socketId;
-        this.pontuacao=0;
+
+class Player {
+    constructor(playerName, socketId) {
+        this.playerName = playerName;
+        this.socketId = socketId;
+        this.pontuacao = 0;
     }
 }
 

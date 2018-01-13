@@ -21,11 +21,21 @@ io.on('connection', function (socket) {
     console.log('client has connected');
 
     socket.on('create_game', function (data){
-    	let game = games.createGame(data.playerName, socket.id, data.name, data.maxPlayers);
+    	let game = games.createGame(data.playerName, socket.id, data.name, data.maxPlayers, false);
 		socket.join(game.gameID);
 		socket.emit('my_active_games_changed');
 		io.emit('lobby_changed');
     });
+
+
+
+    socket.on('create_game_bot', function (data){
+        let game = games.createGame_bot(data.playerName, socket.id, data.name, data.maxPlayers, true);
+        socket.join(game.gameID);
+        socket.emit('my_active_games_changed');
+        io.emit('lobby_changed');
+    });
+
 
 
     socket.on('join_game', function (data){

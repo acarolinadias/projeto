@@ -15,11 +15,20 @@ class GameList {
 
     createGame(playerName, socketID, name, maxPlayers) {
     	this.contadorID = this.contadorID+1;
-    	var game = new Game(this.contadorID, playerName, name, maxPlayers, socketID);
+    	var game = new Game(this.contadorID, playerName, name, maxPlayers, socketID, false);
     	game.player1SocketID = socketID;
     	this.games.set(game.gameID, game);
     	return game;
     }
+
+    createGame_bot(playerName, socketID, name, maxPlayers) {
+        this.contadorID = this.contadorID+1;
+        var game = new Game(this.contadorID, playerName, name, maxPlayers, socketID, true);
+        game.player1SocketID = socketID;
+        this.games.set(game.gameID, game);
+        return game;
+    }
+
 
     joinGame(gameID, playerName, socketID) {
     	let game = this.gameByID(gameID);

@@ -15,7 +15,8 @@
                         <h3 class="text-center">Criar jogo</h3>
                         <p>
                             <button class="btn btn-xs btn-success" v-on:click.prevent="showCreateGame">Multiplayer</button>
-                            <a class="btn btn-xs btn-success" v-on:click.prevent="createSinglePlayer">Singleplayer</a>
+                            <button v-on:click.prevent="createSinglePlayer" class="btn btn-xs btn-success">Singleplayer</button>
+                            <button v-on:click.prevent="createSinglePlayerVsPc" class="btn btn-xs btn-success">Singleplayer VS PC</button>
                         </p>
 
                         <createGame v-if="createGameShow" @game-saved="gameSaved"></createGame>
@@ -141,13 +142,24 @@
                 this.$socket.emit('check-pair-true', {index:index, socketId:gameId, currentPlayer:this.currentPlayer});
             },
             createSinglePlayer(){
-                console.log("Create");
                     if (this.currentPlayer == "") {
                     alert('O Player atual está vazio - Não é possível criar um jogo');
                     return;
                 }
                     else {
                     this.$socket.emit('create_game', {playerName: this.currentPlayer, name:"SinglePlayer", maxPlayers:this.maxPlayers});
+
+
+                }
+            },
+
+            createSinglePlayerVsPc(){
+                if (this.currentPlayer == "") {
+                    alert('O Player atual está vazio - Não é possível criar um jogo');
+                    return;
+                }
+                else {
+                    this.$socket.emit('create_game_bot', {playerName: this.currentPlayer, name:"SinglePlayer", maxPlayers:this.maxPlayers});
 
 
                 }
