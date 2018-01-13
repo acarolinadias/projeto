@@ -64,7 +64,40 @@
                     if (this.game.getCurrentPlayerName == this.currentPlayer) {
                         return "É A TUA VEZ DE JOGAR";
                     } else {
+                        if( this.game.getCurrentPlayerName == "bot" && this.game.bot==true)
+                        {
+                            console.log("BOT a jogar!!!!")
+
+    var random1 = Math.floor(Math.random() * 16);
+
+                            this.$parent.fazerJogada(random1, this.game.gameID);
+                            this.$parent.checkPair(random1, this.game.gameID);
+                            this.$parent.checkPairTrue(random1, this.game.gameID);
+
+                                setTimeout(function(){
+                                do{
+                                var random2 = Math.floor(Math.random() * 16);
+                                if(random1==random2 || this.game.cartasVirada.includes(random2))
+                                            {
+                                        var random2 = Math.floor(Math.random() * 16);
+                                            }else{
+                                        break;
+                                    }
+                            }while(1);
+
+                            this.$parent.fazerJogada(random2, this.game.gameID);
+                            this.$parent.checkPair(random2, this.game.gameID);
+                            this.$parent.checkPairTrue(random2, this.game.gameID);
+                            }.bind(this), 2000);
+
+
+
+
+
+                        }
+
                         return "É A VEZ DE  " + this.game.getCurrentPlayerName + " JOGAR";
+
                     }
                 }
                 return "À espera de jogadores!";

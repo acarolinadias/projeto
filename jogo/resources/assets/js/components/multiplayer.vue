@@ -159,7 +159,9 @@
                     return;
                 }
                 else {
-                    this.$socket.emit('create_game_bot', {playerName: this.currentPlayer, name:"SinglePlayer", maxPlayers:this.maxPlayers});
+                    this.$socket.emit('create_game_bot',
+            {playerName: this.currentPlayer, name:"SinglePlayer",
+            maxPlayers:2});
 
 
                 }

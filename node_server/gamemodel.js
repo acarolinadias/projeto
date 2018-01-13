@@ -18,7 +18,7 @@ class Game {
         this.click = 0;
         this.cellCompare = [];
         this.bot = bot;
-        this.botplayer = null;
+        this.botplayer = "bot";
         switch (parseInt(this.maxPlayers)) {
             case 1:
             case 2:
@@ -38,11 +38,11 @@ class Game {
         if (this.maxPlayers == 1 && this.bot == false) {
             this.gameStarted = true;
 
-        }else if(this.maxPlayers == 1 && this.bot == true){
+        }else if(this.maxPlayers == 2 && this.bot == true){
+            console.log("contra bots")
             this.gameStarted = true;
-            this.botplayer = new Player(bot, 1);
+            this.botplayer = new Player("bot", 1);
             this.players.push(this.botplayer);
-            this.maxPlayers = 2;
         }
 
 
@@ -141,7 +141,7 @@ class Game {
     checkPair(index, player) {
 
         if (this.gameStarted == true) {
-            if (player == this.currentPlayerName()) {
+            if (player == this.currentPlayerName()||this.bot==true) {
                 if (!this.cartasVirada.includes(index)) {
                     if (this.click == 2) {
                         if (this.boardGame[index] != this.boardGame[this.lastClick]) {
@@ -165,7 +165,7 @@ class Game {
 
     checkPairTrue(index, player) {
         if (this.gameStarted == true) {
-            if (player == this.currentPlayerName()) {
+            if (player == this.currentPlayerName()||this.bot==true) {
                 if (this.cartasVirada.includes(index)) {
                     if (this.acertou) {
                         var waitTill = new Date(new Date().getTime() + 1.5 * 1000);
@@ -174,7 +174,7 @@ class Game {
                         this.board[index] = 200;
                         this.board[this.lastClick] = 200;
                         this.acertou = false;
-                        this.lastClick = -1;
+                        this.lastClick = 0;
                     }
                 }
             }
@@ -185,8 +185,8 @@ class Game {
 
         if (this.gameStarted == true) {
 
-            if (player == this.currentPlayerName()) {
-
+            if (player == this.currentPlayerName() || this.bot==true) {
+                console.log("vez de :" + this.currentPlayerName())
                 if (!this.cartasVirada.includes(index)) {
                     switch (this.click) {
                         case 0:
@@ -210,6 +210,7 @@ class Game {
                     }
                 }
             }
+
 
 
         }
@@ -236,12 +237,7 @@ class Game {
 
         console.log("play:" + this.currentPlayerName());
 
-        if(this.bot == true && this.currentPlayerName() == this.botplayer){
-            this.fazerJogada(1,this.botplayer);
-            this.checkPair(1,this.botplayer);
-            this.checkPairTrue(1, this.botplayer);
-            console.log("passa");
-        }
+
     }
 
     checkGameEnded() {
