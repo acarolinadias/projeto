@@ -46872,11 +46872,18 @@ if (false) {
 
 module.exports = {
     props: ['user'],
+    data: function data() {
+        return {
+            userCreate: {}
+
+        };
+    },
     methods: {
         addUser: function addUser() {
             var _this = this;
 
-            axios.post('api/users/' + this.user, this.user).then(function (response) {
+            console.log(this.userCreate);
+            axios.post('api/users/' + this.userCreate, this.userCreate).then(function (response) {
                 // Copy object properties from response.data.data to this.user
                 // without creating a new reference
                 Object.assign(_this.user, response.data.data);
@@ -46921,8 +46928,8 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.user.name,
-                    expression: "user.name"
+                    value: _vm.userCreate.name,
+                    expression: "userCreate.name"
                   }
                 ],
                 staticClass: "form-control",
@@ -46932,13 +46939,13 @@ var render = function() {
                   "aria-describedby": "nameHelp",
                   placeholder: "Nome Completo"
                 },
-                domProps: { value: _vm.user.name },
+                domProps: { value: _vm.userCreate.name },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.$set(_vm.user, "name", $event.target.value)
+                    _vm.$set(_vm.userCreate, "name", $event.target.value)
                   }
                 }
               })
@@ -46954,8 +46961,8 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.user.nickname,
-                    expression: "user.nickname"
+                    value: _vm.userCreate.nickname,
+                    expression: "userCreate.nickname"
                   }
                 ],
                 staticClass: "form-control",
@@ -46965,13 +46972,13 @@ var render = function() {
                   "aria-describedby": "nameHelp",
                   placeholder: "Nickname"
                 },
-                domProps: { value: _vm.user.nickname },
+                domProps: { value: _vm.userCreate.nickname },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.$set(_vm.user, "nickname", $event.target.value)
+                    _vm.$set(_vm.userCreate, "nickname", $event.target.value)
                   }
                 }
               })
@@ -46988,8 +46995,8 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.user.email,
-                  expression: "user.email"
+                  value: _vm.userCreate.email,
+                  expression: "userCreate.email"
                 }
               ],
               staticClass: "form-control",
@@ -46999,19 +47006,55 @@ var render = function() {
                 "aria-describedby": "emailHelp",
                 placeholder: "Email"
               },
-              domProps: { value: _vm.user.email },
+              domProps: { value: _vm.userCreate.email },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.user, "email", $event.target.value)
+                  _vm.$set(_vm.userCreate, "email", $event.target.value)
                 }
               }
             })
           ]),
           _vm._v(" "),
-          _vm._m(0),
+          _c("div", { staticClass: "form-group" }, [
+            _c("div", { staticClass: "form-row" }, [
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("label", { attrs: { for: "exampleInputPassword1" } }, [
+                  _vm._v("Senha")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.userCreate.password,
+                      expression: "userCreate.password"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    id: "exampleInputPassword1",
+                    type: "password",
+                    placeholder: "Senha"
+                  },
+                  domProps: { value: _vm.userCreate.password },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.userCreate, "password", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _vm._m(0)
+            ])
+          ]),
           _vm._v(" "),
           _c(
             "a",
@@ -47050,33 +47093,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("div", { staticClass: "form-row" }, [
-        _c("div", { staticClass: "col-md-6" }, [
-          _c("label", { attrs: { for: "exampleInputPassword1" } }, [
-            _vm._v("Senha")
-          ]),
-          _vm._v(" "),
-          _vm._v(
-            '="user.password" class="form-control" id="exampleInputPassword1" type="password" placeholder="Senha">\n                        '
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
-          _c("label", { attrs: { for: "exampleConfirmPassword" } }, [
-            _vm._v("Confirmar Senha")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              id: "exampleConfirmPassword",
-              type: "password",
-              placeholder: "Confirmar Senha"
-            }
-          })
-        ])
-      ])
+    return _c("div", { staticClass: "col-md-6" }, [
+      _c("label", { attrs: { for: "exampleConfirmPassword" } }, [
+        _vm._v("Confirmar Senha")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          id: "exampleConfirmPassword",
+          type: "password",
+          placeholder: "Confirmar Senha"
+        }
+      })
     ])
   }
 ]
@@ -48390,6 +48419,7 @@ module.exports = {
         createUser: function createUser() {
 
             this.$parent.createUser = true;
+            this.$parent.logged = true;
         }
     }
 };
@@ -49367,6 +49397,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.currentUser = response.data;
 
                 console.log(_this.currentUser.name);
+                _this.logged = true;
                 _this.successMessage = 'Bem vindo ' + _this.currentUser.name;
             });
         },
@@ -49414,7 +49445,7 @@ var render = function() {
           })
         : _vm._e(),
       _vm._v(" "),
-      _vm.currentUser
+      _vm.logged && !_vm.createUser
         ? _c("users-estatisticas", { attrs: { user: _vm.currentUser } })
         : _vm._e(),
       _vm._v(" "),

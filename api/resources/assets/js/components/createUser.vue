@@ -7,22 +7,22 @@
                     <div class="form-group">
                         <div class="form-row">
                             <label for="exampleInputName">Nome Completo</label>
-                            <input v-model="user.name" class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Nome Completo">
+                            <input v-model="userCreate.name" class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Nome Completo">
                         </div>
                         <div class="form-row">
                             <label for="exampleInputLastName">Nickname</label>
-                            <input v-model="user.nickname" class="form-control" id="exampleInputLastName" type="text" aria-describedby="nameHelp" placeholder="Nickname">
+                            <input v-model="userCreate.nickname" class="form-control" id="exampleInputLastName" type="text" aria-describedby="nameHelp" placeholder="Nickname">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email</label>
-                        <input v-model="user.email" class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Email">
+                        <input v-model="userCreate.email" class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Email">
                     </div>
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-md-6">
                                 <label for="exampleInputPassword1">Senha</label>
-                                <inputv-model="user.password" class="form-control" id="exampleInputPassword1" type="password" placeholder="Senha">
+                                <input v-model="userCreate.password" class="form-control" id="exampleInputPassword1" type="password" placeholder="Senha">
                             </div>
                             <div class="col-md-6">
                                 <label for="exampleConfirmPassword">Confirmar Senha</label>
@@ -41,9 +41,16 @@
 <script type="text/javascript">
     module.exports={
         props: ['user'],
+        data: function(){
+            return {
+            userCreate: {},
+
+        }
+        },
         methods: {
             addUser: function(){
-                axios.post('api/users/'+this.user, this.user)
+                console.log(this.userCreate);
+                axios.post('api/users/'+this.userCreate, this.userCreate)
                     .then(response=>{
                     // Copy object properties from response.data.data to this.user
                     // without creating a new reference

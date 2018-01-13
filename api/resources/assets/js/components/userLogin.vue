@@ -91,7 +91,8 @@
             },
             createUser: function () {
 
-               this.$parent.createUser = true;
+    this.$parent.createUser = true;
+    this.$parent.logged= true;
             }
         }
     }

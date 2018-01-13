@@ -1,7 +1,7 @@
 <template>
     <div>
         <user-login v-if="(!logged && !createUser)" :user="currentUser" @login-click="loginUser"></user-login>
-        <users-estatisticas v-if="currentUser" :user="currentUser" ></users-estatisticas>
+        <users-estatisticas v-if="(logged && !createUser)" :user="currentUser" ></users-estatisticas>
         <user-create v-if="createUser" :user="currentUser"></user-create>
     </div>
 
@@ -48,6 +48,7 @@ export default {
                         this.currentUser=response.data;
 
                             console.log(this.currentUser.name);
+                            this.logged=true;
                         this.successMessage = 'Bem vindo '+this.currentUser.name;
                     }
 
