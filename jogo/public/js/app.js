@@ -46270,7 +46270,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -46520,8 +46520,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         play: function play(game, index) {
             this.$socket.emit('play', { gameID: game.gameID, index: index });
         },
-        close: function close(game) {
-            this.$socket.emit('remove_game', { gameID: game.gameID });
+        remove: function remove(game) {
+            if (game.players[1].playerName == this.currentPlayer) {
+                this.$socket.emit('remove_game', { gameID: game.gameID });
+            } else {
+                alert("Nao tem privilegios parta eliminar o jogo");
+            }
         }
     },
     components: {
@@ -46622,7 +46626,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -46654,6 +46658,9 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 //
 //
 //
+//
+//
+//
 
 // Component code (not registered)
 module.exports = {
@@ -46661,6 +46668,9 @@ module.exports = {
     methods: {
         join: function join(game) {
             this.$emit('join-click', game);
+        },
+        remove: function remove(game) {
+            this.$emit('remove-click', game);
         }
     }
 };
@@ -46699,6 +46709,20 @@ var render = function() {
                 }
               },
               [_vm._v("Juntar")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-xs btn-primary",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.remove(game)
+                  }
+                }
+              },
+              [_vm._v("Remover")]
             )
           ])
         ])
@@ -47838,7 +47862,7 @@ var render = function() {
               _vm._v(" "),
               _c("lobby", {
                 attrs: { games: _vm.lobbyGames },
-                on: { "join-click": _vm.join }
+                on: { "join-click": _vm.join, "remove-click": _vm.remove }
               }),
               _vm._v(" "),
               _vm._l(_vm.activeGames, function(game) {
