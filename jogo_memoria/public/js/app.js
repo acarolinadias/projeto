@@ -48895,6 +48895,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['game', 'currentPlayer'],
@@ -48913,7 +48915,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (!this.game.gameStarted) {} else if (this.game.gameEnded) {
                 this.showSuccess = true;
                 return "Jogo terminado";
-                if (this.game.winner == this.playerNumber) {
+                if (this.game.winner == this.currentPlayer) {
                     return "Você ganhou!";
                 } else if (this.game.winner == 0) {
                     return "Game has ended. There was a tie.";
@@ -49016,73 +49018,90 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "game-zone-content" }, [
-      _c("div", { staticClass: "alert", class: _vm.alerttype }, [
-        _c("strong", [
-          _vm._v(_vm._s(_vm.message) + "     "),
-          _c(
-            "a",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.game.gameEnded,
-                  expression: "game.gameEnded"
-                }
-              ],
-              on: {
-                click: function($event) {
-                  $event.preventDefault()
-                  _vm.closeGame($event)
-                }
-              }
-            },
-            [_vm._v("Fechar\nJogo")]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _vm.game.maxPlayers == 2
-        ? _c(
-            "div",
-            { staticClass: "board" },
-            _vm._l(_vm.game.board, function(piece, key) {
-              return _c("div", { staticClass: "cell" }, [
-                _c("img", {
-                  attrs: { src: _vm.pieceImageURL(piece) },
-                  on: {
-                    click: function($event) {
-                      _vm.clickPiece(key)
-                    }
+    _c(
+      "div",
+      { staticClass: "game-zone-content" },
+      [
+        _c("div", { staticClass: "alert", class: _vm.alerttype }, [
+          _c("strong", [
+            _vm._v(_vm._s(_vm.message) + "     "),
+            _c(
+              "a",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.game.gameEnded,
+                    expression: "game.gameEnded"
                   }
-                })
-              ])
-            })
-          )
-        : _c(
-            "div",
-            { staticClass: "boardGrande" },
-            _vm._l(_vm.game.board, function(piece, key) {
-              return _c("div", { staticClass: "cell" }, [
-                _c("img", {
-                  attrs: { src: _vm.pieceImageURL(piece) },
-                  on: {
-                    click: function($event) {
-                      _vm.clickPiece(key)
-                    }
+                ],
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.closeGame($event)
                   }
-                })
-              ])
-            })
-          ),
-      _vm._v(" "),
-      _c("hr"),
-      _vm._v(" "),
-      _c("div", { staticClass: "points" }, [
-        _vm._v("\n//meter a aparecer a mesnagem\n")
-      ])
-    ])
+                }
+              },
+              [_vm._v("Fechar Jogo")]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _vm.game.maxPlayers == 2
+          ? _c(
+              "div",
+              { staticClass: "board" },
+              _vm._l(_vm.game.board, function(piece, key) {
+                return _c("div", { staticClass: "cell" }, [
+                  _c("img", {
+                    attrs: { src: _vm.pieceImageURL(piece) },
+                    on: {
+                      click: function($event) {
+                        _vm.clickPiece(key)
+                      }
+                    }
+                  })
+                ])
+              })
+            )
+          : _c(
+              "div",
+              { staticClass: "boardGrande" },
+              _vm._l(_vm.game.board, function(piece, key) {
+                return _c("div", { staticClass: "cell" }, [
+                  _c("img", {
+                    attrs: { src: _vm.pieceImageURL(piece) },
+                    on: {
+                      click: function($event) {
+                        _vm.clickPiece(key)
+                      }
+                    }
+                  })
+                ])
+              })
+            ),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _vm._l(_vm.game.players, function(player) {
+          return _c("div", { staticClass: "points" }, [
+            player != null
+              ? _c("p", [
+                  _vm._v(
+                    "Player : " +
+                      _vm._s(player.playerName) +
+                      " -> " +
+                      _vm._s(player.pontuacao) +
+                      " pontos"
+                  )
+                ])
+              : _vm._e()
+          ])
+        })
+      ],
+      2
+    )
   ])
 }
 var staticRenderFns = []

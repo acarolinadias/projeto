@@ -124,6 +124,10 @@ class Game {
     {
         return (((this.turn+parseInt(this.maxPlayers))%parseInt(this.maxPlayers))+1);
     }
+    currentPlayerClass()
+    {
+        return this.players[(((this.turn+parseInt(this.maxPlayers))%parseInt(this.maxPlayers))+1)];
+    }
     currentPlayerName()
     {
         return (this.players[((this.turn+parseInt(this.maxPlayers))%parseInt(this.maxPlayers))+1].playerName);
@@ -147,13 +151,13 @@ class Game {
                                 this.board[this.lastClick]=0;
                                 this.nextTurn();
                             }
-                            //delay
+
                             this.click=0;
 
 
 
                     }
-                    this.checkGameEnded();
+
                 }
 
             }
@@ -182,6 +186,8 @@ class Game {
                         this.cartasVirada.push(this.lastClick);
                         this.click=0;
                         this.lastClick=-1;
+                        this.currentPlayerClass().pontuacao+=10;
+                        this.checkGameEnded();
 
                     }else{
                         this.click=2;
@@ -210,17 +216,18 @@ class Game {
     }
     checkGameEnded(){
 
-            //mostrar mensagens
+
             if (this.isBoardComplete()) {
-                /*if (this.counterPlayer1 > this.counterPlayer2) {
-                    this.successMessage = 'O jogo terminou! Jogador 1 Ganhou!!!!!';
-                } else if (this.counterPlayer1 < this.counterPlayer2) {
-                    this.successMessage = 'O jogo terminou! Jogador 2 Ganhou!!!!!';
-                } else {
-                    this.successMessage = 'O jogo terminou! Empate';
+                var winner=this.players[1];
+                for(var player of this.players)
+                {
+                    if(winner.pontuacao<player.pontuacao)
+                    {
+                        winner=player;
+                    }
                 }
-                this.showSuccess = true;
-                this.gameEnded = true;*/
+                this.winner=winner.playerName;
+                console.log("WINNER : " +this.winner);
                 return true;
             }
             return false;
@@ -230,7 +237,6 @@ class Game {
         var returnValue = true;
         this.board.forEach(function (element) {
             if (element === 0 || element == 'hidden') {
-                //console.log(element);
                 returnValue = false;
                 return;
             }
@@ -258,6 +264,7 @@ class Player{
     {
         this.playerName=playerName;
         this.socketId=socketId;
+        this.pontuacao=0;
     }
 }
 
