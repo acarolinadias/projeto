@@ -279,6 +279,8 @@ class Game {
 }
 
 
+
+
 class cell {
     constructor(index, img) {
         this.index = index;
