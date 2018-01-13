@@ -115,6 +115,7 @@
                 {
                     this.lastclick=index;
                 }
+                
                 else{
                     if(index!=this.lastclick)
                     {
