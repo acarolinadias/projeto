@@ -123,6 +123,7 @@
                         this.$parent.checkPair(index, this.game.gameID);
                         this.$parent.checkPairTrue(index, this.game.gameID);
 
+
                     }
                     this.lastclick=index;
                 }

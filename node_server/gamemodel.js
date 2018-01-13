@@ -229,12 +229,16 @@ class Game {
                 var winner=this.players[1];
                 for(var player of this.players)
                 {
-                    if(winner.pontuacao<player.pontuacao)
-                    {
-                        winner=player;
+                    if(player!=null){
+                        if(winner.pontuacao<player.pontuacao)
+                        {
+                            winner=player;
+                        }
                     }
+
                 }
                 this.winner=winner.playerName;
+                this.gameEnded=true;
                 console.log("WINNER : " +this.winner);
                 return true;
             }
