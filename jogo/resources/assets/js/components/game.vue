@@ -58,7 +58,7 @@
                     else if (this.game.winner == 0) {
                         return "Game has ended. There was a tie.";
                     }
-                    return "Game has ended and " + this.adversaryPlayerName + " has won. You lost.";
+                    return "O jogo terminou, o " + this.adversaryPlayerName + " ganhou. Perdes-te";
                 }
                 else {
                     this.showSuccess=true;
@@ -120,6 +120,7 @@
                     {
                         this.$parent.fazerJogada(index, this.game.gameID);
                         this.$parent.checkPair(index, this.game.gameID);
+                        this.$parent.checkPairTrue(index, this.game.gameID);
 
                     }
                     this.lastclick=index;

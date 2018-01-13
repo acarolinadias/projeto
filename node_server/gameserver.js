@@ -45,7 +45,6 @@ io.on('connection', function (socket) {
 
     socket.on('my_active_games_changed', function (data) {
         var my_games= games.getConnectedGamesOf(socket.id);
-        console.log("Data" + socket.id);
         socket.emit('my_active_games', my_games);
     });
 
@@ -95,7 +94,6 @@ io.on('connection', function (socket) {
 
     socket.on('check-pair', function (data){
         let game = games.gameByID(data.socketId);
-        //console.log(game);
         if (game === null) {
             socket.emit('invalid_play', {'type': 'Invalid_Game', 'game': null});
             return;
@@ -109,10 +107,26 @@ io.on('connection', function (socket) {
 
     });
 
+
+    socket.on('check-pair-true', function (data){
+        let game = games.gameByID(data.socketId);
+        if (game === null) {
+            socket.emit('invalid_play', {'type': 'Invalid_Game', 'game': null});
+            return;
+        }
+        if(data.index != null && data.currentPlayer != null)
+        {
+            game.checkPairTrue(data.index, data.currentPlayer);
+        }
+
+        io.to(game.gameID).emit('game_changed', game);
+
+    });
+
+
     socket.on('get_my_lobby_games', function (){
     	var my_games= games.getLobbyGamesOf(socket.id);
     	socket.emit('my_lobby_games', my_games);
-        console.log("get_my_lobby_games");
     });
 
 });

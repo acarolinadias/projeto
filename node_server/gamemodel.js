@@ -9,7 +9,6 @@ class Game {
         this.maxPlayers = maxPlayers;
         this.player1 = player1Name;
         this.players = [];
-        console.log(this.players);
         this.players[1]=new Player(player1Name, socketId);
         this.playerTurn = 1;
         this.winner = 0;
@@ -18,17 +17,13 @@ class Game {
         this.cartasVirada=[];
         this.click = 0;
         this.cellCompare = [];
-        console.log("HERE");
         switch (parseInt(this.maxPlayers))
         {
-
             case 2:
-                console.log("HERE2");
                 this.createTableHidden(16);
                 this.populate(16);
                 break;
             case 3:
-                console.log("HERE3");
                 this.createTableHidden(24);
                 this.populate(24);
                 break;
@@ -43,6 +38,7 @@ class Game {
 
         this.getCurrentPlayerName ="";
         this.lastClick=-1;
+        this.acertou = false;
 
     }
 
@@ -89,8 +85,6 @@ class Game {
     join(player2Name, socketId) {
         var player = new Player(player2Name, socketId);
         this.players.push(player);
-        console.log("max players" + this.maxPlayers);
-        console.log("max players" + this.players.length);
         if (this.players.length-1 == this.maxPlayers) {
             this.gameStarted = true;
             this.setGetters();
@@ -139,12 +133,8 @@ class Game {
             if(player == this.currentPlayerName()) {
                 if(!this.cartasVirada.includes(index)){
                     if (this.click==2) {
-                        console.log(this.boardGame[index]!=this.boardGame[this.lastClick]);
-                        console.log(this.boardGame[index]);
-                        console.log(this.boardGame[this.lastClick]);
                             if(this.boardGame[index]!=this.boardGame[this.lastClick])
                             {
-
                                 var waitTill = new Date(new Date().getTime() + 1.5 * 1000);
                                 while(waitTill > new Date()){}
                                 this.board[index]=0;
@@ -153,9 +143,6 @@ class Game {
                             }
 
                             this.click=0;
-
-
-
                     }
 
                 }
@@ -164,6 +151,24 @@ class Game {
 
         }
     }
+
+    checkPairTrue(index, player){
+        if(this.gameStarted==true) {
+            if (player == this.currentPlayerName()) {
+                if(this.cartasVirada.includes(index)){
+                   if(this.acertou){
+                       var waitTill = new Date(new Date().getTime() + 1.5 * 1000);
+                       while(waitTill > new Date()){}
+                       this.board[index]= 200;
+                       this.board[this.lastClick] = 200;
+                       this.acertou = false;
+                       this.lastClick=-1;
+                   }
+                }
+            }
+        }
+    }
+
     fazerJogada(index, player){
 
         if(this.gameStarted==true){
@@ -184,19 +189,14 @@ class Game {
                     {
                         this.cartasVirada.push(index);
                         this.cartasVirada.push(this.lastClick);
+                        this.acertou = true;
                         this.click=0;
-                        this.lastClick=-1;
                         this.currentPlayerClass().pontuacao+=10;
                         this.checkGameEnded();
-
                     }else{
                         this.click=2;
                     }
-
-
-
                     break;
-
             }
         }}
 

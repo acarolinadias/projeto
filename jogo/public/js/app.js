@@ -46270,7 +46270,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -46471,12 +46471,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {
         fazerJogada: function fazerJogada(index, gameId) {
-            console.log({ index: index, socketId: gameId });
             this.$socket.emit('fazer_jogada', { index: index, socketId: gameId, currentPlayer: this.currentPlayer });
         },
         checkPair: function checkPair(index, gameId) {
-            console.log({ index: index, socketId: gameId });
             this.$socket.emit('check-pair', { index: index, socketId: gameId, currentPlayer: this.currentPlayer });
+        },
+        checkPairTrue: function checkPairTrue(index, gameId) {
+            this.$socket.emit('check-pair-true', { index: index, socketId: gameId, currentPlayer: this.currentPlayer });
         },
         createSinglePlayer: function createSinglePlayer() {
             console.log("Create");
@@ -46884,7 +46885,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 } else if (this.game.winner == 0) {
                     return "Game has ended. There was a tie.";
                 }
-                return "Game has ended and " + this.adversaryPlayerName + " has won. You lost.";
+                return "O jogo terminou, o " + this.adversaryPlayerName + " ganhou. Perdes-te";
             } else {
                 this.showSuccess = true;
                 if (this.game.getCurrentPlayerName == this.currentPlayer) {
@@ -46942,6 +46943,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (index != this.lastclick) {
                     this.$parent.fazerJogada(index, this.game.gameID);
                     this.$parent.checkPair(index, this.game.gameID);
+                    this.$parent.checkPairTrue(index, this.game.gameID);
                 }
                 this.lastclick = index;
             }
